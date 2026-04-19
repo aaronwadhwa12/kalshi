@@ -2,6 +2,7 @@
 import time
 import functools
 import pandas as pd
+from datetime import date
 from typing import Optional
 
 from nba_api.stats.endpoints import (
@@ -46,6 +47,13 @@ def find_player_id(name: str) -> Optional[int]:
     return None
 
 
+def current_season() -> str:
+    """Return the current NBA season string (e.g. '2025-26') based on today's date."""
+    today = date.today()
+    year = today.year if today.month >= 10 else today.year - 1
+    return f"{year}-{str(year + 1)[2:]}"
+
+
 def find_team_id(name: str) -> Optional[int]:
     name_lower = name.lower()
     for t in static_teams.get_teams():
@@ -56,9 +64,11 @@ def find_team_id(name: str) -> Optional[int]:
     return None
 
 
-def get_player_game_log(player_id: int, season: str = "2024-25",
+def get_player_game_log(player_id: int, season: str = None,
                         last_n: int = 30) -> pd.DataFrame:
     """Return the last N regular-season games for a player as a DataFrame."""
+    if season is None:
+        season = current_season()
     cache_key = (player_id, season)
     if cache_key in _player_cache:
         return _player_cache[cache_key].head(last_n)
@@ -90,8 +100,10 @@ def get_player_game_log(player_id: int, season: str = "2024-25",
     return df.head(last_n)
 
 
-def get_playoff_game_log(player_id: int, season: str = "2024-25") -> pd.DataFrame:
+def get_playoff_game_log(player_id: int, season: str = None) -> pd.DataFrame:
     """Return playoff game log for a player."""
+    if season is None:
+        season = current_season()
     log = _nba_request(
         playergamelog.PlayerGameLog,
         player_id=player_id,
@@ -104,8 +116,10 @@ def get_playoff_game_log(player_id: int, season: str = "2024-25") -> pd.DataFram
     return df
 
 
-def get_team_defensive_ratings(season: str = "2024-25") -> pd.DataFrame:
+def get_team_defensive_ratings(season: str = None) -> pd.DataFrame:
     """Return per-team defensive rating and opponent stats (cached)."""
+    if season is None:
+        season = current_season()
     if season in _team_def_cache:
         return _team_def_cache[season]
 
