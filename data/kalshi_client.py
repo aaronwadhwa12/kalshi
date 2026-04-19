@@ -46,10 +46,21 @@ def _post(path: str, payload: dict) -> dict:
 # Market discovery — multi-strategy with full logging
 # ---------------------------------------------------------------------------
 
-# Kalshi rotates series tickers; try all known NBA variants
-_NBA_SERIES_CANDIDATES = ["NBAP", "NBAPLAYER", "NBA", "KXNBA", "KXNBAP"]
-_NBA_KEYWORDS          = ["nba", " pts", " reb", " ast", "points", "rebounds",
-                          "assists", "three", "steals", "blocks"]
+# Correct KX-prefixed series tickers for NBA player props
+_NBA_SERIES_CANDIDATES = [
+    "KXNBAPTS",   # points
+    "KXNBAREB",   # rebounds
+    "KXNBAAST",   # assists
+    "KXNBA3PM",   # 3-pointers
+    "KXNBABLK",   # blocks
+    "KXNBASTL",   # steals
+    "KXNBATO",    # turnovers
+    "KXNBAPRA",   # pts+reb+ast
+    "KXNBAPR",    # pts+reb
+    "KXNBAPA",    # pts+ast
+]
+_NBA_KEYWORDS = ["kxnbapts", "kxnbareb", "kxnbaast", "kxnba3pm",
+                 "kxnbablk", "kxnbastl", "kxnbato", "kxnbapra"]
 
 
 def get_nba_markets(game_date: Optional[date] = None,
@@ -61,7 +72,8 @@ def get_nba_markets(game_date: Optional[date] = None,
     Strategy 2 — event search (finds NBA events then gets their markets)
     Strategy 3 — keyword filter over all open markets (slowest, always works)
     """
-    # ── Strategy 1: try known series tickers ────────────────────────────────
+    # ── Strategy 1: fetch all known NBA player-prop series ──────────────────
+    markets = []
     for series in _NBA_SERIES_CANDIDATES:
         try:
             params = {"limit": limit, "status": "open", "series_ticker": series}
@@ -69,14 +81,16 @@ def get_nba_markets(game_date: Optional[date] = None,
                 params["min_close_ts"] = int(
                     datetime.combine(game_date, datetime.min.time()).timestamp()
                 )
-            data    = _get("/markets", params=params)
-            markets = data.get("markets", [])
-            if markets:
-                print(f"[kalshi] Strategy 1: {len(markets)} markets via series '{series}'")
-                return markets
-            print(f"[kalshi] Series '{series}' returned 0 markets")
+            data  = _get("/markets", params=params)
+            found = data.get("markets", [])
+            if found:
+                print(f"[kalshi] {series}: {len(found)} markets")
+                markets.extend(found)
         except Exception as e:
             print(f"[kalshi] Series '{series}' error: {e}")
+    if markets:
+        print(f"[kalshi] Strategy 1 total: {len(markets)} markets")
+        return markets
 
     # ── Strategy 2: events endpoint ─────────────────────────────────────────
     print("[kalshi] Strategy 2: searching events...")
@@ -146,6 +160,14 @@ def debug_raw_markets(limit: int = 5):
 # Market parsing — handles many Kalshi title formats
 # ---------------------------------------------------------------------------
 
+# Map KX series prefix → stat type
+_KX_SERIES_STAT = {
+    "KXNBAPTS": "pts",  "KXNBAREB": "reb",  "KXNBAAST": "ast",
+    "KXNBA3PM": "3pm",  "KXNBABLK": "blk",  "KXNBASTL": "stl",
+    "KXNBATO":  "tov",  "KXNBAPRA": "pra",  "KXNBAPR":  "pr",
+    "KXNBAPA":  "pa",
+}
+
 _STAT_PATTERNS = [
     # "over 25.5 points" / "25.5+ points" / "25+ pts"
     (r"over\s+(\d+\.?\d*)\s*(?:\+)?\s*(?:point|pts)", "pts"),
@@ -191,15 +213,20 @@ _NAME_TOTAL_RE = re.compile(
 
 def parse_market(raw: dict) -> Optional[dict]:
     ticker   = raw.get("ticker", "")
-    title    = raw.get("title", "")
-    subtitle = raw.get("subtitle", "")
+    title    = raw.get("title", "") or ""
+    subtitle = raw.get("subtitle", "") or ""
     full_lc  = f"{title} {subtitle}".lower()
 
+    # Try title-based extraction first, fall back to ticker
     stat_type, line = _extract_stat(full_lc)
+    if line is None:
+        stat_type, line = _extract_from_ticker(ticker)
     if line is None:
         return None
 
     player_name = _extract_player(title, subtitle, ticker)
+    if not player_name:
+        player_name = _extract_player_from_ticker(ticker)
     if not player_name:
         return None
 
@@ -259,6 +286,80 @@ def _extract_player(title: str, subtitle: str, ticker: str) -> Optional[str]:
         m = _NAME_COLON_RE.match(text)
         if m:
             return _clean_name(m.group(1))
+
+    return None
+
+
+def _extract_from_ticker(ticker: str) -> tuple[str, Optional[float]]:
+    """
+    Parse stat type and line from a KX ticker.
+
+    Format: KXNBAPTS-26APR19PHXOKC-OKCSGILGEOUSALEXANDER2-25
+    The line is the last dash-separated segment.
+    """
+    series = ticker.split("-")[0]
+    stat_type = _KX_SERIES_STAT.get(series, "pts")
+    parts = ticker.split("-")
+    if len(parts) >= 1:
+        try:
+            return stat_type, float(parts[-1])
+        except ValueError:
+            pass
+    return stat_type, None
+
+
+def _extract_player_from_ticker(ticker: str) -> Optional[str]:
+    """
+    Extract a searchable player name from a KX ticker.
+
+    Format: KXNBAPTS-26APR19PHXOKC-OKCSGILGEOUSALEXANDER2-25
+    Third segment: OKCSGILGEOUSALEXANDER2 → team OKC, code SGILGEOUSALEXANDER, #2
+    """
+    parts = ticker.split("-")
+    if len(parts) < 3:
+        return None
+    player_seg = parts[2]       # e.g. OKCSGILGEOUSALEXANDER2
+
+    # Strip leading 3-char team code
+    if len(player_seg) > 3:
+        player_seg = player_seg[3:]
+
+    # Strip trailing jersey number
+    player_code = player_seg.rstrip("0123456789")
+    if len(player_code) < 3:
+        return None
+
+    # player_code looks like SGILGEOUSALEXANDER or VWEMBANYAMA
+    # First char = first name initial, rest = last name (uppercased, no hyphens)
+    first_initial = player_code[0]
+    last_raw = player_code[1:].lower()
+
+    # Attempt lookup in NBA static player list
+    from nba_api.stats.static import players as static_players
+    all_players = static_players.get_players()
+
+    # Pass 1: exact last-name + first initial match
+    for p in all_players:
+        last  = p["full_name"].split()[-1].lower().replace("-", "").replace("'", "")
+        first = p["full_name"].split()[0][0].lower()
+        if last == last_raw and first == first_initial.lower():
+            return p["full_name"]
+
+    # Pass 2: exact last-name match (ignore initial — handles nicknames)
+    for p in all_players:
+        last = p["full_name"].split()[-1].lower().replace("-", "").replace("'", "")
+        if last == last_raw:
+            return p["full_name"]
+
+    # Pass 3: conservative partial — only if last_raw is ≥6 chars and the
+    # player's stripped last name STARTS with last_raw (not just contains it)
+    if len(last_raw) >= 6:
+        for p in all_players:
+            last = p["full_name"].split()[-1].lower().replace("-", "").replace("'", "")
+            if last.startswith(last_raw) or last_raw.startswith(last):
+                first = p["full_name"].split()[0][0].lower()
+                if first == first_initial.lower():
+                    return p["full_name"]
 
     return None
 

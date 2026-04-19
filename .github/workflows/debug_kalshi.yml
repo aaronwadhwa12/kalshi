@@ -21,54 +21,41 @@ jobs:
           KALSHI_BASE_URL: https://api.elections.kalshi.com/trade-api/v2
         run: |
           python - <<'EOF'
-          import requests, json, os
+          import requests, json, os, time
 
           BASE = os.environ["KALSHI_BASE_URL"]
           KEY  = os.environ["KALSHI_API_KEY"]
-          headers = {
-              "Authorization": f"Bearer {KEY}",
-              "Accept": "application/json",
-          }
+          headers = {"Authorization": f"Bearer {KEY}", "Accept": "application/json"}
 
-          def show(label, url, params=None):
-              print(f"\n{'='*60}")
-              print(f"{label}")
-              print(f"GET {url}  params={params}")
-              print('='*60)
+          def get(url, params=None):
+              time.sleep(0.3)
               r = requests.get(url, headers=headers, params=params, timeout=15)
-              print(f"Status: {r.status_code}")
               try:
-                  data = r.json()
-                  # Print first 3 items of any list in response
-                  for k, v in data.items():
-                      if isinstance(v, list):
-                          print(f"{k} ({len(v)} total):")
-                          for item in v[:3]:
-                              print(json.dumps(item, indent=2)[:600])
-                              print("---")
-                      else:
-                          print(f"{k}: {v}")
-              except Exception as e:
-                  print(f"Could not parse JSON: {e}")
-                  print(r.text[:500])
+                  return r.status_code, r.json()
+              except Exception:
+                  return r.status_code, r.text[:300]
 
-          # 1. Check auth
-          show("1. Balance (auth check)", f"{BASE}/portfolio/balance")
+          # 1. Show ONE full KXNBAPTS market to see all fields
+          print("\n=== KXNBAPTS — first market (FULL) ===")
+          status, data = get(f"{BASE}/markets",
+                             {"limit": 1, "status": "open", "series_ticker": "KXNBAPTS"})
+          print(f"Status: {status}")
+          if isinstance(data, dict) and data.get("markets"):
+              print(json.dumps(data["markets"][0], indent=2))
+          else:
+              print(data)
 
-          # 2. All open markets (no filter) — first 5
-          show("2. All open markets (first 5)", f"{BASE}/markets",
-               {"limit": 5, "status": "open"})
-
-          # 3. Try each NBA series ticker
-          for series in ["NBAP", "NBAPLAYER", "NBA", "KXNBA", "KXNBAP"]:
-              show(f"3. Series: {series}", f"{BASE}/markets",
-                   {"limit": 5, "status": "open", "series_ticker": series})
-
-          # 4. Events endpoint
-          show("4. Events (first 5)", f"{BASE}/events",
-               {"limit": 5, "status": "open"})
-
-          # 5. Series list
-          show("5. Series list", f"{BASE}/series", {"limit": 20})
+          # 2. Count markets for each NBA player-prop series
+          print("\n=== NBA player-prop series counts ===")
+          for s in ["KXNBAPTS","KXNBAREB","KXNBAAST","KXNBA3PM",
+                    "KXNBABLK","KXNBASTL","KXNBATO","KXNBAPRA","KXNBAPR","KXNBAPA"]:
+              status, data = get(f"{BASE}/markets",
+                                 {"limit": 3, "status": "open", "series_ticker": s})
+              if isinstance(data, dict):
+                  mkts = data.get("markets", [])
+                  sample = mkts[0].get("ticker","—") if mkts else "—"
+                  print(f"  {s:12s}: {len(mkts):3d} markets  | {sample}")
+              else:
+                  print(f"  {s:12s}: error {status}")
 
           EOF
