@@ -6,6 +6,8 @@ load_dotenv()
 KALSHI_API_KEY = os.getenv("KALSHI_API_KEY", "")
 KALSHI_BASE_URL = os.getenv("KALSHI_BASE_URL", "https://api.elections.kalshi.com/trade-api/v2")
 
+BALLDONTLIE_API_KEY = os.getenv("BALLDONTLIE_API_KEY", "")
+
 # Notification channels (configure at least one)
 IMESSAGE_TO         = os.getenv("IMESSAGE_TO", "")          # macOS only
 NTFY_TOPIC          = os.getenv("NTFY_TOPIC", "")           # ntfy.sh topic name

@@ -1,288 +1,268 @@
-"""NBA API wrapper for historical player game logs, team defense, and standings."""
+"""NBA player stats via BallDontLie API — reliable from cloud/GitHub Actions."""
 import time
-import functools
-import pandas as pd
+from collections import defaultdict
 from datetime import date
 from typing import Optional
 
-from nba_api.stats.endpoints import (
-    playergamelog,
-    leaguegamelog,
-    commonplayerinfo,
-    leaguedashteamstats,
-    leaguedashplayerstats,
-    teamgamelog,
-)
-from nba_api.stats.static import players as static_players, teams as static_teams
-from nba_api.stats.library.parameters import SeasonAll
+import requests
+import pandas as pd
 
-# stats.nba.com requires browser-like headers or it silently times out
-_NBA_HEADERS = {
-    "Host": "stats.nba.com",
-    "Connection": "keep-alive",
-    "Accept": "application/json, text/plain, */*",
-    "x-nba-stats-origin": "stats",
-    "x-nba-stats-token": "true",
-    "Accept-Language": "en-US,en;q=0.5",
-    "Accept-Encoding": "gzip, deflate, br",
-    "Referer": "https://www.nba.com/",
-    "User-Agent": (
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-        "AppleWebKit/537.36 (KHTML, like Gecko) "
-        "Chrome/123.0.0.0 Safari/537.36"
-    ),
-}
-_NBA_TIMEOUT = 8  # fail fast — stats.nba.com blocks cloud IPs; don't hang the workflow
+import config
 
-_player_cache: dict = {}
-_team_def_cache: dict = {}
-_bulk_log_cache: dict = {}  # season → full DataFrame of all player-games
-_nba_stats_available: bool = True  # set False if bulk load fails; skips individual calls
+_BDL_BASE = "https://api.balldontlie.io/v1"
+_REQUEST_DELAY = 0.3  # BDL has generous rate limits vs stats.nba.com
 
-_REQUEST_DELAY = 0.6  # seconds between NBA API requests (rate limiting)
+_player_id_cache: dict[str, Optional[int]] = {}  # name → BDL player ID
+_player_log_cache: dict[int, pd.DataFrame] = {}  # BDL player ID → game log
+_nba_stats_available: bool = True
 
 
-def _nba_request(fn, *args, **kwargs):
+def _headers() -> dict:
+    key = config.BALLDONTLIE_API_KEY
+    if not key:
+        raise RuntimeError("BALLDONTLIE_API_KEY not set in .env / GitHub Secrets")
+    return {"Authorization": key}
+
+
+def _get(path: str, params=None) -> dict:
     time.sleep(_REQUEST_DELAY)
-    kwargs.setdefault("timeout", _NBA_TIMEOUT)
-    kwargs.setdefault("headers", _NBA_HEADERS)
-    return fn(*args, **kwargs)
+    resp = requests.get(f"{_BDL_BASE}{path}", params=params,
+                        headers=_headers(), timeout=15)
+    resp.raise_for_status()
+    return resp.json()
 
 
-def find_player_id(name: str) -> Optional[int]:
-    """Fuzzy-match a player name and return their NBA API player ID."""
-    name_lower = name.lower().strip()
-    all_players = static_players.get_players()
-    for p in all_players:
-        if p["full_name"].lower() == name_lower:
-            return p["id"]
-    # partial match
-    matches = [p for p in all_players if name_lower in p["full_name"].lower()]
-    if len(matches) == 1:
-        return matches[0]["id"]
-    if len(matches) > 1:
-        # prefer active players
-        active = [p for p in matches if p.get("is_active")]
-        if active:
-            return active[0]["id"]
-        return matches[0]["id"]
-    return None
-
+# ---------------------------------------------------------------------------
+# Season helpers
+# ---------------------------------------------------------------------------
 
 def current_season() -> str:
-    """Return the current NBA season string (e.g. '2025-26') based on today's date."""
     today = date.today()
     year = today.year if today.month >= 10 else today.year - 1
     return f"{year}-{str(year + 1)[2:]}"
 
 
-def find_team_id(name: str) -> Optional[int]:
-    name_lower = name.lower()
-    for t in static_teams.get_teams():
-        if (name_lower in t["full_name"].lower()
-                or name_lower in t["nickname"].lower()
-                or name_lower in t["abbreviation"].lower()):
-            return t["id"]
+def _season_year() -> int:
+    today = date.today()
+    return today.year if today.month >= 10 else today.year - 1
+
+
+def _prev_season(season: str) -> str:
+    year = int(season.split("-")[0]) - 1
+    return f"{year}-{str(year + 1)[2:]}"
+
+
+# ---------------------------------------------------------------------------
+# Player lookup
+# ---------------------------------------------------------------------------
+
+def find_player_id(name: str) -> Optional[int]:
+    """Search BDL for a player by name, return their BDL player ID."""
+    name_lower = name.lower().strip()
+    if name_lower in _player_id_cache:
+        return _player_id_cache[name_lower]
+
+    try:
+        data = _get("/players", [("search", name), ("per_page", 5)])
+        players = data.get("data", [])
+
+        for p in players:
+            full = f"{p['first_name']} {p['last_name']}".lower()
+            if full == name_lower:
+                _player_id_cache[name_lower] = p["id"]
+                return p["id"]
+
+        last = name_lower.split()[-1]
+        for p in players:
+            full = f"{p['first_name']} {p['last_name']}".lower()
+            if last in full:
+                _player_id_cache[name_lower] = p["id"]
+                return p["id"]
+    except Exception as e:
+        print(f"[bdl] Player lookup failed for '{name}': {e}")
+
+    _player_id_cache[name_lower] = None
     return None
 
 
-def load_season_game_logs(season: str = None) -> pd.DataFrame:
-    """
-    Fetch every player-game for a full season in ONE API call.
+def find_team_id(name: str) -> Optional[int]:
+    return None  # not needed for live scan
 
-    This is the fast path used by warm_player_cache — replaces ~50 individual
-    PlayerGameLog requests with 2 LeagueGameLog requests (current + prev season).
-    """
-    if season is None:
-        season = current_season()
-    if season in _bulk_log_cache:
-        return _bulk_log_cache[season]
-    print(f"  [nba_api] Bulk-loading {season} game logs (1 request)...")
-    log = _nba_request(
-        leaguegamelog.LeagueGameLog,
-        season=season,
-        player_or_team_abbreviation="P",
-        season_type_all_star="Regular Season",
-    )
-    df = log.get_data_frames()[0]
-    df["GAME_DATE"] = pd.to_datetime(df["GAME_DATE"])
-    df["IS_HOME"]   = ~df["MATCHUP"].str.contains("@")
-    _bulk_log_cache[season] = df
+
+# ---------------------------------------------------------------------------
+# Stats → DataFrame conversion
+# ---------------------------------------------------------------------------
+
+def _stats_to_df(stats: list[dict]) -> pd.DataFrame:
+    """Convert BDL /stats rows to a DataFrame matching nba_api column names."""
+    rows = []
+    for s in stats:
+        g = s.get("game", {})
+        t = s.get("team", {})
+        is_home = g.get("home_team_id") == t.get("id")
+        team_abbr = t.get("abbreviation", "?")
+        rows.append({
+            "GAME_DATE": pd.to_datetime(g.get("date", "")[:10]) if g.get("date") else pd.NaT,
+            "MATCHUP":   f"{team_abbr} vs. ?" if is_home else f"{team_abbr} @ ?",
+            "IS_HOME":   is_home,
+            "PTS":       float(s.get("pts") or 0),
+            "REB":       float(s.get("reb") or 0),
+            "AST":       float(s.get("ast") or 0),
+            "STL":       float(s.get("stl") or 0),
+            "BLK":       float(s.get("blk") or 0),
+            "TOV":       float(s.get("turnover") or 0),
+            "FG3M":      float(s.get("fg3m") or 0),
+            "MIN":       s.get("min", ""),
+        })
+    df = pd.DataFrame(rows)
+    if not df.empty:
+        df = df.dropna(subset=["GAME_DATE"])
+        df = df.sort_values("GAME_DATE", ascending=False).reset_index(drop=True)
     return df
 
+
+# ---------------------------------------------------------------------------
+# Bulk warm (used by scan_and_alert + backtest)
+# ---------------------------------------------------------------------------
 
 def warm_player_cache(player_ids: list, season: str = None):
     """
-    Pre-populate the per-player cache for a list of player IDs using bulk data.
-
-    Sets _nba_stats_available=False on failure so individual calls are skipped.
+    Fetch game logs for all player IDs in batched BDL requests.
+    Much faster and more reliable than N individual stats.nba.com calls.
     """
     global _nba_stats_available
-    if season is None:
-        season = current_season()
+    year = _season_year()
+    to_fetch = [pid for pid in player_ids if pid and pid not in _player_log_cache]
+    if not to_fetch:
+        print("  [bdl] All players already cached.")
+        return
 
-    bulk    = load_season_game_logs(season)
-    prev_df = None
+    print(f"  [bdl] Fetching stats for {len(to_fetch)} players (seasons {year-1},{year})...")
+    try:
+        param_list = [
+            ("seasons[]", year),
+            ("seasons[]", year - 1),
+            ("per_page", 100),
+        ]
+        for pid in to_fetch:
+            param_list.append(("player_ids[]", pid))
 
-    for pid in player_ids:
-        if pid is None or (pid, season) in _player_cache:
-            continue
+        all_stats = []
+        cursor = None
+        pages = 0
+        while True:
+            p = list(param_list)
+            if cursor:
+                p.append(("cursor", cursor))
+            time.sleep(_REQUEST_DELAY)
+            resp = requests.get(f"{_BDL_BASE}/stats", params=p,
+                                headers=_headers(), timeout=20)
+            resp.raise_for_status()
+            data = resp.json()
+            all_stats.extend(data.get("data", []))
+            cursor = data.get("meta", {}).get("next_cursor")
+            pages += 1
+            if not cursor:
+                break
 
-        pdf = bulk[bulk["PLAYER_ID"] == pid].sort_values(
-            "GAME_DATE", ascending=False
-        ).reset_index(drop=True)
+        print(f"  [bdl] Got {len(all_stats)} stat rows across {pages} page(s)")
 
-        if len(pdf) < 5:
-            if prev_df is None:
-                prev_df = load_season_game_logs(_prev_season(season))
-            prev = prev_df[prev_df["PLAYER_ID"] == pid].sort_values(
-                "GAME_DATE", ascending=False
-            ).reset_index(drop=True)
-            pdf = pd.concat([pdf, prev], ignore_index=True)
+        by_player: dict[int, list] = defaultdict(list)
+        for s in all_stats:
+            pid = s.get("player", {}).get("id")
+            if pid:
+                by_player[pid].append(s)
 
-        _player_cache[(pid, season)] = pdf
+        for pid, stats in by_player.items():
+            _player_log_cache[pid] = _stats_to_df(stats)
 
-    print(f"  [cache] Warmed {len(player_ids)} players from bulk data.")
+        _nba_stats_available = True
+        print(f"  [bdl] Cached {len(by_player)} players.")
+    except Exception as e:
+        _nba_stats_available = False
+        print(f"  [bdl] Bulk fetch failed: {e}")
+        raise
 
+
+# ---------------------------------------------------------------------------
+# Per-player game log (uses cache populated by warm_player_cache)
+# ---------------------------------------------------------------------------
 
 def get_player_game_log(player_id: int, season: str = None,
                         last_n: int = 30) -> pd.DataFrame:
-    """Return the last N regular-season games for a player as a DataFrame."""
     if not _nba_stats_available:
-        return pd.DataFrame()  # stats.nba.com is down; skip individual calls
-    if season is None:
-        season = current_season()
-    cache_key = (player_id, season)
-    if cache_key in _player_cache:
-        return _player_cache[cache_key].head(last_n)
+        return pd.DataFrame()
+    if player_id in _player_log_cache:
+        return _player_log_cache[player_id].head(last_n)
 
-    log = _nba_request(
-        playergamelog.PlayerGameLog,
-        player_id=player_id,
-        season=season,
-        season_type_all_star="Regular Season",
-    )
-    df = log.get_data_frames()[0]
+    # Not in cache — fetch individually (fallback for backtest single-player calls)
+    year = _season_year()
+    try:
+        param_list = [
+            ("player_ids[]", player_id),
+            ("seasons[]", year),
+            ("seasons[]", year - 1),
+            ("per_page", 100),
+        ]
+        all_stats = []
+        cursor = None
+        while True:
+            p = list(param_list)
+            if cursor:
+                p.append(("cursor", cursor))
+            time.sleep(_REQUEST_DELAY)
+            resp = requests.get(f"{_BDL_BASE}/stats", params=p,
+                                headers=_headers(), timeout=15)
+            resp.raise_for_status()
+            data = resp.json()
+            all_stats.extend(data.get("data", []))
+            cursor = data.get("meta", {}).get("next_cursor")
+            if not cursor:
+                break
 
-    if len(df) < 5:
-        prev_season = _prev_season(season)
-        log2 = _nba_request(
-            playergamelog.PlayerGameLog,
-            player_id=player_id,
-            season=prev_season,
-            season_type_all_star="Regular Season",
-        )
-        df2 = log2.get_data_frames()[0]
-        df = pd.concat([df, df2], ignore_index=True)
-
-    df["GAME_DATE"] = pd.to_datetime(df["GAME_DATE"])
-    df = df.sort_values("GAME_DATE", ascending=False).reset_index(drop=True)
-    df["IS_HOME"] = ~df["MATCHUP"].str.contains("@")
-
-    _player_cache[cache_key] = df
-    return df.head(last_n)
+        df = _stats_to_df(all_stats)
+        _player_log_cache[player_id] = df
+        return df.head(last_n)
+    except Exception as e:
+        print(f"[bdl] Individual fetch failed for player {player_id}: {e}")
+        return pd.DataFrame()
 
 
-def get_playoff_game_log(player_id: int, season: str = None) -> pd.DataFrame:
-    """Return playoff game log for a player."""
-    if season is None:
-        season = current_season()
-    log = _nba_request(
-        playergamelog.PlayerGameLog,
-        player_id=player_id,
-        season=season,
-        season_type_all_star="Playoffs",
-    )
-    df = log.get_data_frames()[0]
-    df["GAME_DATE"] = pd.to_datetime(df["GAME_DATE"])
-    df = df.sort_values("GAME_DATE", ascending=False).reset_index(drop=True)
-    return df
+# ---------------------------------------------------------------------------
+# Stubs kept for API compatibility (team defense not on BDL free tier)
+# ---------------------------------------------------------------------------
+
+def load_season_game_logs(season: str = None) -> pd.DataFrame:
+    return pd.DataFrame()
 
 
 def get_team_defensive_ratings(season: str = None) -> pd.DataFrame:
-    """Return per-team defensive rating and opponent stats (cached)."""
-    if season is None:
-        season = current_season()
-    if season in _team_def_cache:
-        return _team_def_cache[season]
-
-    stats = _nba_request(
-        leaguedashteamstats.LeagueDashTeamStats,
-        season=season,
-        measure_type_detailed_defense="Defense",
-        per_mode_simple="PerGame",
-    )
-    df = stats.get_data_frames()[0]
-    _team_def_cache[season] = df
-    return df
+    return pd.DataFrame()
 
 
 def get_opponent_def_rating(opp_team_name: str, stat_type: str,
                             season: str = None) -> float:
-    """
-    Return the opponent's defensive rank multiplier for a given stat type.
-
-    Returns a float where > 1.0 means the opponent allows more than league average
-    (easier matchup) and < 1.0 means tougher matchup.
-    """
-    if season is None:
-        season = current_season()
-    df = get_team_defensive_ratings(season)
-
-    opp_lower = opp_team_name.lower()
-    row = df[df["TEAM_NAME"].str.lower().str.contains(opp_lower, na=False)]
-    if row.empty:
-        return 1.0  # neutral if not found
-
-    row = row.iloc[0]
-
-    stat_col_map = {
-        "pts":  "OPP_PTS",
-        "reb":  "OPP_REB",
-        "ast":  "OPP_AST",
-        "3pm":  "OPP_FG3M",
-        "blk":  "OPP_BLK",
-        "stl":  "OPP_STL",
-        "pra":  "OPP_PTS",
-        "pr":   "OPP_PTS",
-        "pa":   "OPP_PTS",
-        "ra":   "OPP_REB",
-    }
-    col = stat_col_map.get(stat_type)
-    if not col or col not in df.columns:
-        return 1.0
-
-    league_avg = df[col].mean()
-    opp_val = row[col]
-    if league_avg == 0:
-        return 1.0
-    return float(opp_val / league_avg)
+    return 1.0  # neutral — advanced defensive stats not on BDL free tier
 
 
 def get_player_home_away_split(df: pd.DataFrame, stat_cols: list[str]) -> dict:
-    """Return average stat values split by home/away."""
+    if df.empty or "IS_HOME" not in df.columns:
+        return {"home": {c: 0.0 for c in stat_cols},
+                "away": {c: 0.0 for c in stat_cols}}
     home = df[df["IS_HOME"] == True][stat_cols].mean()
     away = df[df["IS_HOME"] == False][stat_cols].mean()
     return {"home": home.to_dict(), "away": away.to_dict()}
 
 
-def get_days_rest(df: pd.DataFrame, upcoming_date: Optional[pd.Timestamp] = None) -> int:
-    """Estimate days of rest before the next game from the most recent logged game."""
-    if df.empty:
+def get_days_rest(df: pd.DataFrame, upcoming_date=None) -> int:
+    if df.empty or "GAME_DATE" not in df.columns:
         return 2
     most_recent = df["GAME_DATE"].iloc[0]
     ref = upcoming_date or pd.Timestamp.today()
     return max(0, (ref - most_recent).days)
 
 
-def _prev_season(season: str) -> str:
-    parts = season.split("-")
-    year = int(parts[0]) - 1
-    return f"{year}-{str(year + 1)[2:]}"
-
-
 def compute_composite_stat(df: pd.DataFrame, stat_type: str) -> pd.Series:
-    """Compute composite stats like PRA, PR, PA, RA."""
     combos = {
         "pra": ["PTS", "REB", "AST"],
         "pr":  ["PTS", "REB"],
