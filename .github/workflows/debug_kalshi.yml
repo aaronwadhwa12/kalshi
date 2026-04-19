@@ -1,0 +1,74 @@
+name: Debug Kalshi API
+
+on:
+  workflow_dispatch:
+
+jobs:
+  debug:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+      - run: pip install -r requirements.txt
+
+      - name: Debug Kalshi API
+        env:
+          KALSHI_API_KEY: ${{ secrets.KALSHI_API_KEY }}
+          KALSHI_BASE_URL: https://trading-api.kalshi.com/trade-api/v2
+        run: |
+          python - <<'EOF'
+          import requests, json, os
+
+          BASE = os.environ["KALSHI_BASE_URL"]
+          KEY  = os.environ["KALSHI_API_KEY"]
+          headers = {
+              "Authorization": f"Bearer {KEY}",
+              "Accept": "application/json",
+          }
+
+          def show(label, url, params=None):
+              print(f"\n{'='*60}")
+              print(f"{label}")
+              print(f"GET {url}  params={params}")
+              print('='*60)
+              r = requests.get(url, headers=headers, params=params, timeout=15)
+              print(f"Status: {r.status_code}")
+              try:
+                  data = r.json()
+                  # Print first 3 items of any list in response
+                  for k, v in data.items():
+                      if isinstance(v, list):
+                          print(f"{k} ({len(v)} total):")
+                          for item in v[:3]:
+                              print(json.dumps(item, indent=2)[:600])
+                              print("---")
+                      else:
+                          print(f"{k}: {v}")
+              except Exception as e:
+                  print(f"Could not parse JSON: {e}")
+                  print(r.text[:500])
+
+          # 1. Check auth
+          show("1. Balance (auth check)", f"{BASE}/portfolio/balance")
+
+          # 2. All open markets (no filter) — first 5
+          show("2. All open markets (first 5)", f"{BASE}/markets",
+               {"limit": 5, "status": "open"})
+
+          # 3. Try each NBA series ticker
+          for series in ["NBAP", "NBAPLAYER", "NBA", "KXNBA", "KXNBAP"]:
+              show(f"3. Series: {series}", f"{BASE}/markets",
+                   {"limit": 5, "status": "open", "series_ticker": series})
+
+          # 4. Events endpoint
+          show("4. Events (first 5)", f"{BASE}/events",
+               {"limit": 5, "status": "open"})
+
+          # 5. Series list
+          show("5. Series list", f"{BASE}/series", {"limit": 20})
+
+          EOF
