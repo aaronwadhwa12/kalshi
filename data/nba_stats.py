@@ -32,12 +32,12 @@ _NBA_HEADERS = {
         "Chrome/123.0.0.0 Safari/537.36"
     ),
 }
-_NBA_TIMEOUT = 60
-
+_NBA_TIMEOUT = 8  # fail fast — stats.nba.com blocks cloud IPs; don't hang the workflow
 
 _player_cache: dict = {}
 _team_def_cache: dict = {}
 _bulk_log_cache: dict = {}  # season → full DataFrame of all player-games
+_nba_stats_available: bool = True  # set False if bulk load fails; skips individual calls
 
 _REQUEST_DELAY = 0.6  # seconds between NBA API requests (rate limiting)
 
@@ -98,26 +98,13 @@ def load_season_game_logs(season: str = None) -> pd.DataFrame:
     if season in _bulk_log_cache:
         return _bulk_log_cache[season]
     print(f"  [nba_api] Bulk-loading {season} game logs (1 request)...")
-    last_err = None
-    for attempt in range(3):
-        try:
-            if attempt:
-                wait = 2 ** attempt
-                print(f"  [nba_api] Retry {attempt}/2 after {wait}s...")
-                time.sleep(wait)
-            log = _nba_request(
-                leaguegamelog.LeagueGameLog,
-                season=season,
-                player_or_team_abbreviation="P",
-                season_type_all_star="Regular Season",
-            )
-            df = log.get_data_frames()[0]
-            break
-        except Exception as e:
-            last_err = e
-            print(f"  [nba_api] Attempt {attempt+1} failed: {e}")
-    else:
-        raise RuntimeError(f"LeagueGameLog failed after 3 attempts: {last_err}")
+    log = _nba_request(
+        leaguegamelog.LeagueGameLog,
+        season=season,
+        player_or_team_abbreviation="P",
+        season_type_all_star="Regular Season",
+    )
+    df = log.get_data_frames()[0]
     df["GAME_DATE"] = pd.to_datetime(df["GAME_DATE"])
     df["IS_HOME"]   = ~df["MATCHUP"].str.contains("@")
     _bulk_log_cache[season] = df
@@ -128,9 +115,9 @@ def warm_player_cache(player_ids: list, season: str = None):
     """
     Pre-populate the per-player cache for a list of player IDs using bulk data.
 
-    Call this once at the start of a backtest to avoid N individual API calls.
-    Fetches current + previous season in 2 requests total regardless of player count.
+    Sets _nba_stats_available=False on failure so individual calls are skipped.
     """
+    global _nba_stats_available
     if season is None:
         season = current_season()
 
@@ -161,6 +148,8 @@ def warm_player_cache(player_ids: list, season: str = None):
 def get_player_game_log(player_id: int, season: str = None,
                         last_n: int = 30) -> pd.DataFrame:
     """Return the last N regular-season games for a player as a DataFrame."""
+    if not _nba_stats_available:
+        return pd.DataFrame()  # stats.nba.com is down; skip individual calls
     if season is None:
         season = current_season()
     cache_key = (player_id, season)

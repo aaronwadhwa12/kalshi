@@ -92,7 +92,9 @@ def analyze_markets(markets: list[dict]) -> list[dict]:
         try:
             warm_player_cache(unique_ids)
         except Exception as e:
-            print(f"[cache] Bulk warm failed ({e}); will try individual calls per player")
+            import data.nba_stats as _nba
+            _nba._nba_stats_available = False
+            print(f"[cache] stats.nba.com unavailable ({e}); skipping NBA stats analysis")
 
     analyses = []
     for i, market in enumerate(markets):
@@ -174,10 +176,21 @@ def main():
 
     # ── 5. Format & send ─────────────────────────────────────────────────
     title = build_alert_title(in_window, IS_MORNING_SCAN)
-    if not top_picks:
-        body  = "No strong edges found today (all picks below threshold)."
+    import data.nba_stats as _nba
+    if not top_picks and not _nba._nba_stats_available:
+        # stats.nba.com is down — send top markets by volume as a raw price alert
+        top_raw = sorted(markets, key=lambda m: m.get("volume", 0), reverse=True)[:TOP_N]
+        lines = [f"⚠️ NBA Stats API unavailable — raw Kalshi prices:\n"]
+        for m in top_raw:
+            ask = m.get("yes_ask", 50)
+            lines.append(
+                f"• {m['player_name']} {m['stat_type'].upper()} {m['line']}+ "
+                f"| Yes {ask}¢ / No {100-ask}¢  vol={m.get('volume',0)}"
+            )
+        body = "\n".join(lines)
+    elif not top_picks:
+        body = "No strong edges found today (all picks below threshold)."
     else:
-        # Attach pick_id placeholder so format_picks_sms works without DB
         for i, p in enumerate(top_picks, 1):
             p.setdefault("pick_id", f"#{i}")
         body = format_picks_sms(top_picks, today.isoformat())
