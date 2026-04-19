@@ -211,11 +211,39 @@ _NAME_TOTAL_RE = re.compile(
 )
 
 
+def _parse_price_cents(raw: dict, field: str, default: int = 50) -> int:
+    """Convert yes_ask_dollars / no_ask_dollars (string) to integer cents."""
+    dollar_str = raw.get(f"{field}_dollars")
+    if dollar_str:
+        try:
+            return round(float(dollar_str) * 100)
+        except (ValueError, TypeError):
+            pass
+    return raw.get(field, default)
+
+
+def _extract_teams_from_event_ticker(event_ticker: str) -> tuple[str, str]:
+    """
+    KXNBAPTS-26APR19PORSAS → away=POR, home=SAS
+    Last segment after date is 6-char team string: first 3 = away, last 3 = home.
+    """
+    parts = event_ticker.split("-")
+    if len(parts) >= 2:
+        date_teams = parts[-1]  # e.g. 26APR19PORSAS
+        # strip leading date portion (digits + month abbrev + 2-digit day = up to 7 chars)
+        m = re.search(r"[A-Z]{3}\d{2}([A-Z]{6})$", date_teams)
+        if m:
+            teams = m.group(1)
+            return teams[:3], teams[3:]
+    return "", ""
+
+
 def parse_market(raw: dict) -> Optional[dict]:
-    ticker   = raw.get("ticker", "")
-    title    = raw.get("title", "") or ""
-    subtitle = raw.get("subtitle", "") or ""
-    full_lc  = f"{title} {subtitle}".lower()
+    ticker       = raw.get("ticker", "")
+    event_ticker = raw.get("event_ticker", "")
+    title        = raw.get("title", "") or ""
+    subtitle     = raw.get("subtitle", "") or ""
+    full_lc      = f"{title} {subtitle}".lower()
 
     # Try title-based extraction first, fall back to ticker
     stat_type, line = _extract_stat(full_lc)
@@ -230,24 +258,26 @@ def parse_market(raw: dict) -> Optional[dict]:
     if not player_name:
         return None
 
+    away_team, home_team = _extract_teams_from_event_ticker(event_ticker)
+
     return {
         "ticker":        ticker,
-        "event_ticker":  raw.get("event_ticker", ""),
+        "event_ticker":  event_ticker,
         "series_ticker": raw.get("series_ticker", ""),
         "title":         title,
         "player_name":   player_name,
         "stat_type":     stat_type,
         "line":          line,
-        "yes_ask":       raw.get("yes_ask", 50),
-        "yes_bid":       raw.get("yes_bid", 50),
-        "no_ask":        raw.get("no_ask", 50),
-        "no_bid":        raw.get("no_bid", 50),
+        "yes_ask":       _parse_price_cents(raw, "yes_ask"),
+        "yes_bid":       _parse_price_cents(raw, "yes_bid"),
+        "no_ask":        _parse_price_cents(raw, "no_ask"),
+        "no_bid":        _parse_price_cents(raw, "no_bid"),
         "volume":        raw.get("volume", 0),
         "open_interest": raw.get("open_interest", 0),
         "close_time":    raw.get("close_time", ""),
         "game_date":     _extract_date(raw),
-        "home_team":     "",
-        "away_team":     "",
+        "home_team":     home_team,
+        "away_team":     away_team,
     }
 
 
