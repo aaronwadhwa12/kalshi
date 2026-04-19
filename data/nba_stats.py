@@ -15,10 +15,9 @@ from nba_api.stats.endpoints import (
 )
 from nba_api.stats.static import players as static_players, teams as static_teams
 from nba_api.stats.library.parameters import SeasonAll
-from nba_api.library.http import NBAStatsHTTP
 
-# stats.nba.com blocks requests without proper browser headers
-NBAStatsHTTP.HEADERS = {
+# stats.nba.com requires browser-like headers or it silently times out
+_NBA_HEADERS = {
     "Host": "stats.nba.com",
     "Connection": "keep-alive",
     "Accept": "application/json, text/plain, */*",
@@ -33,8 +32,7 @@ NBAStatsHTTP.HEADERS = {
         "Chrome/123.0.0.0 Safari/537.36"
     ),
 }
-
-_NBA_TIMEOUT = 60  # seconds per request
+_NBA_TIMEOUT = 60
 
 
 _player_cache: dict = {}
@@ -47,6 +45,7 @@ _REQUEST_DELAY = 0.6  # seconds between NBA API requests (rate limiting)
 def _nba_request(fn, *args, **kwargs):
     time.sleep(_REQUEST_DELAY)
     kwargs.setdefault("timeout", _NBA_TIMEOUT)
+    kwargs.setdefault("headers", _NBA_HEADERS)
     return fn(*args, **kwargs)
 
 
