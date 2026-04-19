@@ -6,7 +6,15 @@ load_dotenv()
 KALSHI_API_KEY = os.getenv("KALSHI_API_KEY", "")
 KALSHI_BASE_URL = os.getenv("KALSHI_BASE_URL", "https://trading-api.kalshi.com/trade-api/v2")
 
-IMESSAGE_TO = os.getenv("IMESSAGE_TO", "")
+# Notification channels (configure at least one)
+IMESSAGE_TO         = os.getenv("IMESSAGE_TO", "")          # macOS only
+NTFY_TOPIC          = os.getenv("NTFY_TOPIC", "")           # ntfy.sh topic name
+TELEGRAM_BOT_TOKEN  = os.getenv("TELEGRAM_BOT_TOKEN", "")   # from @BotFather
+TELEGRAM_CHAT_ID    = os.getenv("TELEGRAM_CHAT_ID", "")     # your chat/user ID
+EMAIL_TO            = os.getenv("EMAIL_TO", "")             # recipient email
+SMTP_USER           = os.getenv("SMTP_USER", "")            # Gmail address
+SMTP_PASSWORD       = os.getenv("SMTP_PASSWORD", "")        # Gmail app password
+DISCORD_WEBHOOK_URL = os.getenv("DISCORD_WEBHOOK_URL", "")  # Discord webhook URL
 
 DB_PATH = os.getenv("DB_PATH", "kalshi_nba.db")
 

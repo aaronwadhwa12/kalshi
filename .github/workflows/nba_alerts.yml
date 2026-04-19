@@ -1,0 +1,66 @@
+name: NBA Kalshi Edge Alerts
+
+on:
+  schedule:
+    # Morning scan — 9 AM ET (runs at 13:00 UTC, covers EDT; 14:00 covers EST)
+    - cron: '0 13 * * *'
+    - cron: '0 14 * * *'
+
+    # Pre-game window checks — every 30 min from 5:30 PM to 11 PM ET
+    # EDT (UTC-4): 21:30–03:00 UTC  |  EST (UTC-5): 22:30–04:00 UTC
+    # Running on both to cover daylight-saving transitions
+    - cron: '0,30 21,22,23,0,1,2,3 * * *'
+
+  workflow_dispatch:
+    inputs:
+      morning_scan:
+        description: 'Force morning scan (send picks regardless of game time)'
+        type: boolean
+        default: false
+
+jobs:
+  alert:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Determine if morning scan
+        id: morning
+        run: |
+          HOUR=$(date -u +%H)
+          FORCED="${{ github.event.inputs.morning_scan }}"
+          if [[ "$HOUR" == "13" || "$HOUR" == "14" || "$FORCED" == "true" ]]; then
+            echo "is_morning=1" >> $GITHUB_OUTPUT
+          else
+            echo "is_morning=0" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Run scan and alert
+        env:
+          KALSHI_API_KEY:        ${{ secrets.KALSHI_API_KEY }}
+          NTFY_TOPIC:            ${{ secrets.NTFY_TOPIC }}
+          TELEGRAM_BOT_TOKEN:    ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID:      ${{ secrets.TELEGRAM_CHAT_ID }}
+          EMAIL_TO:              ${{ secrets.EMAIL_TO }}
+          SMTP_USER:             ${{ secrets.SMTP_USER }}
+          SMTP_PASSWORD:         ${{ secrets.SMTP_PASSWORD }}
+          DISCORD_WEBHOOK_URL:   ${{ secrets.DISCORD_WEBHOOK_URL }}
+          IS_MORNING_SCAN:       ${{ steps.morning.outputs.is_morning }}
+          ALERT_WINDOW_MIN:      "90"
+          ALERT_EARLIEST_MIN:    "45"
+          TOP_N:                 "5"
+          MIN_EDGE_THRESHOLD:    "0.05"
+          DECAY_FACTOR:          "0.92"
+        run: python scan_and_alert.py
