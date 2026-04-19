@@ -157,6 +157,57 @@ def get_player_recent_stats_espn(player_id: str, limit: int = 10) -> list[dict]:
     return games[:limit]
 
 
+def get_game_boxscore(event_id: str) -> list[dict]:
+    """
+    Return player stats for a completed game.
+
+    Each entry: {name, team, min, pts, reb, ast, stl, blk, tov, fg3m}
+    """
+    data = _get(f"{BASE}/summary", params={"event": event_id}, cache_ttl=60)
+    players = []
+    for team_block in data.get("boxscore", {}).get("players", []):
+        team_name = team_block.get("team", {}).get("displayName", "")
+        for stat_block in team_block.get("statistics", []):
+            labels = [l.upper() for l in stat_block.get("labels", [])]
+            for athlete_entry in stat_block.get("athletes", []):
+                athlete = athlete_entry.get("athlete", {})
+                raw_stats = athlete_entry.get("stats", [])
+                if not raw_stats:
+                    continue
+                stat_map = dict(zip(labels, raw_stats))
+                def _f(key, default=0.0):
+                    try:
+                        return float(stat_map.get(key, default))
+                    except (ValueError, TypeError):
+                        return default
+                min_played = _f("MIN")
+                if min_played < 10:
+                    continue
+                players.append({
+                    "name":  athlete.get("displayName", ""),
+                    "id":    athlete.get("id", ""),
+                    "team":  team_name,
+                    "min":   min_played,
+                    "pts":   _f("PTS"),
+                    "reb":   _f("REB"),
+                    "ast":   _f("AST"),
+                    "stl":   _f("STL"),
+                    "blk":   _f("BLK"),
+                    "tov":   _f("TO"),
+                    "fg3m":  _f("3PT") or _f("FG3M"),
+                    "pra":   _f("PTS") + _f("REB") + _f("AST"),
+                })
+    return players
+
+
+def get_completed_games(game_date: Optional[date] = None) -> list[dict]:
+    """Return completed games for a given date with event IDs."""
+    games = get_todays_games(game_date)
+    return [g for g in games if g["status"] in (
+        "STATUS_FINAL", "STATUS_FINAL_OT", "Final", "final"
+    )]
+
+
 def parse_injury_impact(player_info: dict) -> float:
     """Return a probability multiplier based on injury status (1.0 = no injury)."""
     status = (player_info.get("injury_status") or "").lower()
