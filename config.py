@@ -6,10 +6,7 @@ load_dotenv()
 KALSHI_API_KEY = os.getenv("KALSHI_API_KEY", "")
 KALSHI_BASE_URL = os.getenv("KALSHI_BASE_URL", "https://trading-api.kalshi.com/trade-api/v2")
 
-TWILIO_ACCOUNT_SID = os.getenv("TWILIO_ACCOUNT_SID", "")
-TWILIO_AUTH_TOKEN = os.getenv("TWILIO_AUTH_TOKEN", "")
-TWILIO_FROM_NUMBER = os.getenv("TWILIO_FROM_NUMBER", "")
-TWILIO_TO_NUMBER = os.getenv("TWILIO_TO_NUMBER", "")
+IMESSAGE_TO = os.getenv("IMESSAGE_TO", "")
 
 DB_PATH = os.getenv("DB_PATH", "kalshi_nba.db")
 
