@@ -64,7 +64,18 @@ def scan_markets(game_date, limit: int = 200) -> list[dict]:
         m = kalshi_client.parse_market(r)
         if m:
             parsed.append(m)
-    return parsed
+
+    # Deduplicate: keep one market per (player, stat_type) — the one with
+    # the highest volume (most liquid / most meaningful price)
+    seen: dict[tuple, dict] = {}
+    for m in parsed:
+        key = (m["player_name"], m["stat_type"])
+        if key not in seen or m.get("volume", 0) > seen[key].get("volume", 0):
+            seen[key] = m
+    deduped = list(seen.values())
+    if len(deduped) < len(parsed):
+        print(f"[kalshi] Deduped {len(parsed)} → {len(deduped)} markets (1 per player/stat)")
+    return deduped
 
 
 def analyze_markets(markets: list[dict]) -> list[dict]:
@@ -76,8 +87,12 @@ def analyze_markets(markets: list[dict]) -> list[dict]:
         if pid:
             player_ids.append(pid)
     if player_ids:
-        print(f"[cache] Pre-warming {len(set(player_ids))} players via bulk load...")
-        warm_player_cache(list(set(player_ids)))
+        unique_ids = list(set(player_ids))
+        print(f"[cache] Pre-warming {len(unique_ids)} players via bulk load...")
+        try:
+            warm_player_cache(unique_ids)
+        except Exception as e:
+            print(f"[cache] Bulk warm failed ({e}); will try individual calls per player")
 
     analyses = []
     for i, market in enumerate(markets):

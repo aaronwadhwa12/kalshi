@@ -15,6 +15,26 @@ from nba_api.stats.endpoints import (
 )
 from nba_api.stats.static import players as static_players, teams as static_teams
 from nba_api.stats.library.parameters import SeasonAll
+from nba_api.library.http import NBAStatsHTTP
+
+# stats.nba.com blocks requests without proper browser headers
+NBAStatsHTTP.HEADERS = {
+    "Host": "stats.nba.com",
+    "Connection": "keep-alive",
+    "Accept": "application/json, text/plain, */*",
+    "x-nba-stats-origin": "stats",
+    "x-nba-stats-token": "true",
+    "Accept-Language": "en-US,en;q=0.5",
+    "Accept-Encoding": "gzip, deflate, br",
+    "Referer": "https://www.nba.com/",
+    "User-Agent": (
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+        "AppleWebKit/537.36 (KHTML, like Gecko) "
+        "Chrome/123.0.0.0 Safari/537.36"
+    ),
+}
+
+_NBA_TIMEOUT = 60  # seconds per request
 
 
 _player_cache: dict = {}
@@ -26,6 +46,7 @@ _REQUEST_DELAY = 0.6  # seconds between NBA API requests (rate limiting)
 
 def _nba_request(fn, *args, **kwargs):
     time.sleep(_REQUEST_DELAY)
+    kwargs.setdefault("timeout", _NBA_TIMEOUT)
     return fn(*args, **kwargs)
 
 
@@ -78,13 +99,26 @@ def load_season_game_logs(season: str = None) -> pd.DataFrame:
     if season in _bulk_log_cache:
         return _bulk_log_cache[season]
     print(f"  [nba_api] Bulk-loading {season} game logs (1 request)...")
-    log = _nba_request(
-        leaguegamelog.LeagueGameLog,
-        season=season,
-        player_or_team_abbreviation="P",
-        season_type_all_star="Regular Season",
-    )
-    df = log.get_data_frames()[0]
+    last_err = None
+    for attempt in range(3):
+        try:
+            if attempt:
+                wait = 2 ** attempt
+                print(f"  [nba_api] Retry {attempt}/2 after {wait}s...")
+                time.sleep(wait)
+            log = _nba_request(
+                leaguegamelog.LeagueGameLog,
+                season=season,
+                player_or_team_abbreviation="P",
+                season_type_all_star="Regular Season",
+            )
+            df = log.get_data_frames()[0]
+            break
+        except Exception as e:
+            last_err = e
+            print(f"  [nba_api] Attempt {attempt+1} failed: {e}")
+    else:
+        raise RuntimeError(f"LeagueGameLog failed after 3 attempts: {last_err}")
     df["GAME_DATE"] = pd.to_datetime(df["GAME_DATE"])
     df["IS_HOME"]   = ~df["MATCHUP"].str.contains("@")
     _bulk_log_cache[season] = df
