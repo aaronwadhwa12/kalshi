@@ -271,6 +271,18 @@ def _pct(num: int, denom: int) -> str:
     return f"{num/denom*100:.1f}" if denom else "—"
 
 
+def _send_via_telegram(text: str, title: str):
+    """Chunk and send backtest output to Telegram (4096 char limit per message)."""
+    from notifications.notify import send_telegram
+    chunk_size = 3800
+    chunks = [text[i:i+chunk_size] for i in range(0, len(text), chunk_size)]
+    for i, chunk in enumerate(chunks):
+        t = title if i == 0 else f"{title} (cont.)"
+        ok = send_telegram(chunk, title=t)
+        if not ok:
+            print(f"[telegram] Failed to send chunk {i+1}/{len(chunks)}")
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Backtest NBA Kalshi edge model")
     parser.add_argument("--date", default=None,
@@ -279,8 +291,23 @@ if __name__ == "__main__":
                         help="Minimum |edge| to include a pick (default: 0.0)")
     parser.add_argument("--top", type=int, default=10,
                         help="Max players to analyse per game (default: 10)")
+    parser.add_argument("--notify", action="store_true",
+                        help="Send results to Telegram when done")
     args = parser.parse_args()
 
     target = date.fromisoformat(args.date) if args.date else date.today()
     init_db()
+
+    if args.notify:
+        import io
+        buf = io.StringIO()
+        _real_stdout = sys.stdout
+        sys.stdout = buf
+
     backtest_date(target, min_edge=args.min_edge, top_n=args.top)
+
+    if args.notify:
+        sys.stdout = _real_stdout
+        output = buf.getvalue()
+        print(output)   # still print to Actions log
+        _send_via_telegram(output, title=f"Backtest {target}")

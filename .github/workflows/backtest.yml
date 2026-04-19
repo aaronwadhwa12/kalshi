@@ -1,0 +1,51 @@
+name: NBA Backtest
+
+on:
+  workflow_dispatch:
+    inputs:
+      date:
+        description: 'Date to backtest (YYYY-MM-DD — leave blank for today)'
+        required: false
+        default: ''
+      min_edge:
+        description: 'Min edge to show (e.g. 0.05 for 5%)'
+        required: false
+        default: '0.0'
+      top:
+        description: 'Max players per game to analyse'
+        required: false
+        default: '10'
+
+jobs:
+  backtest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run backtest
+        env:
+          KALSHI_API_KEY:      ${{ secrets.KALSHI_API_KEY }}
+          TELEGRAM_BOT_TOKEN:  ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID:    ${{ secrets.TELEGRAM_CHAT_ID }}
+          MIN_EDGE_THRESHOLD:  ${{ github.event.inputs.min_edge }}
+          DECAY_FACTOR:        "0.92"
+        run: |
+          DATE_ARG=""
+          if [ -n "${{ github.event.inputs.date }}" ]; then
+            DATE_ARG="--date ${{ github.event.inputs.date }}"
+          fi
+          python backtest.py \
+            $DATE_ARG \
+            --min-edge ${{ github.event.inputs.min_edge }} \
+            --top ${{ github.event.inputs.top }} \
+            --notify
