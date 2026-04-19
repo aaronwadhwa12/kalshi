@@ -196,13 +196,15 @@ def get_team_defensive_ratings(season: str = None) -> pd.DataFrame:
 
 
 def get_opponent_def_rating(opp_team_name: str, stat_type: str,
-                            season: str = "2024-25") -> float:
+                            season: str = None) -> float:
     """
     Return the opponent's defensive rank multiplier for a given stat type.
 
     Returns a float where > 1.0 means the opponent allows more than league average
     (easier matchup) and < 1.0 means tougher matchup.
     """
+    if season is None:
+        season = current_season()
     df = get_team_defensive_ratings(season)
 
     opp_lower = opp_team_name.lower()

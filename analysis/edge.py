@@ -82,7 +82,7 @@ def analyze_market(market: dict) -> Optional[dict]:
         factors["matchup"] = 1.0
 
     # 2. Home / away split
-    is_home = _player_is_home(player_name, home_team)
+    is_home = _player_is_home(player_name, home_team, df)
     if is_home is not None and "IS_HOME" in df.columns:
         split = nba_stats.get_player_home_away_split(df, _stat_cols(stat_type, df))
         home_avg = _dict_sum(split["home"])
@@ -252,20 +252,18 @@ def _resolve_opponent(player_name: str, home_team: str,
     return None
 
 
-def _player_is_home(player_name: str, home_team: str) -> Optional[bool]:
-    """Return True if the player's team is the home team (best-effort)."""
-    if not home_team:
+def _player_is_home(player_name: str, home_team: str,
+                    df: pd.DataFrame = None) -> Optional[bool]:
+    """Return True if the player's team is the home team.
+
+    Derives the player's team abbreviation from the most recent MATCHUP row
+    (e.g. 'SAS vs. POR' → team=SAS) rather than making an extra API call.
+    """
+    if not home_team or df is None or df.empty or "MATCHUP" not in df.columns:
         return None
     try:
-        player_id = nba_stats.find_player_id(player_name)
-        if not player_id:
-            return None
-        from nba_api.stats.endpoints import commonplayerinfo
-        import time
-        time.sleep(0.6)
-        info = commonplayerinfo.CommonPlayerInfo(player_id=player_id)
-        team_city = info.get_data_frames()[0]["TEAM_CITY"].iloc[0]
-        return team_city.lower() in home_team.lower()
+        player_team = df["MATCHUP"].iloc[0].split()[0].upper()
+        return player_team == home_team.upper()
     except Exception:
         return None
 

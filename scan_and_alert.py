@@ -69,6 +69,16 @@ def scan_markets(game_date, limit: int = 200) -> list[dict]:
 
 def analyze_markets(markets: list[dict]) -> list[dict]:
     """Run edge analysis on all markets, return top picks sorted by edge."""
+    from data.nba_stats import warm_player_cache, find_player_id
+    player_ids = []
+    for m in markets:
+        pid = find_player_id(m.get("player_name", ""))
+        if pid:
+            player_ids.append(pid)
+    if player_ids:
+        print(f"[cache] Pre-warming {len(set(player_ids))} players via bulk load...")
+        warm_player_cache(list(set(player_ids)))
+
     analyses = []
     for i, market in enumerate(markets):
         try:
