@@ -47,6 +47,23 @@ jobs:
             echo "is_morning=0" >> $GITHUB_OUTPUT
           fi
 
+      - name: Diagnose Kalshi API (runs only when markets are empty)
+        if: failure()
+        env:
+          KALSHI_API_KEY: ${{ secrets.KALSHI_API_KEY }}
+        run: |
+          python -c "
+          from data.kalshi_client import debug_raw_markets, get_balance
+          try:
+              bal = get_balance()
+              print(f'Kalshi balance: \${bal:.2f}  (auth OK)')
+          except Exception as e:
+              print(f'Auth error: {e}')
+          print()
+          print('First 5 raw markets:')
+          debug_raw_markets(5)
+          "
+
       - name: Run scan and alert
         env:
           KALSHI_API_KEY:        ${{ secrets.KALSHI_API_KEY }}
