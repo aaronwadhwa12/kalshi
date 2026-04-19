@@ -7,6 +7,7 @@ from typing import Optional
 
 from nba_api.stats.endpoints import (
     playergamelog,
+    leaguegamelog,
     commonplayerinfo,
     leaguedashteamstats,
     leaguedashplayerstats,
@@ -18,6 +19,7 @@ from nba_api.stats.library.parameters import SeasonAll
 
 _player_cache: dict = {}
 _team_def_cache: dict = {}
+_bulk_log_cache: dict = {}  # season → full DataFrame of all player-games
 
 _REQUEST_DELAY = 0.6  # seconds between NBA API requests (rate limiting)
 
@@ -62,6 +64,65 @@ def find_team_id(name: str) -> Optional[int]:
                 or name_lower in t["abbreviation"].lower()):
             return t["id"]
     return None
+
+
+def load_season_game_logs(season: str = None) -> pd.DataFrame:
+    """
+    Fetch every player-game for a full season in ONE API call.
+
+    This is the fast path used by warm_player_cache — replaces ~50 individual
+    PlayerGameLog requests with 2 LeagueGameLog requests (current + prev season).
+    """
+    if season is None:
+        season = current_season()
+    if season in _bulk_log_cache:
+        return _bulk_log_cache[season]
+    print(f"  [nba_api] Bulk-loading {season} game logs (1 request)...")
+    log = _nba_request(
+        leaguegamelog.LeagueGameLog,
+        season=season,
+        player_or_team_abbreviation="P",
+        season_type_all_star="Regular Season",
+    )
+    df = log.get_data_frames()[0]
+    df["GAME_DATE"] = pd.to_datetime(df["GAME_DATE"])
+    df["IS_HOME"]   = ~df["MATCHUP"].str.contains("@")
+    _bulk_log_cache[season] = df
+    return df
+
+
+def warm_player_cache(player_ids: list, season: str = None):
+    """
+    Pre-populate the per-player cache for a list of player IDs using bulk data.
+
+    Call this once at the start of a backtest to avoid N individual API calls.
+    Fetches current + previous season in 2 requests total regardless of player count.
+    """
+    if season is None:
+        season = current_season()
+
+    bulk    = load_season_game_logs(season)
+    prev_df = None
+
+    for pid in player_ids:
+        if pid is None or (pid, season) in _player_cache:
+            continue
+
+        pdf = bulk[bulk["PLAYER_ID"] == pid].sort_values(
+            "GAME_DATE", ascending=False
+        ).reset_index(drop=True)
+
+        if len(pdf) < 5:
+            if prev_df is None:
+                prev_df = load_season_game_logs(_prev_season(season))
+            prev = prev_df[prev_df["PLAYER_ID"] == pid].sort_values(
+                "GAME_DATE", ascending=False
+            ).reset_index(drop=True)
+            pdf = pd.concat([pdf, prev], ignore_index=True)
+
+        _player_cache[(pid, season)] = pdf
+
+    print(f"  [cache] Warmed {len(player_ids)} players from bulk data.")
 
 
 def get_player_game_log(player_id: int, season: str = None,

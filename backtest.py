@@ -114,6 +114,25 @@ def backtest_date(target_date: date, min_edge: float = 0.0, top_n: int = 999):
         print(f"  {g['away_team']} @ {g['home_team']}")
     print()
 
+    # ── 2. Fetch all box scores and bulk-warm the player cache ───────────────
+    # This turns ~50 individual NBA API calls into 2 (current + prev season).
+    print("Fetching box scores...")
+    game_boxes = {}
+    all_player_names = []
+    for game in completed:
+        try:
+            players = espn_mod.get_game_boxscore(game["event_id"])
+            game_boxes[game["event_id"]] = players
+            all_player_names.extend(p["name"] for p in players[:top_n])
+        except Exception as e:
+            print(f"  Box score unavailable for {game['event_id']}: {e}")
+            game_boxes[game["event_id"]] = []
+
+    print(f"Resolving {len(set(all_player_names))} unique players...")
+    player_ids = [nba_stats.find_player_id(n) for n in set(all_player_names)]
+    nba_stats.warm_player_cache([pid for pid in player_ids if pid], season)
+    print()
+
     all_results = []
 
     for game in completed:
@@ -125,18 +144,11 @@ def backtest_date(target_date: date, min_edge: float = 0.0, top_n: int = 999):
         print(f"{header}")
         print(f"{'─'*60}")
 
-        # ── 2. Get box score ─────────────────────────────────────────────────
-        try:
-            players = espn_mod.get_game_boxscore(event_id)
-        except Exception as e:
-            print(f"  Box score unavailable: {e}\n")
-            continue
-
+        # ── 2. Use pre-fetched box score ─────────────────────────────────────
+        players = game_boxes.get(event_id, [])
         if not players:
             print("  No box score data.\n")
             continue
-
-        # Sort by minutes played, take top_n
         players = sorted(players, key=lambda p: p["min"], reverse=True)[:top_n]
         game_rows = []
 
