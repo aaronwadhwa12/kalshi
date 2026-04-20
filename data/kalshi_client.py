@@ -2,7 +2,7 @@
 import re
 import time
 import requests
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 from typing import Optional
 
 import config
@@ -87,9 +87,10 @@ def get_nba_markets(game_date: Optional[date] = None,
                 if s:
                     params["status"] = s
                 if game_date:
-                    params["min_close_ts"] = int(
-                        datetime.combine(game_date, datetime.min.time()).timestamp()
-                    )
+                    day_start = datetime.combine(game_date, datetime.min.time())
+                    day_end   = datetime.combine(game_date + timedelta(days=2), datetime.min.time())
+                    params["min_close_ts"] = int(day_start.timestamp())
+                    params["max_close_ts"] = int(day_end.timestamp())
                 data  = _get("/markets", params=params)
                 found = [m for m in data.get("markets", [])
                          if m.get("ticker") not in seen_tickers]
@@ -271,6 +272,14 @@ def parse_market(raw: dict) -> Optional[dict]:
 
     away_team, home_team = _extract_teams_from_event_ticker(event_ticker)
 
+    yes_ask = _parse_price_cents(raw, "yes_ask")
+    no_ask  = _parse_price_cents(raw, "no_ask")
+
+    # Skip illiquid / effectively-settled markets — no edge to extract
+    # when one side trades at 98c+ (market is essentially resolved already)
+    if yes_ask >= 98 or yes_ask <= 2:
+        return None
+
     return {
         "ticker":        ticker,
         "event_ticker":  event_ticker,
@@ -279,9 +288,9 @@ def parse_market(raw: dict) -> Optional[dict]:
         "player_name":   player_name,
         "stat_type":     stat_type,
         "line":          line,
-        "yes_ask":       _parse_price_cents(raw, "yes_ask"),
+        "yes_ask":       yes_ask,
         "yes_bid":       _parse_price_cents(raw, "yes_bid"),
-        "no_ask":        _parse_price_cents(raw, "no_ask"),
+        "no_ask":        no_ask,
         "no_bid":        _parse_price_cents(raw, "no_bid"),
         "volume":        raw.get("volume", 0),
         "open_interest": raw.get("open_interest", 0),

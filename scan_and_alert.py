@@ -160,10 +160,11 @@ def main():
     print(f"[kalshi] {len(markets)} valid markets")
 
     if not markets:
-        send_notification(
-            "Kalshi markets unavailable or no NBA props found today.",
-            title="NBA Kalshi — No Markets",
-        )
+        msg = (f"No open Kalshi NBA markets for {today}. "
+               "Either no games today or all markets are closed/settled.")
+        print(f"[kalshi] {msg}")
+        if IS_MORNING_SCAN or FULL_REPORT:
+            send_notification(msg, title="NBA Kalshi — No Markets")
         sys.exit(0)
 
     # ── 4. Analyze ────────────────────────────────────────────────────────
