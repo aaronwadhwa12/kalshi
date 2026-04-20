@@ -63,18 +63,32 @@ def scan_markets(game_date, limit: int = 200) -> list[dict]:
     try:
         status = None if FULL_REPORT else "open"
         raw = kalshi_client.get_nba_markets(game_date=game_date, limit=limit, status=status)
-        # Fallback: no markets for today → fetch all upcoming open markets
-        if not raw and (IS_MORNING_SCAN or FULL_REPORT):
-            print(f"[kalshi] No markets for {game_date}, fetching all upcoming open markets...")
-            raw = kalshi_client.get_nba_markets(game_date=None, limit=limit, status="open")
     except Exception as e:
         print(f"[kalshi] Failed to fetch markets: {e}")
         return []
+
+    # Parse and filter to the target date (game_date field set by _extract_date)
+    today_str = game_date.isoformat() if hasattr(game_date, "isoformat") else str(game_date)
     parsed = []
     for r in raw:
         m = kalshi_client.parse_market(r)
-        if m:
+        if not m:
+            continue
+        # Keep only markets for today; if game_date is unknown (defaults to today) also keep
+        if m.get("game_date", today_str) <= today_str:
             parsed.append(m)
+
+    # Fallback: nothing for today → grab all upcoming open markets (off-days, advance playoff lines)
+    if not parsed and (IS_MORNING_SCAN or FULL_REPORT):
+        print(f"[kalshi] No markets for {today_str}, fetching all upcoming open markets...")
+        try:
+            raw_all = kalshi_client.get_nba_markets(game_date=None, limit=limit, status="open")
+            for r in raw_all:
+                m = kalshi_client.parse_market(r)
+                if m:
+                    parsed.append(m)
+        except Exception as e:
+            print(f"[kalshi] Fallback fetch failed: {e}")
 
     # Deduplicate: keep one market per (player, stat_type) — the one with
     # the highest volume (most liquid / most meaningful price)

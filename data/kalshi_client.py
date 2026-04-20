@@ -101,17 +101,7 @@ def get_nba_markets(game_date: Optional[date] = None,
                     day_start = datetime.combine(game_date, datetime.min.time())
                     params["min_close_ts"] = int(day_start.timestamp())
                 data  = _get("/markets", params=params)
-                # Filter client-side to the target date window (±2 days)
-                # — avoids relying on max_close_ts which Kalshi may not support
-                if game_date:
-                    day_end_ts = (day_start + timedelta(days=2)).timestamp()
-                    raw_markets = [
-                        m for m in data.get("markets", [])
-                        if _market_close_ts(m) <= day_end_ts
-                    ]
-                else:
-                    raw_markets = data.get("markets", [])
-                found = [m for m in raw_markets
+                found = [m for m in data.get("markets", [])
                          if m.get("ticker") not in seen_tickers]
                 if found:
                     print(f"[kalshi] {series} ({s}): {len(found)} markets")
