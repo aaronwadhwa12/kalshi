@@ -76,23 +76,29 @@ def get_nba_markets(game_date: Optional[date] = None,
     Pass status=None to fetch all statuses (useful for post-game full reports).
     """
     # ── Strategy 1: fetch all known NBA player-prop series ──────────────────
+    # When status=None, try each known status so we catch closed/settled markets
+    statuses_to_try = [status] if status else ["open", "closed", "settled"]
     markets = []
+    seen_tickers: set = set()
     for series in _NBA_SERIES_CANDIDATES:
-        try:
-            params = {"limit": limit, "series_ticker": series}
-            if status:
-                params["status"] = status
-            if game_date:
-                params["min_close_ts"] = int(
-                    datetime.combine(game_date, datetime.min.time()).timestamp()
-                )
-            data  = _get("/markets", params=params)
-            found = data.get("markets", [])
-            if found:
-                print(f"[kalshi] {series}: {len(found)} markets")
-                markets.extend(found)
-        except Exception as e:
-            print(f"[kalshi] Series '{series}' error: {e}")
+        for s in statuses_to_try:
+            try:
+                params = {"limit": limit, "series_ticker": series}
+                if s:
+                    params["status"] = s
+                if game_date:
+                    params["min_close_ts"] = int(
+                        datetime.combine(game_date, datetime.min.time()).timestamp()
+                    )
+                data  = _get("/markets", params=params)
+                found = [m for m in data.get("markets", [])
+                         if m.get("ticker") not in seen_tickers]
+                if found:
+                    print(f"[kalshi] {series} ({s}): {len(found)} markets")
+                    markets.extend(found)
+                    seen_tickers.update(m.get("ticker") for m in found)
+            except Exception as e:
+                print(f"[kalshi] Series '{series}' ({s}) error: {e}")
     if markets:
         print(f"[kalshi] Strategy 1 total: {len(markets)} markets")
         return markets
