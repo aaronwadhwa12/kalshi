@@ -81,22 +81,17 @@ def scan_markets(game_date, limit: int = 200) -> list[dict]:
 
 
 def analyze_markets(markets: list[dict]) -> list[dict]:
-    """Run edge analysis on all markets, return top picks sorted by edge."""
-    from data.nba_stats import warm_player_cache, find_player_id
-    player_ids = []
-    for m in markets:
-        pid = find_player_id(m.get("player_name", ""))
-        if pid:
-            player_ids.append(pid)
-    if player_ids:
-        unique_ids = list(set(player_ids))
-        print(f"[cache] Pre-warming {len(unique_ids)} players via bulk load...")
-        try:
-            warm_player_cache(unique_ids)
-        except Exception as e:
-            import data.nba_stats as _nba
-            _nba._nba_stats_available = False
-            print(f"[cache] stats.nba.com unavailable ({e}); skipping NBA stats analysis")
+    """Run edge analysis on all markets, return all results sorted by edge."""
+    from data.nba_stats import warm_player_cache
+    # Pass player names directly — boxscore approach uses names as keys
+    player_names = list({m.get("player_name", "") for m in markets if m.get("player_name")})
+    print(f"[cache] Loading ESPN boxscore history for {len(player_names)} unique players...")
+    try:
+        warm_player_cache(player_names)
+    except Exception as e:
+        import data.nba_stats as _nba
+        _nba._nba_stats_available = False
+        print(f"[cache] ESPN boxscore load failed ({e}); skipping analysis")
 
     analyses = []
     for i, market in enumerate(markets):

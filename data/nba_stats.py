@@ -1,15 +1,25 @@
-"""NBA player stats via ESPN unofficial API — free, no auth, cloud-friendly."""
+"""
+NBA player stats built from ESPN boxscores — no external API key, no IP blocking.
+
+Instead of per-player game log endpoints (which require auth or block cloud IPs),
+we fetch completed game boxscores from ESPN (confirmed working) going back N days
+and assemble per-player histories from those.
+"""
 import time
-from datetime import date
+from datetime import date, timedelta
 from typing import Optional
 
 import pandas as pd
 
 from data import espn as _espn
 
-_player_id_cache: dict[str, Optional[str]] = {}   # name → ESPN athlete ID
-_player_log_cache: dict[str, pd.DataFrame] = {}   # ESPN athlete ID → game log
+# In-memory stores
+_player_history: dict[str, list[dict]] = {}   # normalized_name → [{date, pts, reb, ...}]
+_name_map: dict[str, str] = {}                # lookup_name → canonical_name in _player_history
+_history_loaded: bool = False
 _nba_stats_available: bool = True
+
+HISTORY_DAYS = 21   # go back this many days to build game logs
 
 
 # ---------------------------------------------------------------------------
@@ -28,107 +38,143 @@ def _prev_season(season: str) -> str:
 
 
 # ---------------------------------------------------------------------------
-# Player lookup via ESPN search
+# Build histories from ESPN boxscores
+# ---------------------------------------------------------------------------
+
+def _normalize(name: str) -> str:
+    return name.lower().strip()
+
+
+def _load_histories(days_back: int = HISTORY_DAYS):
+    """
+    Fetch ESPN boxscores for the past `days_back` days and build per-player histories.
+    Each boxscore call takes ~300ms; ~3 games/day × 21 days = ~63 calls ≈ 20s total.
+    """
+    global _history_loaded, _nba_stats_available
+    today = date.today()
+    print(f"  [espn] Building player histories from past {days_back} days of boxscores...")
+    games_loaded = 0
+
+    for delta in range(days_back):
+        game_date = today - timedelta(days=delta)
+        try:
+            completed = _espn.get_completed_games(game_date)
+        except Exception:
+            continue
+
+        for game in completed:
+            # get_todays_games returns home_team / away_team display names
+            home_display = game.get("home_team", "")
+            try:
+                players = _espn.get_game_boxscore(game["event_id"])
+            except Exception:
+                continue
+
+            for p in players:
+                name_key = _normalize(p["name"])
+                is_home = home_display and p.get("team", "") == home_display
+                entry = {
+                    "date":   game_date.isoformat(),
+                    "is_home": is_home,
+                    "pts":    float(p.get("pts") or 0),
+                    "reb":    float(p.get("reb") or 0),
+                    "ast":    float(p.get("ast") or 0),
+                    "stl":    float(p.get("stl") or 0),
+                    "blk":    float(p.get("blk") or 0),
+                    "tov":    float(p.get("tov") or 0),
+                    "fg3m":   float(p.get("fg3m") or 0),
+                    "min":    float(p.get("min") or 0),
+                }
+                if name_key not in _player_history:
+                    _player_history[name_key] = []
+                _player_history[name_key].append(entry)
+            games_loaded += 1
+
+    _history_loaded = True
+    _nba_stats_available = len(_player_history) > 0
+    print(f"  [espn] Loaded {games_loaded} games | {len(_player_history)} players tracked")
+
+
+def _build_name_map(kalshi_names: list[str]):
+    """Map Kalshi player names to the closest ESPN boxscore name."""
+    global _name_map
+    for name in kalshi_names:
+        key = _normalize(name)
+        if key in _player_history:
+            _name_map[key] = key
+            continue
+        # Try last-name + first-initial match
+        parts = key.split()
+        if len(parts) >= 2:
+            last = parts[-1].rstrip(".")
+            first_init = parts[0][0]
+            for espn_key in _player_history:
+                e_parts = espn_key.split()
+                if len(e_parts) >= 2:
+                    e_last = e_parts[-1].rstrip(".")
+                    e_first_init = e_parts[0][0]
+                    if e_last == last and e_first_init == first_init:
+                        _name_map[key] = espn_key
+                        break
+            else:
+                # Last-name only fallback
+                for espn_key in _player_history:
+                    e_parts = espn_key.split()
+                    if e_parts and e_parts[-1].rstrip(".") == last:
+                        _name_map[key] = espn_key
+                        break
+
+
+# ---------------------------------------------------------------------------
+# Public API (same signatures as original nba_stats.py)
 # ---------------------------------------------------------------------------
 
 def find_player_id(name: str) -> Optional[str]:
-    """Return ESPN athlete ID for a player name (cached)."""
-    key = name.lower().strip()
-    if key in _player_id_cache:
-        return _player_id_cache[key]
-    try:
-        result = _espn.search_player(name)
-        pid = result["id"] if result else None
-    except Exception as e:
-        print(f"[espn] Player lookup failed for '{name}': {e}")
-        pid = None
-    _player_id_cache[key] = pid
-    return pid
-
-
-def find_team_id(name: str) -> Optional[str]:
+    """Return a lookup key for this player. Works after warm_player_cache()."""
+    key = _normalize(name)
+    # Check direct match and mapped match
+    if key in _player_history:
+        return key
+    mapped = _name_map.get(key)
+    if mapped and mapped in _player_history:
+        return mapped
     return None
 
-
-# ---------------------------------------------------------------------------
-# ESPN gamelog → DataFrame
-# ---------------------------------------------------------------------------
-
-def _gamelog_to_df(espn_stats: list[dict]) -> pd.DataFrame:
-    """Convert espn.get_player_recent_stats_espn output to nba_api-style DataFrame."""
-    rows = []
-    for g in espn_stats:
-        try:
-            game_date = pd.to_datetime(g.get("date", "")[:10])
-        except Exception:
-            continue
-        is_home = g.get("home", False)
-        team = "?"
-        rows.append({
-            "GAME_DATE": game_date,
-            "MATCHUP":   f"{team} vs. ?" if is_home else f"{team} @ ?",
-            "IS_HOME":   is_home,
-            "PTS":       float(g.get("pts") or 0),
-            "REB":       float(g.get("reb") or 0),
-            "AST":       float(g.get("ast") or 0),
-            "STL":       float(g.get("stl") or 0),
-            "BLK":       float(g.get("blk") or 0),
-            "TOV":       float(g.get("tov") or 0),
-            "FG3M":      float(g.get("fg3m") or 0),
-            "MIN":       float(g.get("min") or 0),
-        })
-    df = pd.DataFrame(rows)
-    if not df.empty:
-        df = df.sort_values("GAME_DATE", ascending=False).reset_index(drop=True)
-    return df
-
-
-# ---------------------------------------------------------------------------
-# Per-player game log
-# ---------------------------------------------------------------------------
 
 def get_player_game_log(player_id: str, season: str = None,
                         last_n: int = 30) -> pd.DataFrame:
     if not _nba_stats_available:
         return pd.DataFrame()
-    if player_id in _player_log_cache:
-        return _player_log_cache[player_id].head(last_n)
-
-    try:
-        stats = _espn.get_player_recent_stats_espn(str(player_id), limit=60)
-        df = _gamelog_to_df(stats)
-        _player_log_cache[player_id] = df
-        return df.head(last_n)
-    except Exception as e:
-        print(f"[espn] Game log failed for player {player_id}: {e}")
+    games = _player_history.get(str(player_id), [])
+    if not games:
         return pd.DataFrame()
 
+    games_sorted = sorted(games, key=lambda g: g["date"], reverse=True)[:last_n]
+    rows = [{
+        "GAME_DATE": pd.to_datetime(g["date"]),
+        "MATCHUP":   "? vs. ?" if g["is_home"] else "? @ ?",
+        "IS_HOME":   g["is_home"],
+        "PTS":       g["pts"],
+        "REB":       g["reb"],
+        "AST":       g["ast"],
+        "STL":       g["stl"],
+        "BLK":       g["blk"],
+        "TOV":       g["tov"],
+        "FG3M":      g["fg3m"],
+        "MIN":       g["min"],
+    } for g in games_sorted]
+    return pd.DataFrame(rows)
 
-# ---------------------------------------------------------------------------
-# Bulk warm (fetches each player individually — ESPN is fast, no IP blocking)
-# ---------------------------------------------------------------------------
 
 def warm_player_cache(player_ids: list, season: str = None):
-    """Pre-fetch game logs for all players. ~300ms per player via ESPN."""
-    global _nba_stats_available
-    to_fetch = [pid for pid in player_ids if pid and pid not in _player_log_cache]
-    if not to_fetch:
-        print("  [espn] All players already cached.")
-        return
-
-    print(f"  [espn] Fetching game logs for {len(to_fetch)} players...")
-    success = 0
-    for pid in to_fetch:
-        try:
-            stats = _espn.get_player_recent_stats_espn(str(pid), limit=60)
-            _player_log_cache[pid] = _gamelog_to_df(stats)
-            success += 1
-        except Exception as e:
-            print(f"  [espn] Failed for player {pid}: {e}")
-            _player_log_cache[pid] = pd.DataFrame()
-
-    _nba_stats_available = success > 0
-    print(f"  [espn] Cached {success}/{len(to_fetch)} players.")
+    """Load all player histories from ESPN boxscores (fetches all at once)."""
+    global _history_loaded
+    if not _history_loaded:
+        _load_histories()
+    # player_ids here are Kalshi player names; build the name map
+    _build_name_map([str(p) for p in player_ids if p])
+    found = sum(1 for p in player_ids if find_player_id(str(p)))
+    print(f"  [espn] Name map built: {found}/{len(player_ids)} players matched")
 
 
 # ---------------------------------------------------------------------------
@@ -163,6 +209,10 @@ def get_days_rest(df: pd.DataFrame, upcoming_date=None) -> int:
     most_recent = df["GAME_DATE"].iloc[0]
     ref = upcoming_date or pd.Timestamp.today()
     return max(0, (ref - most_recent).days)
+
+
+def find_team_id(name: str) -> Optional[str]:
+    return None
 
 
 def compute_composite_stat(df: pd.DataFrame, stat_type: str) -> pd.Series:
