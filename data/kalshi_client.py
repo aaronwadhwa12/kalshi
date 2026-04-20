@@ -63,6 +63,17 @@ _NBA_KEYWORDS = ["kxnbapts", "kxnbareb", "kxnbaast", "kxnba3pm",
                  "kxnbablk", "kxnbastl", "kxnbato", "kxnbapra"]
 
 
+def _market_close_ts(raw: dict) -> float:
+    """Return the market's close_time as a UTC Unix timestamp, or infinity if absent."""
+    ts = raw.get("close_time") or raw.get("expiration_time", "")
+    if ts:
+        try:
+            return datetime.fromisoformat(ts.replace("Z", "+00:00")).timestamp()
+        except ValueError:
+            pass
+    return float("inf")
+
+
 def get_nba_markets(game_date: Optional[date] = None,
                     limit: int = 200,
                     status: Optional[str] = "open") -> list[dict]:
@@ -88,11 +99,19 @@ def get_nba_markets(game_date: Optional[date] = None,
                     params["status"] = s
                 if game_date:
                     day_start = datetime.combine(game_date, datetime.min.time())
-                    day_end   = datetime.combine(game_date + timedelta(days=2), datetime.min.time())
                     params["min_close_ts"] = int(day_start.timestamp())
-                    params["max_close_ts"] = int(day_end.timestamp())
                 data  = _get("/markets", params=params)
-                found = [m for m in data.get("markets", [])
+                # Filter client-side to the target date window (±2 days)
+                # — avoids relying on max_close_ts which Kalshi may not support
+                if game_date:
+                    day_end_ts = (day_start + timedelta(days=2)).timestamp()
+                    raw_markets = [
+                        m for m in data.get("markets", [])
+                        if _market_close_ts(m) <= day_end_ts
+                    ]
+                else:
+                    raw_markets = data.get("markets", [])
+                found = [m for m in raw_markets
                          if m.get("ticker") not in seen_tickers]
                 if found:
                     print(f"[kalshi] {series} ({s}): {len(found)} markets")
