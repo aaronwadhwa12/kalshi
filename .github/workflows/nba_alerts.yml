@@ -79,6 +79,6 @@ jobs:
           ALERT_WINDOW_MIN:      "90"
           ALERT_EARLIEST_MIN:    "45"
           TOP_N:                 "5"
-          MIN_EDGE_THRESHOLD:    "0.05"
+          MIN_EDGE_THRESHOLD:    "0.02"
           DECAY_FACTOR:          "0.92"
         run: python scan_and_alert.py
