@@ -19,7 +19,7 @@ _name_map: dict[str, str] = {}                # lookup_name → canonical_name i
 _history_loaded: bool = False
 _nba_stats_available: bool = True
 
-HISTORY_DAYS = 90   # covers full regular season + playoffs
+HISTORY_DAYS = 185  # full 2025-26 season: Oct 2025 → Apr 2026
 
 
 # ---------------------------------------------------------------------------
@@ -48,7 +48,7 @@ def _normalize(name: str) -> str:
 def _load_histories(days_back: int = HISTORY_DAYS):
     """
     Fetch ESPN boxscores for the past `days_back` days and build per-player histories.
-    Each boxscore call takes ~300ms; ~3 games/day × 21 days = ~63 calls ≈ 20s total.
+    185 days × ~7 games/day × 300ms ≈ 6 min — within 20-min workflow timeout.
     """
     global _history_loaded, _nba_stats_available
     today = date.today()
@@ -57,15 +57,17 @@ def _load_histories(days_back: int = HISTORY_DAYS):
 
     for delta in range(days_back):
         game_date = today - timedelta(days=delta)
+        if delta % 30 == 0 and delta > 0:
+            print(f"  [espn]   ...{delta}/{days_back} days processed, {games_loaded} games so far")
         try:
             completed = _espn.get_completed_games(game_date)
         except Exception:
             continue
 
         for game in completed:
-            # get_todays_games returns home_team / away_team display names
             home_display = game.get("home_team", "")
             try:
+                time.sleep(0.05)  # gentle rate limit — ~1200 requests over 6 min
                 players = _espn.get_game_boxscore(game["event_id"])
             except Exception:
                 continue
