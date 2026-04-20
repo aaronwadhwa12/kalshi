@@ -142,13 +142,13 @@ def main():
         print(f"[ESPN] {e}")
         games = []
 
-    if not games and not IS_MORNING_SCAN:
+    if not games and not IS_MORNING_SCAN and not FULL_REPORT:
         print("No games today. Exiting.")
         sys.exit(0)
 
     # ── 2. Check alert window ─────────────────────────────────────────────
     in_window = games_in_alert_window(games)
-    if not IS_MORNING_SCAN and not in_window:
+    if not IS_MORNING_SCAN and not in_window and not FULL_REPORT:
         print(f"No games tipping off in next {ALERT_EARLIEST_MIN}–{ALERT_WINDOW_MIN} min. "
               "Exiting.")
         sys.exit(0)
