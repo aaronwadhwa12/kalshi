@@ -64,19 +64,24 @@ _NBA_KEYWORDS = ["kxnbapts", "kxnbareb", "kxnbaast", "kxnba3pm",
 
 
 def get_nba_markets(game_date: Optional[date] = None,
-                    limit: int = 200) -> list[dict]:
+                    limit: int = 200,
+                    status: Optional[str] = "open") -> list[dict]:
     """
-    Fetch open NBA player-prop markets using multiple fallback strategies.
+    Fetch NBA player-prop markets using multiple fallback strategies.
 
     Strategy 1 — known series tickers (fast, most reliable when ticker is right)
     Strategy 2 — event search (finds NBA events then gets their markets)
     Strategy 3 — keyword filter over all open markets (slowest, always works)
+
+    Pass status=None to fetch all statuses (useful for post-game full reports).
     """
     # ── Strategy 1: fetch all known NBA player-prop series ──────────────────
     markets = []
     for series in _NBA_SERIES_CANDIDATES:
         try:
-            params = {"limit": limit, "status": "open", "series_ticker": series}
+            params = {"limit": limit, "series_ticker": series}
+            if status:
+                params["status"] = status
             if game_date:
                 params["min_close_ts"] = int(
                     datetime.combine(game_date, datetime.min.time()).timestamp()

@@ -56,7 +56,8 @@ def games_in_alert_window(games: list[dict]) -> list[dict]:
 def scan_markets(game_date, limit: int = 200) -> list[dict]:
     """Fetch and parse Kalshi NBA markets for a given date."""
     try:
-        raw = kalshi_client.get_nba_markets(game_date=game_date, limit=limit)
+        status = None if FULL_REPORT else "open"
+        raw = kalshi_client.get_nba_markets(game_date=game_date, limit=limit, status=status)
     except Exception as e:
         print(f"[kalshi] Failed to fetch markets: {e}")
         return []
