@@ -19,7 +19,7 @@ _name_map: dict[str, str] = {}                # lookup_name → canonical_name i
 _history_loaded: bool = False
 _nba_stats_available: bool = True
 
-HISTORY_DAYS = 21   # go back this many days to build game logs
+HISTORY_DAYS = 90   # covers full regular season + playoffs
 
 
 # ---------------------------------------------------------------------------
@@ -74,7 +74,8 @@ def _load_histories(days_back: int = HISTORY_DAYS):
                 name_key = _normalize(p["name"])
                 is_home = home_display and p.get("team", "") == home_display
                 entry = {
-                    "date":   game_date.isoformat(),
+                    "date":    game_date.isoformat(),
+                    "team":    p.get("team", ""),
                     "is_home": is_home,
                     "pts":    float(p.get("pts") or 0),
                     "reb":    float(p.get("reb") or 0),
@@ -209,6 +210,17 @@ def get_days_rest(df: pd.DataFrame, upcoming_date=None) -> int:
     most_recent = df["GAME_DATE"].iloc[0]
     ref = upcoming_date or pd.Timestamp.today()
     return max(0, (ref - most_recent).days)
+
+
+def get_player_team(name: str) -> str:
+    """Return the most recent team name for a player from their history."""
+    key = _normalize(name)
+    mapped = _name_map.get(key, key)
+    games = _player_history.get(mapped, [])
+    if not games:
+        return ""
+    recent = sorted(games, key=lambda g: g["date"], reverse=True)
+    return recent[0].get("team", "")
 
 
 def find_team_id(name: str) -> Optional[str]:

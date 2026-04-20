@@ -108,14 +108,39 @@ def analyze_market(market: dict) -> Optional[dict]:
     else:
         factors["rest"] = 1.0
 
-    # 4. Injury / news
+    # 4. Injury / news — player themselves
+    inj_info = {}
+    inj_status = ""
     try:
         inj_info = news_mod.get_player_injury_status(player_name)
-        inj_factor = _injury_factor(inj_info.get("status", ""))
-        factors["injury"] = inj_factor
+        inj_status = inj_info.get("status", "")
+        factors["injury"] = _injury_factor(inj_status)
     except Exception:
-        inj_info = {}
         factors["injury"] = 1.0
+
+    # 4b. Teammate-return penalty — if a star is coming back to this player's
+    #     team their usage/role will shrink (e.g. KD returning → Eason/Thompson ↓)
+    teammate_note = ""
+    try:
+        player_team = nba_stats.get_player_team(player_name)
+        if player_team:
+            team_injuries = news_mod.get_injury_report(player_team)
+            returning = [
+                i for i in team_injuries
+                if i.get("player", "").lower() != player_name.lower()
+                and i.get("status", "").lower() in ("probable", "questionable", "active",
+                                                     "day-to-day")
+            ]
+            if returning:
+                # Star = appears near top of injury report (index 0-1) or is well-known
+                stars_returning = returning[:2]  # top entries are usually stars
+                if stars_returning:
+                    teammate_note = ", ".join(
+                        f"{r['player']} ({r['status']})" for r in stars_returning
+                    )
+                    factors["teammate_return"] = 0.90  # 10% usage reduction
+    except Exception:
+        pass
 
     # 5. Variance / consistency adjustment
     std = float(stat_series.std()) if len(stat_series) > 1 else 0.0
@@ -165,6 +190,11 @@ def analyze_market(market: dict) -> Optional[dict]:
         "base_rate":        round(base_prob, 4),
         "factors":          factors,
         "news_summary":     news_summary,
+        "inj_status":       inj_status,
+        "teammate_note":    teammate_note,
+        "game_date":        market.get("game_date", ""),
+        "away_team":        market.get("away_team", ""),
+        "home_team":        market.get("home_team", ""),
     }
 
 

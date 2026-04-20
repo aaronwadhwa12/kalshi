@@ -184,9 +184,24 @@ def main():
             edge_pct = f"{a['edge']:+.1%}"
             our = f"{a['our_probability']:.0%}"
             impl = f"{a['implied_probability']:.0%}"
+            # Game context
+            away = a.get("away_team", "")
+            home = a.get("home_team", "")
+            gdate = a.get("game_date", "")
+            game_tag = f"  [{away}@{home} {gdate}]" if away and home else (f"  [{gdate}]" if gdate else "")
+            # Injury / teammate context
+            inj = a.get("inj_status", "")
+            tm = a.get("teammate_note", "")
+            notes = []
+            if inj:
+                notes.append(f"🏥{inj}")
+            if tm:
+                notes.append(f"⚠️teammate: {tm}")
+            note_tag = "  " + " | ".join(notes) if notes else ""
             lines.append(
                 f"{a['player_name']} {a['stat_type'].upper()} {a['line']}+  "
                 f"edge={edge_pct}  ours={our} kalshi={impl}  conf={a.get('confidence','?')}"
+                f"{game_tag}{note_tag}"
             )
         # Split into ≤3800-char chunks for Telegram
         body_full = "\n".join(lines)
