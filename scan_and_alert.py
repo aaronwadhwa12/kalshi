@@ -54,10 +54,19 @@ def games_in_alert_window(games: list[dict]) -> list[dict]:
 
 
 def scan_markets(game_date, limit: int = 200) -> list[dict]:
-    """Fetch and parse Kalshi NBA markets for a given date."""
+    """Fetch and parse Kalshi NBA markets for a given date.
+
+    In morning scan / full report mode, if no markets exist for today we
+    search without a date filter so we still surface the nearest upcoming
+    games (e.g. second-round playoff games Kalshi opens days in advance).
+    """
     try:
         status = None if FULL_REPORT else "open"
         raw = kalshi_client.get_nba_markets(game_date=game_date, limit=limit, status=status)
+        # Fallback: no markets for today → fetch all upcoming open markets
+        if not raw and (IS_MORNING_SCAN or FULL_REPORT):
+            print(f"[kalshi] No markets for {game_date}, fetching all upcoming open markets...")
+            raw = kalshi_client.get_nba_markets(game_date=None, limit=limit, status="open")
     except Exception as e:
         print(f"[kalshi] Failed to fetch markets: {e}")
         return []
@@ -113,8 +122,14 @@ def analyze_markets(markets: list[dict]) -> list[dict]:
     return sorted(analyses, key=lambda a: a.get("edge", 0), reverse=True)
 
 
-def build_alert_title(games_in_window: list[dict], is_morning: bool) -> str:
+def build_alert_title(games_in_window: list[dict], is_morning: bool,
+                      markets: list[dict] = None) -> str:
     if is_morning:
+        # If markets are for a future date, say so
+        if markets:
+            dates = sorted({m.get("game_date", "") for m in markets if m.get("game_date")})
+            if dates and dates[0] != datetime.now(ET).strftime("%Y-%m-%d"):
+                return f"NBA Kalshi Morning Scan — Next games: {', '.join(dates[:2])}"
         return "NBA Kalshi Morning Scan"
     if games_in_window:
         game = games_in_window[0]
@@ -176,7 +191,7 @@ def main():
     print(f"[analysis] {len(all_analyses)} total | {len(top_picks)} above {threshold:.0%} threshold")
 
     # ── 5. Format & send ─────────────────────────────────────────────────
-    title = build_alert_title(in_window, IS_MORNING_SCAN)
+    title = build_alert_title(in_window, IS_MORNING_SCAN, markets=all_analyses or markets)
 
     if FULL_REPORT:
         # Send every analyzed market sorted by edge descending
