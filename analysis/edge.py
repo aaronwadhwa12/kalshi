@@ -118,13 +118,15 @@ def analyze_market(market: dict) -> Optional[dict]:
     except Exception:
         factors["injury"] = 1.0
 
-    # 4b. Teammate-return penalty — if a star is coming back to this player's
-    #     team their usage/role will shrink (e.g. KD returning → Eason/Thompson ↓)
+    # 4b/4c. Teammate injury adjustments — fetch report once, use for both
     teammate_note = ""
+    inj_minutes_sample = 999  # tracks smallest sample used for minutes boost
     try:
         player_team = nba_stats.get_player_team(player_name)
         if player_team:
             team_injuries = news_mod.get_injury_report(player_team)
+
+            # 4b. Returning-star penalty (probable/questionable → usage shrinks)
             returning = [
                 i for i in team_injuries
                 if i.get("player", "").lower() != player_name.lower()
@@ -132,13 +134,29 @@ def analyze_market(market: dict) -> Optional[dict]:
                                                      "day-to-day")
             ]
             if returning:
-                # Star = appears near top of injury report (index 0-1) or is well-known
-                stars_returning = returning[:2]  # top entries are usually stars
+                stars_returning = returning[:2]
                 if stars_returning:
                     teammate_note = ", ".join(
                         f"{r['player']} ({r['status']})" for r in stars_returning
                     )
                     factors["teammate_return"] = 0.90  # 10% usage reduction
+
+            # 4c. OUT-player minutes boost — historical minutes distribution
+            out_players = [
+                i for i in team_injuries
+                if i.get("player", "").lower() != player_name.lower()
+                and "out" in i.get("status", "").lower()
+            ]
+            inj_factors: list[float] = []
+            for out_p in out_players[:4]:  # limit to 4 absent players
+                factor, n = nba_stats.get_minutes_impact(player_name, out_p["player"])
+                if factor != 1.0 and n >= 3:
+                    inj_factors.append(factor)
+                    inj_minutes_sample = min(inj_minutes_sample, n)
+            if inj_factors:
+                # Average the per-absence boosts; weight > 1 means more minutes → more production
+                avg_min_factor = sum(inj_factors) / len(inj_factors)
+                factors["inj_minutes"] = round(avg_min_factor, 3)
     except Exception:
         pass
 
@@ -171,6 +189,16 @@ def analyze_market(market: dict) -> Optional[dict]:
     # Confidence level
     # -----------------------------------------------------------------------
     confidence = _confidence(sample_size, std, mean)
+    # If minutes boost was derived from a small "teammate-out" sample, downgrade confidence
+    if inj_minutes_sample < 999 and "inj_minutes" in factors:
+        if inj_minutes_sample < 5:
+            if confidence == "high":
+                confidence = "medium"
+            elif confidence == "medium":
+                confidence = "low"
+        elif inj_minutes_sample < 10:
+            if confidence == "high":
+                confidence = "medium"
 
     # -----------------------------------------------------------------------
     # News summary
@@ -192,6 +220,7 @@ def analyze_market(market: dict) -> Optional[dict]:
         "news_summary":     news_summary,
         "inj_status":       inj_status,
         "teammate_note":    teammate_note,
+        "inj_minutes_sample": inj_minutes_sample if inj_minutes_sample < 999 else 0,
         "game_date":        market.get("game_date", ""),
         "away_team":        market.get("away_team", ""),
         "home_team":        market.get("home_team", ""),

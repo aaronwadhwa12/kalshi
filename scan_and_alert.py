@@ -192,11 +192,16 @@ def main():
             # Injury / teammate context
             inj = a.get("inj_status", "")
             tm = a.get("teammate_note", "")
+            inj_min_factor = a.get("factors", {}).get("inj_minutes", 1.0)
+            inj_min_n = a.get("inj_minutes_sample", 0)
             notes = []
             if inj:
                 notes.append(f"🏥{inj}")
             if tm:
                 notes.append(f"⚠️teammate: {tm}")
+            if inj_min_factor != 1.0 and inj_min_n > 0:
+                direction = "↑" if inj_min_factor > 1 else "↓"
+                notes.append(f"⏱min{direction}{inj_min_factor:.2f}x(n={inj_min_n})")
             note_tag = "  " + " | ".join(notes) if notes else ""
             lines.append(
                 f"{a['player_name']} {a['stat_type'].upper()} {a['line']}+  "

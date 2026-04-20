@@ -16,6 +16,7 @@ from data import espn as _espn
 # In-memory stores
 _player_history: dict[str, list[dict]] = {}   # normalized_name → [{date, pts, reb, ...}]
 _name_map: dict[str, str] = {}                # lookup_name → canonical_name in _player_history
+_date_team_roster: dict[str, dict[str, set]] = {}  # date → team → {player_name} (who played)
 _history_loaded: bool = False
 _nba_stats_available: bool = True
 
@@ -72,12 +73,15 @@ def _load_histories(days_back: int = HISTORY_DAYS):
             except Exception:
                 continue
 
+            date_str = game_date.isoformat()
             for p in players:
                 name_key = _normalize(p["name"])
-                is_home = home_display and p.get("team", "") == home_display
+                team_name = p.get("team", "")
+                is_home = home_display and team_name == home_display
+                mins = float(p.get("min") or 0)
                 entry = {
-                    "date":    game_date.isoformat(),
-                    "team":    p.get("team", ""),
+                    "date":    date_str,
+                    "team":    team_name,
                     "is_home": is_home,
                     "pts":    float(p.get("pts") or 0),
                     "reb":    float(p.get("reb") or 0),
@@ -86,11 +90,18 @@ def _load_histories(days_back: int = HISTORY_DAYS):
                     "blk":    float(p.get("blk") or 0),
                     "tov":    float(p.get("tov") or 0),
                     "fg3m":   float(p.get("fg3m") or 0),
-                    "min":    float(p.get("min") or 0),
+                    "min":    mins,
                 }
                 if name_key not in _player_history:
                     _player_history[name_key] = []
                 _player_history[name_key].append(entry)
+                # Track roster: only count players who actually played (min > 0)
+                if mins > 0 and team_name:
+                    if date_str not in _date_team_roster:
+                        _date_team_roster[date_str] = {}
+                    if team_name not in _date_team_roster[date_str]:
+                        _date_team_roster[date_str][team_name] = set()
+                    _date_team_roster[date_str][team_name].add(name_key)
             games_loaded += 1
 
     _history_loaded = True
@@ -223,6 +234,56 @@ def get_player_team(name: str) -> str:
         return ""
     recent = sorted(games, key=lambda g: g["date"], reverse=True)
     return recent[0].get("team", "")
+
+
+def get_minutes_impact(player_name: str, absent_player_name: str) -> tuple[float, int]:
+    """
+    Compare player's average minutes in games where absent_player_name was out
+    vs. games when they played together.
+
+    Returns (factor, n_absent_games) where factor > 1 means the player plays
+    more minutes when that teammate is absent.  Returns (1.0, 0) if not enough
+    data to compute a meaningful estimate.
+    """
+    p_key = _normalize(player_name)
+    p_key = _name_map.get(p_key, p_key)
+    absent_key = _normalize(absent_player_name)
+    absent_key = _name_map.get(absent_key, absent_key)
+
+    games = _player_history.get(p_key, [])
+    if not games:
+        return 1.0, 0
+
+    mins_with: list[float] = []
+    mins_without: list[float] = []
+
+    for g in games:
+        mins = g["min"]
+        if mins < 1:  # DNP — skip
+            continue
+        date_str = g["date"]
+        team = g["team"]
+        roster = _date_team_roster.get(date_str, {}).get(team, set())
+        if absent_key in roster:
+            mins_with.append(mins)
+        else:
+            mins_without.append(mins)
+
+    n_with    = len(mins_with)
+    n_without = len(mins_without)
+
+    if n_with < 3 or n_without < 3:
+        return 1.0, n_without
+
+    avg_with    = sum(mins_with)    / n_with
+    avg_without = sum(mins_without) / n_without
+
+    if avg_with < 1:
+        return 1.0, n_without
+
+    factor = avg_without / avg_with
+    factor = max(0.75, min(1.40, factor))  # cap at ±25-40%
+    return round(factor, 3), n_without
 
 
 def find_team_id(name: str) -> Optional[str]:

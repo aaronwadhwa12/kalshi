@@ -74,10 +74,26 @@ def format_picks_sms(picks: list[dict], game_date: str = None) -> str:
         pick_id  = pick.get("pick_id", "?")
         tip_off  = _format_tipoff(pick.get("close_time", ""))
 
+        # Build context notes (injury, minutes boost)
+        ctx = []
+        inj_status = pick.get("inj_status", "")
+        teammate_note = pick.get("teammate_note", "")
+        inj_min_factor = pick.get("factors", {}).get("inj_minutes", 1.0)
+        inj_min_n = pick.get("inj_minutes_sample", 0)
+        if inj_status:
+            ctx.append(f"Inj:{inj_status}")
+        if teammate_note:
+            ctx.append(f"Return:{teammate_note}")
+        if inj_min_factor != 1.0 and inj_min_n > 0:
+            direction = "↑" if inj_min_factor > 1 else "↓"
+            ctx.append(f"Min{direction}{inj_min_factor:.2f}x(n={inj_min_n})")
+
         lines.append(f"{i}. [#{pick_id}] {player}")
         lines.append(f"   {stat} {side} {line_val}+ @ {imp_pct}c")
         lines.append(f"   Our prob: {our_pct}% | Edge: +{edge_pct}%")
         lines.append(f"   Confidence: {conf} | Tip: {tip_off}")
+        if ctx:
+            lines.append(f"   {' | '.join(ctx)}")
         lines.append("")
 
     lines.append("To track: python main.py bet <pick_id> <contracts>")
