@@ -1,6 +1,5 @@
 nba-api==1.4.1
 requests==2.31.0
-balldontlie
 pandas==2.1.4
 numpy==1.26.3
 twilio==8.12.0
