@@ -17,6 +17,10 @@ on:
         description: 'Force morning scan (send picks regardless of game time)'
         type: boolean
         default: false
+      full_report:
+        description: 'Send full edge breakdown for all analyzed markets'
+        type: boolean
+        default: false
 
 jobs:
   alert:
@@ -76,6 +80,7 @@ jobs:
           SMTP_PASSWORD:         ${{ secrets.SMTP_PASSWORD }}
           DISCORD_WEBHOOK_URL:   ${{ secrets.DISCORD_WEBHOOK_URL }}
           IS_MORNING_SCAN:       ${{ steps.morning.outputs.is_morning }}
+          FULL_REPORT:           ${{ github.event.inputs.full_report == 'true' && '1' || '0' }}
           ALERT_WINDOW_MIN:      "90"
           ALERT_EARLIEST_MIN:    "45"
           TOP_N:                 "5"

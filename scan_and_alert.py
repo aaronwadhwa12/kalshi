@@ -28,9 +28,10 @@ import config
 
 ET = pytz.timezone("America/New_York")
 
-ALERT_WINDOW_MIN   = int(os.getenv("ALERT_WINDOW_MIN", "90"))   # alert if tip-off within N min
-ALERT_EARLIEST_MIN = int(os.getenv("ALERT_EARLIEST_MIN", "45")) # don't alert if < N min away
+ALERT_WINDOW_MIN   = int(os.getenv("ALERT_WINDOW_MIN", "90"))
+ALERT_EARLIEST_MIN = int(os.getenv("ALERT_EARLIEST_MIN", "45"))
 IS_MORNING_SCAN    = os.getenv("IS_MORNING_SCAN", "0") == "1"
+FULL_REPORT        = os.getenv("FULL_REPORT", "0") == "1"
 TOP_N              = int(os.getenv("TOP_N", "5"))
 
 
@@ -101,7 +102,6 @@ def analyze_markets(markets: list[dict]) -> list[dict]:
         try:
             result = analyze_market(market)
             if result:
-                # attach display fields from the market
                 result["player_name"] = market.get("player_name", "")
                 result["stat_type"]   = market.get("stat_type", "")
                 result["line"]        = market.get("line")
@@ -113,7 +113,8 @@ def analyze_markets(markets: list[dict]) -> list[dict]:
             print(f"[analysis] {market.get('ticker','?')}: {e}")
         if (i + 1) % 10 == 0:
             print(f"  Analyzed {i+1}/{len(markets)} markets...")
-    return rank_picks(analyses)
+    # Return all analyses sorted by edge (caller decides threshold)
+    return sorted(analyses, key=lambda a: a.get("edge", 0), reverse=True)
 
 
 def build_alert_title(games_in_window: list[dict], is_morning: bool) -> str:
@@ -171,25 +172,52 @@ def main():
 
     # ── 4. Analyze ────────────────────────────────────────────────────────
     print("Running edge analysis...")
-    top_picks = analyze_markets(markets)[:TOP_N]
-    print(f"[analysis] {len(top_picks)} picks above threshold")
+    import data.nba_stats as _nba
+    all_analyses = analyze_markets(markets)
+    threshold = float(os.getenv("MIN_EDGE_THRESHOLD", "0.02"))
+    top_picks = [a for a in all_analyses if a.get("edge", 0) >= threshold][:TOP_N]
+    print(f"[analysis] {len(all_analyses)} total | {len(top_picks)} above {threshold:.0%} threshold")
 
     # ── 5. Format & send ─────────────────────────────────────────────────
     title = build_alert_title(in_window, IS_MORNING_SCAN)
-    import data.nba_stats as _nba
-    if not top_picks and not _nba._nba_stats_available:
-        # stats.nba.com is down — send top markets by volume as a raw price alert
+
+    if FULL_REPORT:
+        # Send every analyzed market sorted by edge descending
+        lines = [f"Full edge breakdown ({len(all_analyses)} markets):\n"]
+        for a in all_analyses:
+            edge_pct = f"{a['edge']:+.1%}"
+            our = f"{a['our_probability']:.0%}"
+            impl = f"{a['implied_probability']:.0%}"
+            lines.append(
+                f"{a['player_name']} {a['stat_type'].upper()} {a['line']}+  "
+                f"edge={edge_pct}  ours={our} kalshi={impl}  conf={a.get('confidence','?')}"
+            )
+        # Split into ≤3800-char chunks for Telegram
+        body_full = "\n".join(lines)
+        chunks = [body_full[i:i+3800] for i in range(0, len(body_full), 3800)]
+        for chunk in chunks:
+            send_notification(chunk, title=title)
+        print(f"\nSent full report in {len(chunks)} message(s).")
+        return
+
+    if not all_analyses and not _nba._nba_stats_available:
         top_raw = sorted(markets, key=lambda m: m.get("volume", 0), reverse=True)[:TOP_N]
-        lines = [f"⚠️ NBA Stats API unavailable — raw Kalshi prices:\n"]
+        lines = ["NBA Stats API unavailable — raw Kalshi prices:\n"]
         for m in top_raw:
             ask = m.get("yes_ask", 50)
             lines.append(
-                f"• {m['player_name']} {m['stat_type'].upper()} {m['line']}+ "
-                f"| Yes {ask}¢ / No {100-ask}¢  vol={m.get('volume',0)}"
+                f"{m['player_name']} {m['stat_type'].upper()} {m['line']}+ "
+                f"| Yes {ask}c / No {100-ask}c  vol={m.get('volume',0)}"
             )
         body = "\n".join(lines)
     elif not top_picks:
-        body = "No strong edges found today (all picks below threshold)."
+        body = f"No edges above {threshold:.0%} today. Best: "
+        if all_analyses:
+            best = all_analyses[0]
+            body += (f"{best['player_name']} {best['stat_type'].upper()} {best['line']}+ "
+                     f"edge={best['edge']:+.1%}")
+        else:
+            body += "none computed."
     else:
         for i, p in enumerate(top_picks, 1):
             p.setdefault("pick_id", f"#{i}")
