@@ -54,12 +54,8 @@ def games_in_alert_window(games: list[dict]) -> list[dict]:
 
 
 def scan_markets(game_date, limit: int = 200) -> list[dict]:
-    """Fetch and parse Kalshi NBA markets for a given date.
-
-    In morning scan / full report mode, if no markets exist for today we
-    search without a date filter so we still surface the nearest upcoming
-    games (e.g. second-round playoff games Kalshi opens days in advance).
-    """
+    """Fetch and parse Kalshi NBA markets for a given date."""
+    from datetime import timedelta
     try:
         status = None if FULL_REPORT else "open"
         raw = kalshi_client.get_nba_markets(game_date=game_date, limit=limit, status=status)
@@ -67,20 +63,22 @@ def scan_markets(game_date, limit: int = 200) -> list[dict]:
         print(f"[kalshi] Failed to fetch markets: {e}")
         return []
 
-    # Parse and filter to the target date (game_date field set by _extract_date)
-    today_str = game_date.isoformat() if hasattr(game_date, "isoformat") else str(game_date)
+    today_str    = game_date.isoformat() if hasattr(game_date, "isoformat") else str(game_date)
+    # Allow game_date up to +1 day: late ET games (8-11 PM) close after UTC midnight
+    # so _extract_date returns the next calendar day, but they're still tonight's games
+    tomorrow_str = (game_date + timedelta(days=1)).isoformat()
+
     parsed = []
     for r in raw:
         m = kalshi_client.parse_market(r)
         if not m:
             continue
-        # Keep only markets for today; if game_date is unknown (defaults to today) also keep
-        if m.get("game_date", today_str) <= today_str:
+        if m.get("game_date", today_str) <= tomorrow_str:
             parsed.append(m)
 
-    # Fallback: nothing for today → grab all upcoming open markets (off-days, advance playoff lines)
+    # Fallback: true off-day (no games) → surface next available open markets
     if not parsed and (IS_MORNING_SCAN or FULL_REPORT):
-        print(f"[kalshi] No markets for {today_str}, fetching all upcoming open markets...")
+        print(f"[kalshi] No markets within 24h of {today_str}, fetching all upcoming open markets...")
         try:
             raw_all = kalshi_client.get_nba_markets(game_date=None, limit=limit, status="open")
             for r in raw_all:
@@ -139,11 +137,6 @@ def analyze_markets(markets: list[dict]) -> list[dict]:
 def build_alert_title(games_in_window: list[dict], is_morning: bool,
                       markets: list[dict] = None) -> str:
     if is_morning:
-        # If markets are for a future date, say so
-        if markets:
-            dates = sorted({m.get("game_date", "") for m in markets if m.get("game_date")})
-            if dates and dates[0] != datetime.now(ET).strftime("%Y-%m-%d"):
-                return f"NBA Kalshi Morning Scan — Next games: {', '.join(dates[:2])}"
         return "NBA Kalshi Morning Scan"
     if games_in_window:
         game = games_in_window[0]
