@@ -54,8 +54,13 @@ def games_in_alert_window(games: list[dict]) -> list[dict]:
     return in_window
 
 
-def scan_markets(game_date, limit: int = 200) -> list[dict]:
-    """Fetch and parse Kalshi NBA markets for a given date."""
+def scan_markets(game_date, limit: int = 200,
+                 has_games_today: bool = False) -> list[dict]:
+    """Fetch and parse Kalshi NBA markets for a given date.
+
+    has_games_today: if True (ESPN confirmed games today), never fall back to
+    future-date markets — Kalshi just hasn't opened props yet for today.
+    """
     from datetime import timedelta
     try:
         status = None if FULL_REPORT else "open"
@@ -65,8 +70,8 @@ def scan_markets(game_date, limit: int = 200) -> list[dict]:
         return []
 
     today_str    = game_date.isoformat() if hasattr(game_date, "isoformat") else str(game_date)
-    # Allow game_date up to +1 day: late ET games (8-11 PM) close after UTC midnight
-    # so _extract_date returns the next calendar day, but they're still tonight's games
+    # +1 day buffer: late ET games (8-11 PM) close after UTC midnight so
+    # _extract_date can return the next calendar day for tonight's games
     tomorrow_str = (game_date + timedelta(days=1)).isoformat()
 
     parsed = []
@@ -77,9 +82,11 @@ def scan_markets(game_date, limit: int = 200) -> list[dict]:
         if m.get("game_date", today_str) <= tomorrow_str:
             parsed.append(m)
 
-    # Fallback: true off-day (no games) → surface next available open markets
-    if not parsed and (IS_MORNING_SCAN or FULL_REPORT):
-        print(f"[kalshi] No markets within 24h of {today_str}, fetching all upcoming open markets...")
+    # Only fall back to future-date markets on genuine off-days.
+    # If ESPN shows games today, Kalshi just hasn't opened props yet — don't
+    # show next week's games as if they were tonight's picks.
+    if not parsed and not has_games_today and (IS_MORNING_SCAN or FULL_REPORT):
+        print(f"[kalshi] Off-day — no games today, fetching nearest upcoming open markets...")
         try:
             raw_all = kalshi_client.get_nba_markets(game_date=None, limit=limit, status="open")
             for r in raw_all:
@@ -89,8 +96,7 @@ def scan_markets(game_date, limit: int = 200) -> list[dict]:
         except Exception as e:
             print(f"[kalshi] Fallback fetch failed: {e}")
 
-    # Deduplicate: keep one market per (player, stat_type) — the one with
-    # the highest volume (most liquid / most meaningful price)
+    # Deduplicate: keep one market per (player, stat_type) — highest volume wins
     seen: dict[tuple, dict] = {}
     for m in parsed:
         key = (m["player_name"], m["stat_type"])
@@ -201,16 +207,27 @@ def main():
 
     # ── 3. Scan Kalshi ────────────────────────────────────────────────────
     print(f"\nScanning Kalshi markets for {today}...")
-    markets = scan_markets(today)
+    has_games_today = len(games) > 0
+    markets = scan_markets(today, has_games_today=has_games_today)
     print(f"[kalshi] {len(markets)} valid markets")
 
     if not markets:
-        msg = (f"No open Kalshi NBA markets for {today}. "
-               "Either no games today or all markets are closed/settled.")
+        if has_games_today:
+            msg = (f"{len(games)} NBA game(s) today but Kalshi hasn't opened "
+                   f"player prop markets yet for {today}. Check back closer to tip-off.")
+        else:
+            msg = f"No NBA games today ({today}) and no upcoming Kalshi markets found."
         print(f"[kalshi] {msg}")
         if IS_MORNING_SCAN or FULL_REPORT:
             send_notification(msg, title="NBA Kalshi — No Markets")
         sys.exit(0)
+
+    # Warn if any markets are for a future date (off-day fallback triggered)
+    today_str = today.isoformat()
+    future_markets = [m for m in markets if m.get("game_date", today_str) > today_str]
+    if future_markets and not has_games_today:
+        future_dates = sorted({m["game_date"] for m in future_markets})
+        print(f"[kalshi] Off-day: showing markets for upcoming games on {', '.join(future_dates)}")
 
     # ── 4. Analyze ────────────────────────────────────────────────────────
     print("Running edge analysis...")
