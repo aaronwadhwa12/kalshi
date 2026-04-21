@@ -28,11 +28,12 @@ import config
 
 ET = pytz.timezone("America/New_York")
 
-ALERT_WINDOW_MIN   = int(os.getenv("ALERT_WINDOW_MIN", "90"))
-ALERT_EARLIEST_MIN = int(os.getenv("ALERT_EARLIEST_MIN", "45"))
-IS_MORNING_SCAN    = os.getenv("IS_MORNING_SCAN", "0") == "1"
-FULL_REPORT        = os.getenv("FULL_REPORT", "0") == "1"
-TOP_N              = int(os.getenv("TOP_N", "5"))
+ALERT_WINDOW_MIN    = int(os.getenv("ALERT_WINDOW_MIN", "90"))
+ALERT_EARLIEST_MIN  = int(os.getenv("ALERT_EARLIEST_MIN", "45"))
+IS_MORNING_SCAN     = os.getenv("IS_MORNING_SCAN", "0") == "1"
+FULL_REPORT         = os.getenv("FULL_REPORT", "0") == "1"
+CALIBRATION_REPORT  = os.getenv("CALIBRATION_REPORT", "0") == "1"
+TOP_N               = int(os.getenv("TOP_N", "5"))
 
 
 def games_in_alert_window(games: list[dict]) -> list[dict]:
@@ -147,10 +148,34 @@ def build_alert_title(games_in_window: list[dict], is_morning: bool,
 
 
 def main():
+    from datetime import timedelta
+    from analysis.calibration import (
+        resolve_picks, log_picks, update_learned_params, format_calibration_report
+    )
+
     now_et = datetime.now(ET)
     today  = now_et.date()
     print(f"[scan_and_alert] {now_et.strftime('%Y-%m-%d %H:%M ET')} | "
           f"morning={IS_MORNING_SCAN}")
+
+    # ── 0. Resolve yesterday's picks & update calibration ────────────────
+    if IS_MORNING_SCAN:
+        yesterday = today - timedelta(days=1)
+        try:
+            resolve_picks(yesterday)
+            update_learned_params()
+        except Exception as e:
+            print(f"[calibration] Resolution step failed (non-fatal): {e}")
+
+    # ── 0b. Calibration report (short-circuit) ────────────────────────────
+    if CALIBRATION_REPORT:
+        try:
+            report = format_calibration_report()
+            send_notification(report, title="NBA Model Calibration Report")
+            print(report)
+        except Exception as e:
+            print(f"[calibration] Report failed: {e}")
+        return
 
     # ── 1. Get today's games ──────────────────────────────────────────────
     try:
@@ -196,6 +221,12 @@ def main():
     threshold = float(os.getenv("MIN_EDGE_THRESHOLD", "0.02"))
     top_picks = [a for a in all_analyses if a.get("edge", 0) >= threshold][:TOP_N]
     print(f"[analysis] {len(all_analyses)} total | {len(top_picks)} above {threshold:.0%} threshold")
+
+    # ── 4b. Log picks for calibration ─────────────────────────────────────
+    try:
+        log_picks(all_analyses, today)
+    except Exception as e:
+        print(f"[calibration] Logging failed (non-fatal): {e}")
 
     # ── 5. Format & send ─────────────────────────────────────────────────
     title = build_alert_title(in_window, IS_MORNING_SCAN, markets=all_analyses or markets)

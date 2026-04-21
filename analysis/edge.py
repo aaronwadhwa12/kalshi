@@ -180,6 +180,20 @@ def analyze_market(market: dict) -> Optional[dict]:
     adjusted_prob = round(max(0.03, min(0.97, adjusted_prob)), 4)
 
     # -----------------------------------------------------------------------
+    # Apply learned calibration bias corrections
+    # -----------------------------------------------------------------------
+    try:
+        from analysis.calibration import load_learned_params
+        params = load_learned_params()
+        if params:
+            correction = params.get("global_bias", 0.0)
+            correction += params.get("stat_biases", {}).get(stat_type, 0.0)
+            if correction:
+                adjusted_prob = round(max(0.03, min(0.97, adjusted_prob + correction)), 4)
+    except Exception:
+        pass
+
+    # -----------------------------------------------------------------------
     # Implied probability from Kalshi ask price
     # -----------------------------------------------------------------------
     implied_prob = yes_ask / 100.0
