@@ -96,6 +96,14 @@ def scan_markets(game_date, limit: int = 200,
         except Exception as e:
             print(f"[kalshi] Fallback fetch failed: {e}")
 
+    # Log price distribution so we can see what Kalshi is returning
+    if parsed:
+        prices = [m["yes_ask"] for m in parsed]
+        low    = sum(1 for p in prices if p <= 5)
+        high   = sum(1 for p in prices if p >= 95)
+        mid    = len(prices) - low - high
+        print(f"[kalshi] Price dist: {mid} normal (6-94c), {high} high (≥95c), {low} low (≤5c)")
+
     # Deduplicate: keep one market per (player, stat_type) — highest volume wins
     seen: dict[tuple, dict] = {}
     for m in parsed:

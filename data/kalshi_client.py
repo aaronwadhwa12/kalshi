@@ -284,11 +284,6 @@ def parse_market(raw: dict) -> Optional[dict]:
     yes_ask = _parse_price_cents(raw, "yes_ask")
     no_ask  = _parse_price_cents(raw, "no_ask")
 
-    # Skip illiquid / effectively-settled markets — no edge to extract
-    # when one side trades at 98c+ (market is essentially resolved already)
-    if yes_ask >= 98 or yes_ask <= 2:
-        return None
-
     return {
         "ticker":        ticker,
         "event_ticker":  event_ticker,
