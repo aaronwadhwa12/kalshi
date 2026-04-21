@@ -110,83 +110,117 @@ def log_picks(all_analyses: list[dict], game_date: date):
 # Resolution — fetch actual outcomes from ESPN boxscores
 # ---------------------------------------------------------------------------
 
-def resolve_picks(for_date: date):
-    """Mark win/loss on all unresolved picks for for_date using ESPN boxscores."""
+# ---------------------------------------------------------------------------
+# Resolution — fetch actual outcomes from ESPN boxscores
+# ---------------------------------------------------------------------------
+
+def resolve_picks(for_date: date = None):
+    """
+    Mark win/loss on all unresolved picks whose game_date is in the past.
+
+    Handles picks for any future game date (not just yesterday) — e.g. if
+    this morning's picks were for a game on May 6, they'll be resolved the
+    morning of May 7 when that date becomes yesterday.
+
+    Pass for_date to limit resolution to a specific date (used in tests).
+    """
     from data import espn as espn_mod
 
-    picks = _load_picks()
-    date_str = for_date.isoformat()
-    unresolved = [p for p in picks
-                  if p["game_date"] == date_str and p["outcome"] is None]
+    picks    = _load_picks()
+    today_str = date.today().isoformat()
 
-    if not unresolved:
-        print(f"[calibration] No unresolved picks for {date_str}")
+    # Collect all dates that have unresolved picks in the past
+    if for_date:
+        pending_dates = [for_date.isoformat()]
+    else:
+        pending_dates = sorted({
+            p["game_date"] for p in picks
+            if p["outcome"] is None and p.get("game_date", "") < today_str
+        })
+
+    if not pending_dates:
+        print("[calibration] No past unresolved picks to resolve")
         return
 
-    print(f"[calibration] Resolving {len(unresolved)} picks for {date_str}...")
+    total_resolved = 0
+    total_no_data  = 0
 
-    # Fetch all completed games for that date
-    try:
-        completed = espn_mod.get_completed_games(for_date)
-    except Exception as e:
-        print(f"[calibration] ESPN fetch failed for {date_str}: {e}")
-        return
+    for date_str in pending_dates:
+        unresolved_for_date = [
+            p for p in picks
+            if p["game_date"] == date_str and p["outcome"] is None
+        ]
+        if not unresolved_for_date:
+            continue
 
-    if not completed:
-        print(f"[calibration] No completed games found for {date_str}")
-        return
+        print(f"[calibration] Resolving {len(unresolved_for_date)} picks for {date_str}...")
 
-    # Build name → stats lookup from boxscores
-    actuals: dict[str, dict] = {}
-    for game in completed:
         try:
-            players = espn_mod.get_game_boxscore(game["event_id"])
-        except Exception:
-            continue
-        for p in players:
-            key = p["name"].lower().strip()
-            pts = float(p.get("pts") or 0)
-            reb = float(p.get("reb") or 0)
-            ast = float(p.get("ast") or 0)
-            actuals[key] = {
-                "pts": pts,
-                "reb": reb,
-                "ast": ast,
-                "stl": float(p.get("stl") or 0),
-                "blk": float(p.get("blk") or 0),
-                "tov": float(p.get("tov") or 0),
-                "3pm": float(p.get("fg3m") or 0),
-                "pra": pts + reb + ast,
-                "pr":  pts + reb,
-                "pa":  pts + ast,
-                "ra":  reb + ast,
-            }
-
-    resolved = 0
-    no_data  = 0
-    for pick in picks:
-        if pick["game_date"] != date_str or pick["outcome"] is not None:
+            game_date_obj = date.fromisoformat(date_str)
+            completed     = espn_mod.get_completed_games(game_date_obj)
+        except Exception as e:
+            print(f"[calibration] ESPN fetch failed for {date_str}: {e}")
             continue
 
-        name_key = pick["player_name"].lower().strip()
-        stats = _find_player_stats(name_key, actuals)
-
-        if stats is None:
-            pick["outcome"] = "no_data"
-            no_data += 1
+        if not completed:
+            print(f"[calibration] No completed games found for {date_str} (game may not have happened yet)")
             continue
 
-        stat   = pick["stat_type"]
-        actual = stats.get(stat, 0.0)
-        line   = pick["line"] or 0
+        # Build name → stats lookup from all boxscores on this date
+        actuals: dict[str, dict] = {}
+        for game in completed:
+            try:
+                players = espn_mod.get_game_boxscore(game["event_id"])
+            except Exception:
+                continue
+            for p in players:
+                key = p["name"].lower().strip()
+                pts = float(p.get("pts") or 0)
+                reb = float(p.get("reb") or 0)
+                ast = float(p.get("ast") or 0)
+                actuals[key] = {
+                    "pts": pts,
+                    "reb": reb,
+                    "ast": ast,
+                    "stl": float(p.get("stl") or 0),
+                    "blk": float(p.get("blk") or 0),
+                    "tov": float(p.get("tov") or 0),
+                    "3pm": float(p.get("fg3m") or 0),
+                    "pra": pts + reb + ast,
+                    "pr":  pts + reb,
+                    "pa":  pts + ast,
+                    "ra":  reb + ast,
+                }
 
-        pick["actual_stat"]   = actual
-        pick["outcome"]       = "win" if actual >= line else "loss"
-        pick["resolved_date"] = date.today().isoformat()
-        resolved += 1
+        resolved = 0
+        no_data  = 0
+        for pick in picks:
+            if pick["game_date"] != date_str or pick["outcome"] is not None:
+                continue
+
+            name_key = pick["player_name"].lower().strip()
+            stats    = _find_player_stats(name_key, actuals)
+
+            if stats is None:
+                pick["outcome"] = "no_data"
+                no_data += 1
+                continue
+
+            stat   = pick["stat_type"]
+            actual = stats.get(stat, 0.0)
+            line   = pick["line"] or 0
+
+            pick["actual_stat"]   = actual
+            pick["outcome"]       = "win" if actual >= line else "loss"
+            pick["resolved_date"] = today_str
+            resolved += 1
+
+        total_resolved += resolved
+        total_no_data  += no_data
+        print(f"[calibration]   {date_str}: {resolved} resolved, {no_data} no-data")
 
     _save_picks(picks)
-    print(f"[calibration] Resolved {resolved} picks, {no_data} no-data for {date_str}")
+    print(f"[calibration] Total: {total_resolved} resolved, {total_no_data} no-data")
 
 
 def _find_player_stats(name_key: str, actuals: dict) -> Optional[dict]:

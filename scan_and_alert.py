@@ -148,7 +148,6 @@ def build_alert_title(games_in_window: list[dict], is_morning: bool,
 
 
 def main():
-    from datetime import timedelta
     from analysis.calibration import (
         resolve_picks, log_picks, update_learned_params, format_calibration_report
     )
@@ -158,11 +157,10 @@ def main():
     print(f"[scan_and_alert] {now_et.strftime('%Y-%m-%d %H:%M ET')} | "
           f"morning={IS_MORNING_SCAN}")
 
-    # ── 0. Resolve yesterday's picks & update calibration ────────────────
+    # ── 0. Resolve all past unresolved picks & update calibration ─────────
     if IS_MORNING_SCAN:
-        yesterday = today - timedelta(days=1)
         try:
-            resolve_picks(yesterday)
+            resolve_picks()       # resolves any game_date < today, any date
             update_learned_params()
         except Exception as e:
             print(f"[calibration] Resolution step failed (non-fatal): {e}")
