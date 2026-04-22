@@ -214,7 +214,34 @@ _STAT_PATTERNS = [
     (r"(\d+\.?\d*)\+?\s*(?:pts\+reb|pr)\b", "pr"),
     (r"(\d+\.?\d*)\+?\s*(?:pts\+ast|pa)\b", "pa"),
     (r"(\d+\.?\d*)\+?\s*(?:reb\+ast|ra)\b", "ra"),
+    # "Points Over 28.5" / "Rebounds - Over 8.5" (stat word BEFORE "over")
+    (r"point[s]?\s*[-–]?\s*over\s+(\d+\.?\d*)", "pts"),
+    (r"rebound[s]?\s*[-–]?\s*over\s+(\d+\.?\d*)", "reb"),
+    (r"assist[s]?\s*[-–]?\s*over\s+(\d+\.?\d*)", "ast"),
+    (r"steal[s]?\s*[-–]?\s*over\s+(\d+\.?\d*)", "stl"),
+    (r"block[s]?\s*[-–]?\s*over\s+(\d+\.?\d*)", "blk"),
+    (r"turnover[s]?\s*[-–]?\s*over\s+(\d+\.?\d*)", "tov"),
+    (r"(?:three[s]?|3-pointer[s]?|threes made)\s*[-–]?\s*over\s+(\d+\.?\d*)", "3pm"),
+    # "PRA Over 55.5" / "PR Over 38.5" (combo abbrevs BEFORE "over")
+    (r"(?:pra|pts\+reb\+ast|p\+r\+a)\s*[-–]?\s*over\s+(\d+\.?\d*)", "pra"),
+    (r"(?:pts\+reb|p\+r)\b\s*[-–]?\s*over\s+(\d+\.?\d*)", "pr"),
+    (r"(?:pts\+ast|p\+a)\b\s*[-–]?\s*over\s+(\d+\.?\d*)", "pa"),
+    (r"(?:reb\+ast|r\+a)\b\s*[-–]?\s*over\s+(\d+\.?\d*)", "ra"),
 ]
+
+# Stat-word keywords used for player-name boundary detection
+_STAT_KEYWORDS = (
+    r"points?|pts|rebounds?|reb|assists?|ast|steals?|stl|blocks?|blk"
+    r"|turnovers?|tov|threes?|3-pointers?|3pm|pra|p\+r\+a|pr\b|pa\b|ra\b"
+)
+
+# Single name-part: starts uppercase (or mixed-case like LeBron/DeAndre),
+# allows apostrophes (De'Aaron), periods (Jr.), hyphens for double-barrel
+# last names (Gilgeous-Alexander, Ingram-McCants).
+_NAME_PART = r"[A-Z][a-zA-Z'\.]*(?:-[A-Za-z][a-zA-Z'\.]*)*"
+
+# Full player name: 2–4 name parts separated by spaces
+_NAME_PAT = rf"(?:{_NAME_PART})(?:\s+(?:{_NAME_PART})){{1,3}}"
 
 # "Will LeBron James score ..."
 _WILL_RE = re.compile(
@@ -223,12 +250,16 @@ _WILL_RE = re.compile(
     re.I,
 )
 # "LeBron James: Over 25.5 Points"  or  "LeBron James - points - over 25.5"
-_NAME_COLON_RE = re.compile(
-    r"^([A-Z][a-z]+(?:\s+[A-Z][a-z'\.]+){1,3})\s*[:\-]",
-)
-# "LeBron James total points over 25.5"
+# Require colon OR whitespace-surrounded dashes so we don't split on hyphens inside names
+_NAME_COLON_RE = re.compile(rf"^({_NAME_PAT})\s*(?::\s*|\s+-+\s*)")
+# "LeBron James total points over 25.5" / "LeBron James over 25.5"
 _NAME_TOTAL_RE = re.compile(
-    r"^([A-Z][a-z]+(?:\s+[A-Z][a-z'\.]+){1,3})\s+(?:total|over|to\s+have|to\s+score)",
+    rf"^({_NAME_PAT})\s+(?:total|over|to\s+have|to\s+score)",
+)
+# "LeBron James Points Over 25.5" / "Shai Gilgeous-Alexander Rebounds Over 8.5"
+_NAME_STAT_RE = re.compile(
+    rf"^({_NAME_PAT})\s+(?:{_STAT_KEYWORDS})",
+    re.I,
 )
 
 
@@ -332,12 +363,20 @@ def _extract_player(title: str, subtitle: str, ticker: str) -> Optional[str]:
     if m:
         return _clean_name(m.group(1))
 
-    # 4. Same patterns on subtitle
+    # 4. "Player Name Points/Rebounds/... Over X" (stat word directly after name)
+    m = _NAME_STAT_RE.match(title)
+    if m:
+        return _clean_name(m.group(1))
+
+    # 5. Same patterns on subtitle
     for text in (subtitle,):
         m = _WILL_RE.search(text)
         if m:
             return _clean_name(m.group(1))
         m = _NAME_COLON_RE.match(text)
+        if m:
+            return _clean_name(m.group(1))
+        m = _NAME_STAT_RE.match(text)
         if m:
             return _clean_name(m.group(1))
 

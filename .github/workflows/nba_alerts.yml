@@ -103,7 +103,7 @@ jobs:
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git pull --rebase origin ${{ github.ref_name }} 2>/dev/null || true
-          git add results/picks_log.json results/learned_params.json
+          git add results/picks_log.json results/learned_params.json results/picks_report.xlsx
           git diff --staged --quiet || \
-            git commit -m "chore: update picks log and calibration params [skip ci]"
+            git commit -m "chore: update picks log, calibration params, and report [skip ci]"
           git push origin ${{ github.ref_name }} || true

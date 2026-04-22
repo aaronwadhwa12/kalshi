@@ -194,6 +194,13 @@ def main():
         except Exception as e:
             print(f"[calibration] Recap send failed (non-fatal): {e}")
 
+        # Regenerate Excel report so it stays current after each morning resolution
+        try:
+            from analysis.report import generate_report
+            generate_report()
+        except Exception as e:
+            print(f"[report] Excel generation failed (non-fatal): {e}")
+
     # ── 0b. Calibration report (short-circuit) ────────────────────────────
     if CALIBRATION_REPORT:
         try:
