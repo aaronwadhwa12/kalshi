@@ -408,3 +408,61 @@ def format_calibration_report() -> str:
         lines.append(f"  {conf.upper():6s}: {s['hit_rate']:.1%}  (n={s['n']})")
 
     return "\n".join(lines)
+
+
+def format_daily_recap(for_date: date) -> Optional[str]:
+    """
+    Format a recap of all picks logged for for_date with their outcomes.
+    Returns None if no picks were logged for that date.
+    """
+    picks    = _load_picks()
+    date_str = for_date.isoformat()
+
+    day_picks = [p for p in picks if p["game_date"] == date_str]
+    if not day_picks:
+        return None
+
+    resolved = [p for p in day_picks if p["outcome"] in ("win", "loss")]
+    no_data  = [p for p in day_picks if p["outcome"] == "no_data"]
+    pending  = [p for p in day_picks if p["outcome"] is None]
+
+    wins = sum(1 for p in resolved if p["outcome"] == "win")
+
+    lines = [f"NBA Results — {date_str}", ""]
+
+    if resolved:
+        # Sort: wins first, then losses
+        for p in sorted(resolved, key=lambda x: x["outcome"]):
+            icon      = "YES" if p["outcome"] == "win" else "NO"
+            actual    = p.get("actual_stat")
+            actual_s  = f"{actual:.1f}" if actual is not None else "?"
+            our_pct   = f"{p['our_probability']:.0%}" if p.get("our_probability") is not None else "?"
+            impl_pct  = f"{p['implied_probability']:.0%}" if p.get("implied_probability") is not None else "?"
+            edge_pct  = f"{p['edge']:+.1%}" if p.get("edge") is not None else "?"
+            stat      = p.get("stat_type", "?").upper()
+            line_val  = p.get("line", "?")
+            player    = p.get("player_name", "?")
+            lines.append(f"[{icon}] {player} {stat} {line_val}+  actual={actual_s}")
+            lines.append(f"      edge={edge_pct}  ours={our_pct}  kalshi={impl_pct}")
+
+        lines.append("")
+        lines.append(f"Hit rate: {wins}/{len(resolved)} ({wins/len(resolved):.1%})")
+    else:
+        lines.append("No resolved picks for this date.")
+
+    if no_data:
+        lines.append(f"No boxscore data found for {len(no_data)} pick(s).")
+    if pending:
+        lines.append(f"{len(pending)} pick(s) still pending resolution.")
+
+    # Running total across all resolved picks
+    all_resolved = [p for p in picks if p["outcome"] in ("win", "loss")]
+    if len(all_resolved) > len(resolved):
+        total_wins = sum(1 for p in all_resolved if p["outcome"] == "win")
+        lines.append(
+            f"\nAll-time: {total_wins}/{len(all_resolved)} "
+            f"({total_wins/len(all_resolved):.1%}) across "
+            f"{len({p['game_date'] for p in all_resolved})} day(s)"
+        )
+
+    return "\n".join(lines)

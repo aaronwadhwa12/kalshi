@@ -162,8 +162,10 @@ def build_alert_title(games_in_window: list[dict], is_morning: bool,
 
 
 def main():
+    from datetime import timedelta
     from analysis.calibration import (
-        resolve_picks, log_picks, update_learned_params, format_calibration_report
+        resolve_picks, log_picks, update_learned_params,
+        format_calibration_report, format_daily_recap,
     )
 
     now_et = datetime.now(ET)
@@ -171,13 +173,26 @@ def main():
     print(f"[scan_and_alert] {now_et.strftime('%Y-%m-%d %H:%M ET')} | "
           f"morning={IS_MORNING_SCAN}")
 
-    # ── 0. Resolve all past unresolved picks & update calibration ─────────
+    # ── 0. Morning resolution & recap ─────────────────────────────────────
     if IS_MORNING_SCAN:
         try:
-            resolve_picks()       # resolves any game_date < today, any date
-            update_learned_params()
+            resolve_picks()               # mark win/loss for all past game dates
+            update_learned_params()       # recompute bias corrections
         except Exception as e:
-            print(f"[calibration] Resolution step failed (non-fatal): {e}")
+            print(f"[calibration] Resolution failed (non-fatal): {e}")
+
+        # Send yesterday's results before today's picks
+        yesterday = today - timedelta(days=1)
+        try:
+            recap = format_daily_recap(yesterday)
+            if recap:
+                send_notification(recap, title=f"NBA Results — {yesterday}")
+                print(f"[calibration] Sent recap for {yesterday}")
+            else:
+                print(f"[calibration] No logged picks for {yesterday} — recap skipped"
+                      " (picks log was empty or scan didn't run yesterday)")
+        except Exception as e:
+            print(f"[calibration] Recap send failed (non-fatal): {e}")
 
     # ── 0b. Calibration report (short-circuit) ────────────────────────────
     if CALIBRATION_REPORT:
