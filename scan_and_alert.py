@@ -89,7 +89,7 @@ def scan_markets(game_date, limit: int = 200,
                 failed_titles.append(title)
             continue
         gdate = m.get("game_date", today_str)
-        if gdate <= tomorrow_str:
+        if today_str <= gdate <= tomorrow_str:
             parsed.append(m)
         else:
             date_dropped += 1
