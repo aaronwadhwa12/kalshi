@@ -260,7 +260,23 @@ def main():
     top_picks = [a for a in all_analyses if a.get("edge", 0) >= threshold][:TOP_N]
     print(f"[analysis] {len(all_analyses)} total | {len(top_picks)} above {threshold:.0%} threshold")
 
-    # ── 4b. Log picks for calibration ─────────────────────────────────────
+    # ── 4b. Position sizing ───────────────────────────────────────────────
+    from analysis.sizing import suggest_contracts
+    try:
+        bankroll = kalshi_client.get_balance()
+        print(f"[sizing] Kalshi balance: ${bankroll:.2f}")
+    except Exception:
+        bankroll = float(os.getenv("BANKROLL", "100"))
+        print(f"[sizing] Balance fetch failed, using default ${bankroll:.2f}")
+    for pick in top_picks:
+        pick["suggested_contracts"] = suggest_contracts(
+            pick.get("our_probability", 0.5),
+            pick.get("yes_ask", 50),
+            pick.get("confidence", "low"),
+            bankroll,
+        )
+
+    # ── 4c. Log picks for calibration ─────────────────────────────────────
     try:
         log_picks(all_analyses, today)
     except Exception as e:

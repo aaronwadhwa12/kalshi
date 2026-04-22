@@ -81,18 +81,19 @@ def log_picks(all_analyses: list[dict], game_date: date):
         if not ticker or (ticker, date_str) in existing:
             continue
         picks.append({
-            "ticker":            ticker,
-            "game_date":         date_str,
-            "player_name":       a.get("player_name", ""),
-            "stat_type":         a.get("stat_type", ""),
-            "line":              a.get("line"),
-            "yes_ask":           a.get("yes_ask", 50),
-            "our_probability":   a.get("our_probability"),
+            "ticker":              ticker,
+            "game_date":           date_str,
+            "player_name":         a.get("player_name", ""),
+            "stat_type":           a.get("stat_type", ""),
+            "line":                a.get("line"),
+            "yes_ask":             a.get("yes_ask", 50),
+            "our_probability":     a.get("our_probability"),
             "implied_probability": a.get("implied_probability"),
-            "edge":              a.get("edge"),
-            "confidence":        a.get("confidence", ""),
-            "base_rate":         a.get("base_rate"),
-            "factors":           a.get("factors", {}),
+            "edge":                a.get("edge"),
+            "confidence":          a.get("confidence", ""),
+            "base_rate":           a.get("base_rate"),
+            "factors":             a.get("factors", {}),
+            "suggested_contracts": a.get("suggested_contracts", 0),
             "outcome":           None,   # filled by resolve_picks
             "actual_stat":       None,
             "resolved_date":     None,
@@ -431,22 +432,35 @@ def format_daily_recap(for_date: date) -> Optional[str]:
     lines = [f"NBA Results — {date_str}", ""]
 
     if resolved:
+        from analysis.sizing import pick_pnl
+        total_pnl = 0.0
         # Sort: wins first, then losses
         for p in sorted(resolved, key=lambda x: x["outcome"]):
-            icon      = "YES" if p["outcome"] == "win" else "NO"
-            actual    = p.get("actual_stat")
-            actual_s  = f"{actual:.1f}" if actual is not None else "?"
-            our_pct   = f"{p['our_probability']:.0%}" if p.get("our_probability") is not None else "?"
-            impl_pct  = f"{p['implied_probability']:.0%}" if p.get("implied_probability") is not None else "?"
-            edge_pct  = f"{p['edge']:+.1%}" if p.get("edge") is not None else "?"
-            stat      = p.get("stat_type", "?").upper()
-            line_val  = p.get("line", "?")
-            player    = p.get("player_name", "?")
-            lines.append(f"[{icon}] {player} {stat} {line_val}+  actual={actual_s}")
-            lines.append(f"      edge={edge_pct}  ours={our_pct}  kalshi={impl_pct}")
+            icon       = "WIN" if p["outcome"] == "win" else "LOSS"
+            actual     = p.get("actual_stat")
+            actual_s   = f"{actual:.1f}" if actual is not None else "?"
+            our_pct    = f"{p['our_probability']:.0%}" if p.get("our_probability") is not None else "?"
+            impl_pct   = f"{p['implied_probability']:.0%}" if p.get("implied_probability") is not None else "?"
+            edge_pct   = f"{p['edge']:+.1%}" if p.get("edge") is not None else "?"
+            stat       = p.get("stat_type", "?").upper()
+            line_val   = p.get("line", "?")
+            player     = p.get("player_name", "?")
+            contracts  = p.get("suggested_contracts", 0)
+            yes_ask    = p.get("yes_ask", 50)
+            pnl        = pick_pnl(contracts, yes_ask, p["outcome"]) if contracts else None
+            if pnl is not None:
+                total_pnl += pnl
+                pnl_s = f"  {pnl:+.2f}"
+            else:
+                pnl_s = ""
+            contracts_s = f" × {contracts}c" if contracts else ""
+            lines.append(f"[{icon}] {player} {stat} {line_val}+  actual={actual_s}{contracts_s}{pnl_s}")
+            lines.append(f"       edge={edge_pct}  ours={our_pct}  kalshi={impl_pct}")
 
         lines.append("")
         lines.append(f"Hit rate: {wins}/{len(resolved)} ({wins/len(resolved):.1%})")
+        if any(p.get("suggested_contracts", 0) for p in resolved):
+            lines.append(f"P&L: ${total_pnl:+.2f}")
     else:
         lines.append("No resolved picks for this date.")
 

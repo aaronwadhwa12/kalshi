@@ -88,15 +88,25 @@ def format_picks_sms(picks: list[dict], game_date: str = None) -> str:
             direction = "↑" if inj_min_factor > 1 else "↓"
             ctx.append(f"Min{direction}{inj_min_factor:.2f}x(n={inj_min_n})")
 
-        game_date = pick.get("game_date", "")
-        away      = pick.get("away_team", "")
-        home      = pick.get("home_team", "")
-        matchup   = f"{away}@{home}" if away and home else game_date
+        game_date  = pick.get("game_date", "")
+        away       = pick.get("away_team", "")
+        home       = pick.get("home_team", "")
+        matchup    = f"{away}@{home}" if away and home else game_date
+        n_contracts = pick.get("suggested_contracts", 0)
+        if n_contracts:
+            cost_per = imp_pct / 100
+            max_risk = round(n_contracts * cost_per, 2)
+            max_win  = round(n_contracts * (1 - cost_per), 2)
+            sizing_s = f"   Suggested: {n_contracts} contracts  (risk ${max_risk} → win ${max_win})"
+        else:
+            sizing_s = None
 
         lines.append(f"{i}. [#{pick_id}] {player}  [{matchup}]")
         lines.append(f"   {stat} {side} {line_val}+ @ {imp_pct}c")
         lines.append(f"   Our prob: {our_pct}% | Edge: +{edge_pct}%")
         lines.append(f"   Confidence: {conf} | Tip: {tip_off} ({game_date})")
+        if sizing_s:
+            lines.append(sizing_s)
         if ctx:
             lines.append(f"   {' | '.join(ctx)}")
         lines.append("")
