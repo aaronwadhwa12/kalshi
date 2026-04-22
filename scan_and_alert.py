@@ -74,13 +74,42 @@ def scan_markets(game_date, limit: int = 200,
     # _extract_date can return the next calendar day for tonight's games
     tomorrow_str = (game_date + timedelta(days=1)).isoformat()
 
-    parsed = []
+    print(f"[kalshi] {len(raw)} raw markets returned by API")
+
+    parsed       = []
+    parse_failed = 0
+    date_dropped = 0
+    failed_titles: list[str] = []
     for r in raw:
         m = kalshi_client.parse_market(r)
         if not m:
+            parse_failed += 1
+            title = r.get("title", "") or r.get("ticker", "?")
+            if len(failed_titles) < 8:
+                failed_titles.append(title)
             continue
-        if m.get("game_date", today_str) <= tomorrow_str:
+        gdate = m.get("game_date", today_str)
+        if gdate <= tomorrow_str:
             parsed.append(m)
+        else:
+            date_dropped += 1
+            if len(failed_titles) < 8:
+                failed_titles.append(f"[date={gdate}] {m['player_name']} {m['stat_type']}")
+
+    if parse_failed or date_dropped:
+        print(f"[kalshi] Dropped: {parse_failed} parse-fail, {date_dropped} date-filtered")
+        for t in failed_titles:
+            print(f"  ↳ {t}")
+
+    # If we got raw markets but NONE parsed, dump the first few raw records
+    # so we can see what Kalshi is actually returning and why parsing fails.
+    if raw and not parsed and parse_failed > 0:
+        print("[kalshi] DIAGNOSTIC — first 3 raw market records:")
+        for r in raw[:3]:
+            print(f"  ticker={r.get('ticker')} title={r.get('title')!r} "
+                  f"subtitle={r.get('subtitle')!r} "
+                  f"yes_ask={r.get('yes_ask')} yes_ask_dollars={r.get('yes_ask_dollars')} "
+                  f"close_time={r.get('close_time')}")
 
     # Only fall back to future-date markets on genuine off-days.
     # If ESPN shows games today, Kalshi just hasn't opened props yet — don't

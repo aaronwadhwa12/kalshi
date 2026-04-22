@@ -97,9 +97,9 @@ def get_nba_markets(game_date: Optional[date] = None,
                 params = {"limit": limit, "series_ticker": series}
                 if s:
                     params["status"] = s
-                if game_date:
-                    day_start = datetime.combine(game_date, datetime.min.time())
-                    params["min_close_ts"] = int(day_start.timestamp())
+                # NOTE: do NOT add min_close_ts / max_close_ts here — Kalshi
+                # silently returns 0 results for unsupported / edge-case ts values.
+                # Date filtering is done client-side in scan_markets() instead.
                 data  = _get("/markets", params=params)
                 found = [m for m in data.get("markets", [])
                          if m.get("ticker") not in seen_tickers]
@@ -112,6 +112,7 @@ def get_nba_markets(game_date: Optional[date] = None,
     if markets:
         print(f"[kalshi] Strategy 1 total: {len(markets)} markets")
         return markets
+    print("[kalshi] Strategy 1: 0 markets found across all series tickers")
 
     # ── Strategy 2: events endpoint ─────────────────────────────────────────
     print("[kalshi] Strategy 2: searching events...")
