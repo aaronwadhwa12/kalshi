@@ -55,15 +55,20 @@ def games_in_alert_window(games: list[dict]) -> list[dict]:
 
 
 def scan_markets(game_date, limit: int = 200,
-                 has_games_today: bool = False) -> list[dict]:
+                 has_games_today: bool = False,
+                 include_closed: bool = False) -> list[dict]:
     """Fetch and parse Kalshi NBA markets for a given date.
 
     has_games_today: if True (ESPN confirmed games today), never fall back to
     future-date markets — Kalshi just hasn't opened props yet for today.
+    include_closed: also fetch closed/settled markets (used after tip-off).
     """
     from datetime import timedelta
     try:
-        status = None if FULL_REPORT else "open"
+        if FULL_REPORT or include_closed:
+            status = None   # fetch open + closed + settled
+        else:
+            status = "open"
         raw = kalshi_client.get_nba_markets(game_date=game_date, limit=limit, status=status)
     except Exception as e:
         print(f"[kalshi] Failed to fetch markets: {e}")
@@ -272,14 +277,33 @@ def main():
 
     if not markets:
         if has_games_today:
-            msg = (f"{len(games)} NBA game(s) today but Kalshi hasn't opened "
-                   f"player prop markets yet for {today}. Check back closer to tip-off.")
+            # Distinguish "not open yet" from "already closed" based on ET hour
+            if now_et.hour >= 18:
+                # After 6 PM ET — markets likely closed at tip-off; try fetching
+                # closed markets for today so we can still run analysis
+                print("[kalshi] After 6 PM ET — trying closed markets for today's games...")
+                markets = scan_markets(today, has_games_today=True, include_closed=True)
+                if markets:
+                    print(f"[kalshi] Found {len(markets)} closed markets — running analysis for reference")
+                else:
+                    msg = (f"Today's Kalshi markets have closed — {len(games)} game(s) "
+                           f"are underway for {today}. Results tomorrow morning.")
+                    print(f"[kalshi] {msg}")
+                    send_notification(msg, title="NBA Kalshi — Games Underway")
+                    sys.exit(0)
+            else:
+                msg = (f"{len(games)} NBA game(s) today but Kalshi hasn't opened "
+                       f"player prop markets yet for {today}. Check back closer to tip-off.")
+                print(f"[kalshi] {msg}")
+                if IS_MORNING_SCAN or FULL_REPORT:
+                    send_notification(msg, title="NBA Kalshi — No Markets")
+                sys.exit(0)
         else:
             msg = f"No NBA games today ({today}) and no upcoming Kalshi markets found."
-        print(f"[kalshi] {msg}")
-        if IS_MORNING_SCAN or FULL_REPORT:
-            send_notification(msg, title="NBA Kalshi — No Markets")
-        sys.exit(0)
+            print(f"[kalshi] {msg}")
+            if IS_MORNING_SCAN or FULL_REPORT:
+                send_notification(msg, title="NBA Kalshi — No Markets")
+            sys.exit(0)
 
     # Warn if any markets are for a future date (off-day fallback triggered)
     today_str = today.isoformat()
