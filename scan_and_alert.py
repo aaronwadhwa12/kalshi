@@ -69,9 +69,9 @@ def scan_markets(game_date, limit: int = 200,
         print(f"[kalshi] Failed to fetch markets: {e}")
         return []
 
-    today_str    = game_date.isoformat() if hasattr(game_date, "isoformat") else str(game_date)
-    # +1 day buffer: late ET games (8-11 PM) close after UTC midnight so
-    # _extract_date can return the next calendar day for tonight's games
+    today_str = game_date.isoformat() if hasattr(game_date, "isoformat") else str(game_date)
+    # _extract_date now uses ET — no UTC overflow. Keep a 1-day upper buffer
+    # only for edge cases (e.g. markets whose event spans past midnight ET).
     tomorrow_str = (game_date + timedelta(days=1)).isoformat()
 
     print(f"[kalshi] {len(raw)} raw markets returned by API")

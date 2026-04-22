@@ -467,14 +467,22 @@ def _clean_name(raw: str) -> str:
     return name
 
 
+_ET = None
+def _et_tz():
+    global _ET
+    if _ET is None:
+        import pytz
+        _ET = pytz.timezone("America/New_York")
+    return _ET
+
 def _extract_date(raw: dict) -> str:
     for field in ("close_time", "expiration_time"):
         ts = raw.get(field, "")
         if ts:
             try:
                 dt = datetime.fromisoformat(ts.replace("Z", "+00:00"))
-                return dt.strftime("%Y-%m-%d")
-            except ValueError:
+                return dt.astimezone(_et_tz()).strftime("%Y-%m-%d")
+            except (ValueError, Exception):
                 pass
     return date.today().isoformat()
 
