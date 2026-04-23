@@ -19,7 +19,7 @@
       "consistency": 0.998
     },
     "suggested_contracts": 279,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -43,7 +43,7 @@
       "consistency": 0.993
     },
     "suggested_contracts": 9,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -67,9 +67,9 @@
       "consistency": 0.971
     },
     "suggested_contracts": 16,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 1.0,
+    "resolved_date": "2026-04-23"
   },
   {
     "ticker": "KXNBAPTS-26APR21PORSAS-SASDFOX4-25",
@@ -91,7 +91,7 @@
       "consistency": 1.0
     },
     "suggested_contracts": 37,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -115,7 +115,7 @@
       "consistency": 1.0
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -139,7 +139,7 @@
       "consistency": 0.959
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -163,7 +163,7 @@
       "consistency": 1.0
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -187,7 +187,7 @@
       "consistency": 1.0
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -211,7 +211,7 @@
       "consistency": 0.976
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -235,7 +235,7 @@
       "consistency": 0.99
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -259,7 +259,7 @@
       "consistency": 1.0
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -283,7 +283,7 @@
       "consistency": 0.993
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -307,7 +307,7 @@
       "consistency": 1.0
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -331,9 +331,9 @@
       "consistency": 0.984
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 10.0,
+    "resolved_date": "2026-04-23"
   },
   {
     "ticker": "KXNBAPTS-26APR21PORSAS-PORJGRANT9-20",
@@ -355,7 +355,7 @@
       "consistency": 0.983
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -379,7 +379,7 @@
       "consistency": 1.0
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -403,7 +403,7 @@
       "consistency": 0.994
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -427,9 +427,9 @@
       "consistency": 0.991
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "win",
+    "actual_stat": 8.0,
+    "resolved_date": "2026-04-23"
   },
   {
     "ticker": "KXNBAPTS-26APR21PHIBOS-BOSNVUCEVIC4-20",
@@ -451,7 +451,7 @@
       "consistency": 0.969
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -475,7 +475,7 @@
       "consistency": 0.985
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -499,7 +499,7 @@
       "consistency": 0.993
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -523,7 +523,7 @@
       "consistency": 0.962
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -547,7 +547,7 @@
       "consistency": 0.964
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -571,7 +571,7 @@
       "consistency": 0.986
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -595,9 +595,9 @@
       "consistency": 1.0
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 37.0,
+    "resolved_date": "2026-04-23"
   },
   {
     "ticker": "KXNBAPTS-26APR21PHIBOS-BOSSHAUSER30-20",
@@ -619,7 +619,7 @@
       "consistency": 0.956
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -643,7 +643,7 @@
       "consistency": 0.998
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -667,7 +667,7 @@
       "consistency": 1.0
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -691,7 +691,7 @@
       "consistency": 1.0
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -715,7 +715,7 @@
       "consistency": 1.0
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -739,7 +739,7 @@
       "consistency": 0.978
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -763,9 +763,9 @@
       "consistency": 0.98
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 5.0,
+    "resolved_date": "2026-04-23"
   },
   {
     "ticker": "KXNBAREB-26APR21PHIBOS-BOSJBROWN7-8",
@@ -787,7 +787,7 @@
       "consistency": 0.986
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -811,7 +811,7 @@
       "consistency": 1.0
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -835,7 +835,7 @@
       "consistency": 0.987
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -859,7 +859,7 @@
       "consistency": 0.918
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -883,9 +883,9 @@
       "consistency": 0.999
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 11.0,
+    "resolved_date": "2026-04-23"
   },
   {
     "ticker": "KXNBAPTS-26APR19PHXOKC-OKCCWALLACE22-20",
@@ -907,9 +907,9 @@
       "consistency": 0.928
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 0.0,
+    "resolved_date": "2026-04-23"
   },
   {
     "ticker": "KXNBAPTS-26APR21PORSAS-SASDHARPER2-20",
@@ -931,7 +931,7 @@
       "consistency": 0.991
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -955,7 +955,7 @@
       "consistency": 0.956
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -979,7 +979,7 @@
       "consistency": 1.0
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -1003,7 +1003,7 @@
       "consistency": 0.981
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -1027,9 +1027,9 @@
       "consistency": 0.965
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 3.0,
+    "resolved_date": "2026-04-23"
   },
   {
     "ticker": "KXNBAPTS-26APR21PORSAS-SASDVASSELL24-25",
@@ -1051,7 +1051,7 @@
       "consistency": 0.981
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -1075,7 +1075,7 @@
       "consistency": 0.971
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -1099,7 +1099,7 @@
       "consistency": 0.985
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -1123,7 +1123,7 @@
       "consistency": 0.975
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -1147,7 +1147,7 @@
       "consistency": 0.987
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -1171,7 +1171,7 @@
       "consistency": 0.956
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -1195,7 +1195,7 @@
       "consistency": 0.971
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -1219,7 +1219,7 @@
       "consistency": 0.958
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -1243,9 +1243,9 @@
       "consistency": 0.945
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 10.0,
+    "resolved_date": "2026-04-23"
   },
   {
     "ticker": "KXNBAPTS-26APR20ATLNYK-NYKKTOWNS32-30",
@@ -1267,7 +1267,7 @@
       "consistency": 1.0
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -1291,7 +1291,7 @@
       "consistency": 1.0
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -1315,7 +1315,7 @@
       "consistency": 0.967
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -1339,7 +1339,7 @@
       "consistency": 0.92
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -1363,7 +1363,7 @@
       "consistency": 0.957
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -1387,9 +1387,9 @@
       "consistency": 1.0
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 3.0,
+    "resolved_date": "2026-04-23"
   },
   {
     "ticker": "KXNBAPTS-26APR19PHXOKC-OKCJWILLIAMS8-30",
@@ -1411,9 +1411,9 @@
       "consistency": 1.0
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 19.0,
+    "resolved_date": "2026-04-23"
   },
   {
     "ticker": "KXNBAPTS-26APR19PHXOKC-OKCIHARTENSTEIN55-20",
@@ -1435,9 +1435,9 @@
       "consistency": 0.937
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 9.0,
+    "resolved_date": "2026-04-23"
   },
   {
     "ticker": "KXNBAPTS-26APR20ATLNYK-NYKMBRIDGES25-25",
@@ -1459,7 +1459,7 @@
       "consistency": 0.975
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -1483,7 +1483,7 @@
       "consistency": 0.988
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -1507,7 +1507,7 @@
       "consistency": 0.986
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -1531,9 +1531,9 @@
       "consistency": 0.978
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 6.0,
+    "resolved_date": "2026-04-23"
   },
   {
     "ticker": "KXNBAPTS-26APR20ATLNYK-ATLJKUMINGA0-20",
@@ -1555,7 +1555,7 @@
       "consistency": 0.95
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -1579,7 +1579,7 @@
       "consistency": 0.964
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -1603,7 +1603,7 @@
       "consistency": 0.998
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -1627,7 +1627,7 @@
       "consistency": 0.988
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -1651,7 +1651,7 @@
       "consistency": 0.983
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -1675,7 +1675,7 @@
       "consistency": 0.971
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -1699,7 +1699,7 @@
       "consistency": 0.992
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -1723,7 +1723,7 @@
       "consistency": 0.981
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -1747,7 +1747,7 @@
       "consistency": 0.986
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -1771,9 +1771,9 @@
       "consistency": 0.977
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 5.0,
+    "resolved_date": "2026-04-23"
   },
   {
     "ticker": "KXNBAREB-26APR21PHIBOS-BOSNQUETA88-12",
@@ -1795,7 +1795,7 @@
       "consistency": 0.97
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -1819,9 +1819,9 @@
       "consistency": 0.994
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 8.0,
+    "resolved_date": "2026-04-23"
   },
   {
     "ticker": "KXNBAREB-26APR21PORSAS-SASSCASTLE5-8",
@@ -1843,7 +1843,7 @@
       "consistency": 0.963
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -1867,9 +1867,9 @@
       "consistency": 1.0
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 19.0,
+    "resolved_date": "2026-04-23"
   },
   {
     "ticker": "KXNBAREB-26APR20ATLNYK-ATLNALEXANDERWALKER7-8",
@@ -1891,7 +1891,7 @@
       "consistency": 0.941
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -1915,7 +1915,7 @@
       "consistency": 0.971
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -1939,7 +1939,7 @@
       "consistency": 0.959
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -1963,7 +1963,7 @@
       "consistency": 0.986
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -1987,7 +1987,7 @@
       "consistency": 0.942
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -2011,7 +2011,7 @@
       "consistency": 0.949
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -2035,7 +2035,7 @@
       "consistency": 0.981
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -2059,7 +2059,7 @@
       "consistency": 0.998
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -2083,9 +2083,9 @@
       "consistency": 0.967
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 5.0,
+    "resolved_date": "2026-04-23"
   },
   {
     "ticker": "KXNBAPTS-26APR21PHIBOS-PHIVEDGECOMBE77-25",
@@ -2107,7 +2107,7 @@
       "consistency": 0.976
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -2131,7 +2131,7 @@
       "consistency": 0.945
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -2155,7 +2155,7 @@
       "consistency": 0.986
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   }
