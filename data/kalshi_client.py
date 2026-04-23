@@ -74,18 +74,79 @@ def _market_close_ts(raw: dict) -> float:
     return float("inf")
 
 
+def _kalshi_date(d: date) -> str:
+    """Format a date as Kalshi event ticker date: YYMONDD (e.g. 26APR23)."""
+    months = ["JAN","FEB","MAR","APR","MAY","JUN",
+              "JUL","AUG","SEP","OCT","NOV","DEC"]
+    return f"{str(d.year)[2:]}{months[d.month-1]}{d.day:02d}"
+
+
+def get_markets_for_games(games: list[dict], game_date: date,
+                          status: Optional[str] = "open") -> list[dict]:
+    """
+    Fetch markets by constructing exact Kalshi event tickers from ESPN matchups.
+
+    Avoids the pagination/sort-order problem of series-ticker fetches by
+    targeting specific game events directly.
+    """
+    date_code = _kalshi_date(game_date)
+    markets: list[dict] = []
+    seen_tickers: set = set()
+    statuses = [status] if status else ["open", "closed", "settled"]
+
+    for game in games:
+        away = game.get("away_abbr", "")
+        home = game.get("home_abbr", "")
+        if not away or not home:
+            continue
+        matchup = f"{away}{home}".upper()
+
+        for series in _NBA_SERIES_CANDIDATES:
+            event_ticker = f"{series}-{date_code}{matchup}"
+            for s in statuses:
+                try:
+                    params = {"event_ticker": event_ticker, "limit": 200}
+                    if s:
+                        params["status"] = s
+                    data  = _get("/markets", params=params)
+                    found = [m for m in data.get("markets", [])
+                             if m.get("ticker") not in seen_tickers]
+                    if found:
+                        markets.extend(found)
+                        seen_tickers.update(m["ticker"] for m in found)
+                except Exception:
+                    pass
+                time.sleep(0.15)  # avoid 429
+
+    if markets:
+        print(f"[kalshi] Event-ticker strategy: {len(markets)} markets "
+              f"for {len(games)} game(s) on {game_date}")
+    return markets
+
+
 def get_nba_markets(game_date: Optional[date] = None,
                     limit: int = 200,
-                    status: Optional[str] = "open") -> list[dict]:
+                    status: Optional[str] = "open",
+                    games: Optional[list] = None) -> list[dict]:
     """
     Fetch NBA player-prop markets using multiple fallback strategies.
 
-    Strategy 1 — known series tickers (fast, most reliable when ticker is right)
+    Strategy 0 — direct event-ticker fetch when today's ESPN games are known
+    Strategy 1 — known series tickers (catches all markets but may miss today if
+                 the API returns future-date markets first and limit truncates)
     Strategy 2 — event search (finds NBA events then gets their markets)
     Strategy 3 — keyword filter over all open markets (slowest, always works)
 
     Pass status=None to fetch all statuses (useful for post-game full reports).
+    Pass games= (ESPN game list with away_abbr/home_abbr) to enable Strategy 0.
     """
+    # ── Strategy 0: direct event-ticker fetch for today's specific games ────
+    if games and game_date:
+        markets = get_markets_for_games(games, game_date, status=status)
+        if markets:
+            return markets
+        print("[kalshi] Strategy 0: no markets found via event tickers — falling through")
+
     # ── Strategy 1: fetch all known NBA player-prop series ──────────────────
     # When status=None, try each known status so we catch closed/settled markets
     statuses_to_try = [status] if status else ["open", "closed", "settled"]
@@ -109,6 +170,7 @@ def get_nba_markets(game_date: Optional[date] = None,
                     seen_tickers.update(m.get("ticker") for m in found)
             except Exception as e:
                 print(f"[kalshi] Series '{series}' ({s}) error: {e}")
+            time.sleep(0.15)  # avoid 429 rate limits
     if markets:
         print(f"[kalshi] Strategy 1 total: {len(markets)} markets")
         return markets

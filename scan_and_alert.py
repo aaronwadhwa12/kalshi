@@ -56,12 +56,16 @@ def games_in_alert_window(games: list[dict]) -> list[dict]:
 
 def scan_markets(game_date, limit: int = 200,
                  has_games_today: bool = False,
-                 include_closed: bool = False) -> list[dict]:
+                 include_closed: bool = False,
+                 games: list = None) -> list[dict]:
     """Fetch and parse Kalshi NBA markets for a given date.
 
     has_games_today: if True (ESPN confirmed games today), never fall back to
     future-date markets — Kalshi just hasn't opened props yet for today.
     include_closed: also fetch closed/settled markets (used after tip-off).
+    games: ESPN game list (with away_abbr/home_abbr) — enables targeted
+           event-ticker fetching so today's markets are never missed due to
+           pagination sort order.
     """
     from datetime import timedelta
     try:
@@ -69,7 +73,10 @@ def scan_markets(game_date, limit: int = 200,
             status = None   # fetch open + closed + settled
         else:
             status = "open"
-        raw = kalshi_client.get_nba_markets(game_date=game_date, limit=limit, status=status)
+        raw = kalshi_client.get_nba_markets(
+            game_date=game_date, limit=limit, status=status,
+            games=games,
+        )
     except Exception as e:
         print(f"[kalshi] Failed to fetch markets: {e}")
         return []
@@ -272,7 +279,7 @@ def main():
     # ── 3. Scan Kalshi ────────────────────────────────────────────────────
     print(f"\nScanning Kalshi markets for {today}...")
     has_games_today = len(games) > 0
-    markets = scan_markets(today, has_games_today=has_games_today)
+    markets = scan_markets(today, has_games_today=has_games_today, games=games)
     print(f"[kalshi] {len(markets)} valid markets")
 
     if not markets:

@@ -35,14 +35,16 @@ def get_todays_games(game_date: Optional[date] = None) -> list[dict]:
     games = []
     for event in data.get("events", []):
         comp = event["competitions"][0]
-        teams = {t["homeAway"]: t["team"]["displayName"] for t in comp["competitors"]}
+        teams = {t["homeAway"]: t["team"] for t in comp["competitors"]}
         games.append({
-            "event_id":  event["id"],
-            "home_team": teams.get("home", ""),
-            "away_team": teams.get("away", ""),
-            "tip_off":   comp.get("date", ""),
-            "venue":     comp.get("venue", {}).get("fullName", ""),
-            "status":    event["status"]["type"]["name"],
+            "event_id":   event["id"],
+            "home_team":  teams.get("home", {}).get("displayName", ""),
+            "away_team":  teams.get("away", {}).get("displayName", ""),
+            "home_abbr":  teams.get("home", {}).get("abbreviation", ""),
+            "away_abbr":  teams.get("away", {}).get("abbreviation", ""),
+            "tip_off":    comp.get("date", ""),
+            "venue":      comp.get("venue", {}).get("fullName", ""),
+            "status":     event["status"]["type"]["name"],
         })
     return games
 
