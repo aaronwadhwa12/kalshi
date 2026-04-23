@@ -537,7 +537,29 @@ def _et_tz():
         _ET = pytz.timezone("America/New_York")
     return _ET
 
+_TICKER_DATE_RE = re.compile(
+    r"-(\d{2})(JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)(\d{2})[A-Z]{3}"
+)
+_TICKER_MONTHS = {
+    "JAN":1,"FEB":2,"MAR":3,"APR":4,"MAY":5,"JUN":6,
+    "JUL":7,"AUG":8,"SEP":9,"OCT":10,"NOV":11,"DEC":12,
+}
+
 def _extract_date(raw: dict) -> str:
+    # Event ticker encodes the actual game date (e.g. 26APR22 = Apr 22 2026).
+    # This is more reliable than close_time, which can be after midnight ET
+    # when a late game runs long.
+    event_ticker = raw.get("event_ticker", "") or raw.get("ticker", "")
+    m = _TICKER_DATE_RE.search(event_ticker)
+    if m:
+        try:
+            yr  = int("20" + m.group(1))
+            mon = _TICKER_MONTHS[m.group(2)]
+            day = int(m.group(3))
+            return date(yr, mon, day).isoformat()
+        except (ValueError, KeyError):
+            pass
+    # Fall back: convert close_time to ET date
     for field in ("close_time", "expiration_time"):
         ts = raw.get(field, "")
         if ts:

@@ -101,12 +101,19 @@ def scan_markets(game_date, limit: int = 200,
                 failed_titles.append(title)
             continue
         gdate = m.get("game_date", today_str)
-        if today_str <= gdate <= tomorrow_str:
-            parsed.append(m)
-        else:
+        if not (today_str <= gdate <= tomorrow_str):
             date_dropped += 1
             if len(failed_titles) < 8:
                 failed_titles.append(f"[date={gdate}] {m['player_name']} {m['stat_type']}")
+            continue
+        # Drop near-settled markets (≤2¢ = settled NO, ≥98¢ = settled YES)
+        ask = m.get("yes_ask", 50)
+        if ask <= 2 or ask >= 98:
+            date_dropped += 1
+            if len(failed_titles) < 8:
+                failed_titles.append(f"[settled={ask}¢] {m['player_name']} {m['stat_type']}")
+            continue
+        parsed.append(m)
 
     if parse_failed or date_dropped:
         print(f"[kalshi] Dropped: {parse_failed} parse-fail, {date_dropped} date-filtered")
