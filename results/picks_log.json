@@ -8350,5 +8350,29 @@
     "outcome": null,
     "actual_stat": null,
     "resolved_date": null
+  },
+  {
+    "ticker": "KXNBAAST-26APR26LALHOU-HOURSHEPPARD15-10",
+    "game_date": "2026-04-26",
+    "player_name": "Reed Sheppard",
+    "stat_type": "ast",
+    "line": 10.0,
+    "yes_ask": 6,
+    "our_probability": 0.0362,
+    "implied_probability": 0.06,
+    "edge": -0.0238,
+    "confidence": "low",
+    "base_rate": 0.0341,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 1.039,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.935
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
   }
 ]
