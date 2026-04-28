@@ -10966,5 +10966,29 @@
     "outcome": null,
     "actual_stat": null,
     "resolved_date": null
+  },
+  {
+    "ticker": "KXNBASTL-26APR28PHIBOS-BOSPPRITCHARD11-3",
+    "game_date": "2026-04-28",
+    "player_name": "Payton Pritchard",
+    "stat_type": "stl",
+    "line": 3.0,
+    "yes_ask": 61,
+    "our_probability": 0.0591,
+    "implied_probability": 0.61,
+    "edge": -0.5509,
+    "confidence": "low",
+    "base_rate": 0.0463,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 0.85,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.811
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
   }
 ]
