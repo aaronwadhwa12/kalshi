@@ -16150,5 +16150,53 @@
     "outcome": null,
     "actual_stat": null,
     "resolved_date": null
+  },
+  {
+    "ticker": "KXNBABLK-26MAY01LALHOU-HOUATHOMPSON1-2",
+    "game_date": "2026-05-01",
+    "player_name": "Amen Thompson",
+    "stat_type": "blk",
+    "line": 2.0,
+    "yes_ask": 18,
+    "our_probability": 0.1658,
+    "implied_probability": 0.18,
+    "edge": -0.0142,
+    "confidence": "low",
+    "base_rate": 0.1605,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 1.15,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.826
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBABLK-26MAY01LALHOU-LALLJAMES23-2",
+    "game_date": "2026-05-01",
+    "player_name": "Lebron James",
+    "stat_type": "blk",
+    "line": 2.0,
+    "yes_ask": 48,
+    "our_probability": 0.0433,
+    "implied_probability": 0.48,
+    "edge": -0.4367,
+    "confidence": "low",
+    "base_rate": 0.0227,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 0.85,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.83
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
   }
 ]
