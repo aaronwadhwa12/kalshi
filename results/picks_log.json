@@ -17134,5 +17134,53 @@
     "outcome": null,
     "actual_stat": null,
     "resolved_date": null
+  },
+  {
+    "ticker": "KXNBASTL-26MAY02PHIBOS-BOSPPRITCHARD11-3",
+    "game_date": "2026-05-02",
+    "player_name": "Payton Pritchard",
+    "stat_type": "stl",
+    "line": 3.0,
+    "yes_ask": 10,
+    "our_probability": 0.0379,
+    "implied_probability": 0.1,
+    "edge": -0.0621,
+    "confidence": "low",
+    "base_rate": 0.0392,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 0.85,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.811
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBABLK-26MAY02PHIBOS-BOSNVUCEVIC4-3",
+    "game_date": "2026-05-02",
+    "player_name": "Nikola Vucevic",
+    "stat_type": "blk",
+    "line": 3.0,
+    "yes_ask": 44,
+    "our_probability": 0.0812,
+    "implied_probability": 0.44,
+    "edge": -0.3588,
+    "confidence": "low",
+    "base_rate": 0.0646,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 1.042,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.848
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
   }
 ]
