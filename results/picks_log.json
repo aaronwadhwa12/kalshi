@@ -14083,9 +14083,9 @@
       "consistency": 0.974
     },
     "suggested_contracts": 39,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 14.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBAREB-26MAY01DETORL-DETJDUREN0-8",
@@ -14107,9 +14107,9 @@
       "consistency": 1.0
     },
     "suggested_contracts": 15,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "win",
+    "actual_stat": 9.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBAREB-26MAY01LALHOU-HOUTEASON17-8",
@@ -14131,9 +14131,9 @@
       "consistency": 0.984
     },
     "suggested_contracts": 8,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 5.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBASTL-26MAY01LALHOU-HOUATHOMPSON1-3",
@@ -14155,9 +14155,9 @@
       "consistency": 0.939
     },
     "suggested_contracts": 6,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 0.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBAPTS-26MAY01DETORL-DETJDUREN0-25",
@@ -14179,9 +14179,9 @@
       "consistency": 0.994
     },
     "suggested_contracts": 31,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 8.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBAREB-26MAY01CLETOR-CLEJALLEN31-8",
@@ -14203,9 +14203,9 @@
       "consistency": 0.989
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 7.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBAREB-26MAY01DETORL-ORLPBANCHERO5-8",
@@ -14227,9 +14227,9 @@
       "consistency": 0.994
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "win",
+    "actual_stat": 10.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBABLK-26MAY01CLETOR-TORSBARNES4-3",
@@ -14251,9 +14251,9 @@
       "consistency": 0.883
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "win",
+    "actual_stat": 3.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBAPTS-26MAY01CLETOR-CLEEMOBLEY4-25",
@@ -14275,9 +14275,9 @@
       "consistency": 1.0
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "win",
+    "actual_stat": 26.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBAAST-26MAY01LALHOU-LALMSMART36-8",
@@ -14299,9 +14299,9 @@
       "consistency": 0.922
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 1.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBASTL-26MAY01DETORL-DETATHOMPSON9-3",
@@ -14323,9 +14323,9 @@
       "consistency": 0.942
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 1.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBAPTS-26MAY01LALHOU-HOUASENGUN28-30",
@@ -14347,9 +14347,9 @@
       "consistency": 0.988
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 17.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBAPTS-26MAY01DETORL-ORLPBANCHERO5-35",
@@ -14371,9 +14371,9 @@
       "consistency": 0.998
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 17.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBABLK-26MAY01CLETOR-CLEJALLEN31-3",
@@ -14395,9 +14395,9 @@
       "consistency": 0.844
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 2.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBAPTS-26MAY01LALHOU-LALMSMART36-20",
@@ -14419,9 +14419,9 @@
       "consistency": 0.949
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 7.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBAREB-26MAY01CLETOR-TORRBARRETT9-8",
@@ -14443,9 +14443,9 @@
       "consistency": 0.997
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "win",
+    "actual_stat": 9.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBAREB-26MAY01CLETOR-TORJPOELTL19-8",
@@ -14467,9 +14467,9 @@
       "consistency": 0.974
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 4.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBAREB-26MAY01CLETOR-CLEJHARDEN1-8",
@@ -14491,9 +14491,9 @@
       "consistency": 0.973
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "win",
+    "actual_stat": 9.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBAAST-26MAY01DETORL-ORLPBANCHERO5-8",
@@ -14515,9 +14515,9 @@
       "consistency": 0.994
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 6.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBAPTS-26MAY01LALHOU-LALRHACHIMURA28-20",
@@ -14539,9 +14539,9 @@
       "consistency": 0.966
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "win",
+    "actual_stat": 21.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBASTL-26MAY01DETORL-ORLJSUGGS4-3",
@@ -14563,9 +14563,9 @@
       "consistency": 0.923
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 1.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBASTL-26MAY01LALHOU-LALMSMART36-3",
@@ -14587,9 +14587,9 @@
       "consistency": 0.881
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 2.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBAREB-26MAY01DETORL-DETCCUNNINGHAM2-8",
@@ -14611,9 +14611,9 @@
       "consistency": 0.978
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "win",
+    "actual_stat": 10.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBAREB-26MAY01CLETOR-CLEEMOBLEY4-9",
@@ -14635,9 +14635,9 @@
       "consistency": 0.982
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "win",
+    "actual_stat": 14.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBAAST-26MAY01DETORL-ORLJSUGGS4-8",
@@ -14659,9 +14659,9 @@
       "consistency": 0.971
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 7.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBAPTS-26MAY01DETORL-DETATHOMPSON9-25",
@@ -14683,9 +14683,9 @@
       "consistency": 0.985
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 4.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBAAST-26MAY01DETORL-DETJDUREN0-8",
@@ -14707,9 +14707,9 @@
       "consistency": 0.925
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 1.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBAPTS-26MAY01DETORL-ORLABLACK0-25",
@@ -14731,9 +14731,9 @@
       "consistency": 0.96
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 8.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBAAST-26MAY01DETORL-DETCCUNNINGHAM2-9",
@@ -14755,9 +14755,9 @@
       "consistency": 1.0
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 3.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBABLK-26MAY01LALHOU-LALDAYTON5-3",
@@ -14779,9 +14779,9 @@
       "consistency": 0.865
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 1.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBABLK-26MAY01CLETOR-CLEEMOBLEY4-3",
@@ -14803,9 +14803,9 @@
       "consistency": 0.891
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 0.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBAAST-26MAY01CLETOR-CLEDMITCHELL45-8",
@@ -14827,9 +14827,9 @@
       "consistency": 0.981
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 2.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBAPTS-26MAY01CLETOR-CLEJTYSON20-20",
@@ -14851,9 +14851,9 @@
       "consistency": 0.955
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 5.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBAAST-26MAY01DETORL-DETATHOMPSON9-8",
@@ -14875,9 +14875,9 @@
       "consistency": 0.952
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 6.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBAPTS-26MAY01CLETOR-CLEDSCHRODER8-20",
@@ -14899,9 +14899,9 @@
       "consistency": 0.925
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 7.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBAAST-26MAY01CLETOR-CLEDSCHRODER8-10",
@@ -14923,9 +14923,9 @@
       "consistency": 0.962
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 1.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBAAST-26MAY01CLETOR-TORJPOELTL19-8",
@@ -14947,9 +14947,9 @@
       "consistency": 0.907
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 1.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBAPTS-26MAY01LALHOU-LALDAYTON5-25",
@@ -14971,9 +14971,9 @@
       "consistency": 0.954
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 7.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBAREB-26MAY01LALHOU-HOUATHOMPSON1-8",
@@ -14995,9 +14995,9 @@
       "consistency": 0.988
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "win",
+    "actual_stat": 8.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBABLK-26MAY01LALHOU-HOUASENGUN28-3",
@@ -15019,9 +15019,9 @@
       "consistency": 0.866
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 2.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBAREB-26MAY01DETORL-ORLJSUGGS4-8",
@@ -15043,9 +15043,9 @@
       "consistency": 0.959
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 7.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBABLK-26MAY01DETORL-ORLPBANCHERO5-3",
@@ -15067,9 +15067,9 @@
       "consistency": 0.762
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 0.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBAPTS-26MAY01DETORL-DETCCUNNINGHAM2-40",
@@ -15091,9 +15091,9 @@
       "consistency": 0.987
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 32.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBAAST-26MAY01DETORL-ORLABLACK0-8",
@@ -15115,9 +15115,9 @@
       "consistency": 0.958
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 1.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBAPTS-26MAY01CLETOR-TORJPOELTL19-20",
@@ -15139,9 +15139,9 @@
       "consistency": 0.968
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 2.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBAPTS-26MAY01DETORL-ORLDBANE3-30",
@@ -15163,9 +15163,9 @@
       "consistency": 0.999
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 17.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBAREB-26MAY01CLETOR-CLEDMITCHELL45-8",
@@ -15187,9 +15187,9 @@
       "consistency": 0.974
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 5.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBASTL-26MAY01DETORL-ORLPBANCHERO5-3",
@@ -15211,9 +15211,9 @@
       "consistency": 0.834
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 2.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBAPTS-26MAY01DETORL-DETTHARRIS12-30",
@@ -15235,9 +15235,9 @@
       "consistency": 0.988
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 22.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBAAST-26MAY01DETORL-DETTHARRIS12-8",
@@ -15259,9 +15259,9 @@
       "consistency": 0.91
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 0.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBAPTS-26MAY01LALHOU-HOUTEASON17-25",
@@ -15283,9 +15283,9 @@
       "consistency": 0.951
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 14.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBAPTS-26MAY01LALHOU-HOUJSMITH10-30",
@@ -15307,9 +15307,9 @@
       "consistency": 1.0
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 9.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBAPTS-26MAY01LALHOU-HOUATHOMPSON1-30",
@@ -15331,9 +15331,9 @@
       "consistency": 1.0
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 18.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBAPTS-26MAY01DETORL-DETDROBINSON55-20",
@@ -15355,9 +15355,9 @@
       "consistency": 0.981
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 14.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBAREB-26MAY01DETORL-DETATHOMPSON9-8",
@@ -15379,9 +15379,9 @@
       "consistency": 0.984
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "win",
+    "actual_stat": 10.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBASTL-26MAY01CLETOR-CLEEMOBLEY4-3",
@@ -15403,9 +15403,9 @@
       "consistency": 0.844
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 1.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBAPTS-26MAY01DETORL-ORLJSUGGS4-25",
@@ -15427,9 +15427,9 @@
       "consistency": 0.984
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 7.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBAPTS-26MAY01CLETOR-TORRBARRETT9-35",
@@ -15451,9 +15451,9 @@
       "consistency": 1.0
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 24.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBAPTS-26MAY01CLETOR-CLEDMITCHELL45-40",
@@ -15475,9 +15475,9 @@
       "consistency": 1.0
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 24.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBAAST-26MAY01CLETOR-TORRBARRETT9-8",
@@ -15499,9 +15499,9 @@
       "consistency": 0.975
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 3.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBAAST-26MAY01LALHOU-HOURSHEPPARD15-8",
@@ -15523,9 +15523,9 @@
       "consistency": 0.939
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 1.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBASTL-26MAY01CLETOR-TORRBARRETT9-3",
@@ -15547,9 +15547,9 @@
       "consistency": 0.835
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 1.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBAPTS-26MAY01DETORL-ORLWCARTER34-20",
@@ -15571,9 +15571,9 @@
       "consistency": 0.965
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 9.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBAPTS-26MAY01LALHOU-LALLJAMES23-35",
@@ -15595,9 +15595,9 @@
       "consistency": 1.0
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 28.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBASTL-26MAY01CLETOR-TORSBARNES4-3",
@@ -15619,9 +15619,9 @@
       "consistency": 0.927
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "win",
+    "actual_stat": 3.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBAAST-26MAY01LALHOU-HOUASENGUN28-8",
@@ -15643,9 +15643,9 @@
       "consistency": 0.982
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 1.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBAPTS-26MAY01LALHOU-LALAREAVES15-35",
@@ -15667,9 +15667,9 @@
       "consistency": 0.994
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 15.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBAAST-26MAY01CLETOR-CLEJHARDEN1-8",
@@ -15691,9 +15691,9 @@
       "consistency": 1.0
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "win",
+    "actual_stat": 9.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBASTL-26MAY01DETORL-DETCCUNNINGHAM2-3",
@@ -15715,9 +15715,9 @@
       "consistency": 0.892
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "win",
+    "actual_stat": 4.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBABLK-26MAY01DETORL-DETJDUREN0-3",
@@ -15739,9 +15739,9 @@
       "consistency": 0.824
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 0.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBASTL-26MAY01CLETOR-CLEJHARDEN1-3",
@@ -15763,9 +15763,9 @@
       "consistency": 0.842
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 2.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBAREB-26MAY01DETORL-DETTHARRIS12-8",
@@ -15787,9 +15787,9 @@
       "consistency": 0.983
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "win",
+    "actual_stat": 10.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBAPTS-26MAY01CLETOR-TORSBARNES4-30",
@@ -15811,9 +15811,9 @@
       "consistency": 1.0
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 25.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBAREB-26MAY01LALHOU-HOUASENGUN28-8",
@@ -15835,9 +15835,9 @@
       "consistency": 0.988
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "win",
+    "actual_stat": 11.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBAREB-26MAY01LALHOU-LALDAYTON5-9",
@@ -15859,9 +15859,9 @@
       "consistency": 0.979
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "win",
+    "actual_stat": 16.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBAAST-26MAY01LALHOU-HOUATHOMPSON1-8",
@@ -15883,9 +15883,9 @@
       "consistency": 0.989
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 3.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBAPTS-26MAY01CLETOR-CLEJHARDEN1-30",
@@ -15907,9 +15907,9 @@
       "consistency": 1.0
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 16.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBASTL-26MAY01CLETOR-CLEDMITCHELL45-3",
@@ -15931,9 +15931,9 @@
       "consistency": 0.93
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 0.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBAPTS-26MAY01LALHOU-HOURSHEPPARD15-25",
@@ -15955,9 +15955,9 @@
       "consistency": 0.985
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 10.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBAREB-26MAY01LALHOU-HOUJSMITH10-8",
@@ -15979,9 +15979,9 @@
       "consistency": 0.984
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "win",
+    "actual_stat": 12.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBASTL-26MAY01LALHOU-LALLJAMES23-3",
@@ -16003,9 +16003,9 @@
       "consistency": 0.914
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 0.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBAREB-26MAY01CLETOR-TORSBARNES4-8",
@@ -16027,9 +16027,9 @@
       "consistency": 0.978
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 7.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBAAST-26MAY01CLETOR-TORSBARNES4-8",
@@ -16051,9 +16051,9 @@
       "consistency": 0.969
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "win",
+    "actual_stat": 14.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBAREB-26MAY01DETORL-ORLWCARTER34-8",
@@ -16075,9 +16075,9 @@
       "consistency": 0.985
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 0.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBAAST-26MAY01LALHOU-LALAREAVES15-8",
@@ -16099,9 +16099,9 @@
       "consistency": 0.969
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 2.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBAREB-26MAY01LALHOU-LALLJAMES23-8",
@@ -16123,9 +16123,9 @@
       "consistency": 0.981
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 7.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBAAST-26MAY01LALHOU-LALLJAMES23-8",
@@ -16147,9 +16147,9 @@
       "consistency": 0.987
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "win",
+    "actual_stat": 8.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBABLK-26MAY01LALHOU-HOUATHOMPSON1-2",
@@ -16171,9 +16171,9 @@
       "consistency": 0.826
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "win",
+    "actual_stat": 3.0,
+    "resolved_date": "2026-05-02"
   },
   {
     "ticker": "KXNBABLK-26MAY01LALHOU-LALLJAMES23-2",
@@ -16193,6 +16193,942 @@
       "rest": 1.0,
       "injury": 1.0,
       "consistency": 0.83
+    },
+    "suggested_contracts": 0,
+    "outcome": "loss",
+    "actual_stat": 0.0,
+    "resolved_date": "2026-05-02"
+  },
+  {
+    "ticker": "KXNBAREB-26MAY02PHIBOS-BOSNQUETA88-8",
+    "game_date": "2026-05-02",
+    "player_name": "Neemias Queta",
+    "stat_type": "reb",
+    "line": 8.0,
+    "yes_ask": 49,
+    "our_probability": 0.6667,
+    "implied_probability": 0.49,
+    "edge": 0.1767,
+    "confidence": "medium",
+    "base_rate": 0.6058,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 1.08,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.971
+    },
+    "suggested_contracts": 13,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBAPTS-26MAY02PHIBOS-PHIVEDGECOMBE77-20",
+    "game_date": "2026-05-02",
+    "player_name": "Vj Edgecombe",
+    "stat_type": "pts",
+    "line": 20.0,
+    "yes_ask": 9,
+    "our_probability": 0.2577,
+    "implied_probability": 0.09,
+    "edge": 0.1677,
+    "confidence": "medium",
+    "base_rate": 0.2506,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 1.063,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.974
+    },
+    "suggested_contracts": 38,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBAREB-26MAY02PHIBOS-PHIVEDGECOMBE77-8",
+    "game_date": "2026-05-02",
+    "player_name": "Vj Edgecombe",
+    "stat_type": "reb",
+    "line": 8.0,
+    "yes_ask": 28,
+    "our_probability": 0.4276,
+    "implied_probability": 0.28,
+    "edge": 0.1476,
+    "confidence": "medium",
+    "base_rate": 0.3882,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 0.988,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.981
+    },
+    "suggested_contracts": 13,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBAPTS-26MAY02PHIBOS-BOSPPRITCHARD11-25",
+    "game_date": "2026-05-02",
+    "player_name": "Payton Pritchard",
+    "stat_type": "pts",
+    "line": 25.0,
+    "yes_ask": 9,
+    "our_probability": 0.2044,
+    "implied_probability": 0.09,
+    "edge": 0.1144,
+    "confidence": "medium",
+    "base_rate": 0.1653,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 1.15,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.964
+    },
+    "suggested_contracts": 26,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBAREB-26MAY02PHIBOS-BOSNVUCEVIC4-8",
+    "game_date": "2026-05-02",
+    "player_name": "Nikola Vucevic",
+    "stat_type": "reb",
+    "line": 8.0,
+    "yes_ask": 15,
+    "our_probability": 0.2616,
+    "implied_probability": 0.15,
+    "edge": 0.1116,
+    "confidence": "medium",
+    "base_rate": 0.2271,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 0.945,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.98
+    },
+    "suggested_contracts": 16,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBAREB-26MAY02PHIBOS-PHIJEMBIID21-9",
+    "game_date": "2026-05-02",
+    "player_name": "Joel Embiid",
+    "stat_type": "reb",
+    "line": 9.0,
+    "yes_ask": 47,
+    "our_probability": 0.56,
+    "implied_probability": 0.47,
+    "edge": 0.09,
+    "confidence": "medium",
+    "base_rate": 0.5282,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 0.966,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.997
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBAAST-26MAY02PHIBOS-BOSJTATUM0-8",
+    "game_date": "2026-05-02",
+    "player_name": "Jayson Tatum",
+    "stat_type": "ast",
+    "line": 8.0,
+    "yes_ask": 25,
+    "our_probability": 0.321,
+    "implied_probability": 0.25,
+    "edge": 0.071,
+    "confidence": "medium",
+    "base_rate": 0.3309,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 1.063,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.962
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBAREB-26MAY02PHIBOS-BOSJTATUM0-16",
+    "game_date": "2026-05-02",
+    "player_name": "Jayson Tatum",
+    "stat_type": "reb",
+    "line": 16.0,
+    "yes_ask": 10,
+    "our_probability": 0.164,
+    "implied_probability": 0.1,
+    "edge": 0.064,
+    "confidence": "medium",
+    "base_rate": 0.1289,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 0.881,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.992
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBAAST-26MAY02PHIBOS-BOSJBROWN7-8",
+    "game_date": "2026-05-02",
+    "player_name": "Jaylen Brown",
+    "stat_type": "ast",
+    "line": 8.0,
+    "yes_ask": 8,
+    "our_probability": 0.1423,
+    "implied_probability": 0.08,
+    "edge": 0.0623,
+    "confidence": "low",
+    "base_rate": 0.1152,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 1.15,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.957
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBAREB-26MAY02PHIBOS-BOSPPRITCHARD11-8",
+    "game_date": "2026-05-02",
+    "player_name": "Payton Pritchard",
+    "stat_type": "reb",
+    "line": 8.0,
+    "yes_ask": 5,
+    "our_probability": 0.1085,
+    "implied_probability": 0.05,
+    "edge": 0.0585,
+    "confidence": "medium",
+    "base_rate": 0.0,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 1.15,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.969
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBAAST-26MAY02PHIBOS-PHIVEDGECOMBE77-8",
+    "game_date": "2026-05-02",
+    "player_name": "Vj Edgecombe",
+    "stat_type": "ast",
+    "line": 8.0,
+    "yes_ask": 6,
+    "our_probability": 0.118,
+    "implied_probability": 0.06,
+    "edge": 0.058,
+    "confidence": "low",
+    "base_rate": 0.1305,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 1.085,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.932
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBAREB-26MAY02PHIBOS-PHIPGEORGE8-8",
+    "game_date": "2026-05-02",
+    "player_name": "Paul George",
+    "stat_type": "reb",
+    "line": 8.0,
+    "yes_ask": 19,
+    "our_probability": 0.233,
+    "implied_probability": 0.19,
+    "edge": 0.043,
+    "confidence": "medium",
+    "base_rate": 0.1263,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 1.15,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.98
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBAREB-26MAY02PHIBOS-PHIKOUBRE9-8",
+    "game_date": "2026-05-02",
+    "player_name": "Kelly Oubre Jr.",
+    "stat_type": "reb",
+    "line": 8.0,
+    "yes_ask": 19,
+    "our_probability": 0.2315,
+    "implied_probability": 0.19,
+    "edge": 0.0415,
+    "confidence": "medium",
+    "base_rate": 0.1886,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 0.979,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.976
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBAPTS-26MAY02PHIBOS-BOSSHAUSER30-20",
+    "game_date": "2026-05-02",
+    "player_name": "Sam Hauser",
+    "stat_type": "pts",
+    "line": 20.0,
+    "yes_ask": 6,
+    "our_probability": 0.0928,
+    "implied_probability": 0.06,
+    "edge": 0.0328,
+    "confidence": "low",
+    "base_rate": 0.0835,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 1.085,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.953
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBABLK-26MAY02PHIBOS-BOSNQUETA88-3",
+    "game_date": "2026-05-02",
+    "player_name": "Neemias Queta",
+    "stat_type": "blk",
+    "line": 3.0,
+    "yes_ask": 13,
+    "our_probability": 0.1627,
+    "implied_probability": 0.13,
+    "edge": 0.0327,
+    "confidence": "low",
+    "base_rate": 0.1309,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 1.15,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.885
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBASTL-26MAY02PHIBOS-BOSJTATUM0-3",
+    "game_date": "2026-05-02",
+    "player_name": "Jayson Tatum",
+    "stat_type": "stl",
+    "line": 3.0,
+    "yes_ask": 14,
+    "our_probability": 0.1722,
+    "implied_probability": 0.14,
+    "edge": 0.0322,
+    "confidence": "low",
+    "base_rate": 0.2136,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 0.85,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.905
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBABLK-26MAY02PHIBOS-PHIJEMBIID21-3",
+    "game_date": "2026-05-02",
+    "player_name": "Joel Embiid",
+    "stat_type": "blk",
+    "line": 3.0,
+    "yes_ask": 14,
+    "our_probability": 0.1714,
+    "implied_probability": 0.14,
+    "edge": 0.0314,
+    "confidence": "low",
+    "base_rate": 0.129,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 1.15,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.906
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBASTL-26MAY02PHIBOS-PHIKOUBRE9-3",
+    "game_date": "2026-05-02",
+    "player_name": "Kelly Oubre Jr.",
+    "stat_type": "stl",
+    "line": 3.0,
+    "yes_ask": 15,
+    "our_probability": 0.1805,
+    "implied_probability": 0.15,
+    "edge": 0.0305,
+    "confidence": "low",
+    "base_rate": 0.17,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 1.137,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.885
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBAPTS-26MAY02PHIBOS-BOSJBROWN7-35",
+    "game_date": "2026-05-02",
+    "player_name": "Jaylen Brown",
+    "stat_type": "pts",
+    "line": 35.0,
+    "yes_ask": 14,
+    "our_probability": 0.1649,
+    "implied_probability": 0.14,
+    "edge": 0.0249,
+    "confidence": "high",
+    "base_rate": 0.1636,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 1.018,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 1.0
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBAAST-26MAY02PHIBOS-PHITMAXEY0-8",
+    "game_date": "2026-05-02",
+    "player_name": "Tyrese Maxey",
+    "stat_type": "ast",
+    "line": 8.0,
+    "yes_ask": 34,
+    "our_probability": 0.3396,
+    "implied_probability": 0.34,
+    "edge": -0.0004,
+    "confidence": "medium",
+    "base_rate": 0.3377,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 1.07,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.989
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBAPTS-26MAY02PHIBOS-BOSNVUCEVIC4-20",
+    "game_date": "2026-05-02",
+    "player_name": "Nikola Vucevic",
+    "stat_type": "pts",
+    "line": 20.0,
+    "yes_ask": 5,
+    "our_probability": 0.0442,
+    "implied_probability": 0.05,
+    "edge": -0.0058,
+    "confidence": "low",
+    "base_rate": 0.0603,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 0.872,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.959
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBAAST-26MAY02PHIBOS-PHIPGEORGE8-8",
+    "game_date": "2026-05-02",
+    "player_name": "Paul George",
+    "stat_type": "ast",
+    "line": 8.0,
+    "yes_ask": 4,
+    "our_probability": 0.03,
+    "implied_probability": 0.04,
+    "edge": -0.01,
+    "confidence": "medium",
+    "base_rate": 0.0,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 0.988,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.978
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBAREB-26MAY02PHIBOS-BOSJBROWN7-8",
+    "game_date": "2026-05-02",
+    "player_name": "Jaylen Brown",
+    "stat_type": "reb",
+    "line": 8.0,
+    "yes_ask": 29,
+    "our_probability": 0.2798,
+    "implied_probability": 0.29,
+    "edge": -0.0102,
+    "confidence": "medium",
+    "base_rate": 0.2097,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 1.07,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.979
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBAAST-26MAY02PHIBOS-BOSDWHITE9-8",
+    "game_date": "2026-05-02",
+    "player_name": "Derrick White",
+    "stat_type": "ast",
+    "line": 8.0,
+    "yes_ask": 6,
+    "our_probability": 0.0494,
+    "implied_probability": 0.06,
+    "edge": -0.0106,
+    "confidence": "medium",
+    "base_rate": 0.0673,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 1.021,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.972
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBAPTS-26MAY02PHIBOS-BOSDWHITE9-20",
+    "game_date": "2026-05-02",
+    "player_name": "Derrick White",
+    "stat_type": "pts",
+    "line": 20.0,
+    "yes_ask": 10,
+    "our_probability": 0.0886,
+    "implied_probability": 0.1,
+    "edge": -0.0114,
+    "confidence": "medium",
+    "base_rate": 0.0968,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 1.005,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.974
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBASTL-26MAY02PHIBOS-PHIPGEORGE8-3",
+    "game_date": "2026-05-02",
+    "player_name": "Paul George",
+    "stat_type": "stl",
+    "line": 3.0,
+    "yes_ask": 19,
+    "our_probability": 0.1721,
+    "implied_probability": 0.19,
+    "edge": -0.0179,
+    "confidence": "low",
+    "base_rate": 0.2102,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 0.85,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.919
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBAAST-26MAY02PHIBOS-BOSPPRITCHARD11-8",
+    "game_date": "2026-05-02",
+    "player_name": "Payton Pritchard",
+    "stat_type": "ast",
+    "line": 8.0,
+    "yes_ask": 9,
+    "our_probability": 0.0714,
+    "implied_probability": 0.09,
+    "edge": -0.0186,
+    "confidence": "medium",
+    "base_rate": 0.0767,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 1.058,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.97
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBAPTS-26MAY02PHIBOS-PHIKOUBRE9-25",
+    "game_date": "2026-05-02",
+    "player_name": "Kelly Oubre Jr.",
+    "stat_type": "pts",
+    "line": 25.0,
+    "yes_ask": 5,
+    "our_probability": 0.03,
+    "implied_probability": 0.05,
+    "edge": -0.02,
+    "confidence": "medium",
+    "base_rate": 0.0382,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 0.947,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.968
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBAAST-26MAY02PHIBOS-PHIKOUBRE9-8",
+    "game_date": "2026-05-02",
+    "player_name": "Kelly Oubre Jr.",
+    "stat_type": "ast",
+    "line": 8.0,
+    "yes_ask": 5,
+    "our_probability": 0.03,
+    "implied_probability": 0.05,
+    "edge": -0.02,
+    "confidence": "low",
+    "base_rate": 0.0,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 0.927,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.919
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBAPTS-26MAY02PHIBOS-PHIJEMBIID21-35",
+    "game_date": "2026-05-02",
+    "player_name": "Joel Embiid",
+    "stat_type": "pts",
+    "line": 35.0,
+    "yes_ask": 18,
+    "our_probability": 0.1588,
+    "implied_probability": 0.18,
+    "edge": -0.0212,
+    "confidence": "high",
+    "base_rate": 0.1625,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 1.006,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 1.0
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBAPTS-26MAY02PHIBOS-BOSNQUETA88-20",
+    "game_date": "2026-05-02",
+    "player_name": "Neemias Queta",
+    "stat_type": "pts",
+    "line": 20.0,
+    "yes_ask": 6,
+    "our_probability": 0.03,
+    "implied_probability": 0.06,
+    "edge": -0.03,
+    "confidence": "low",
+    "base_rate": 0.0273,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 0.981,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.953
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBAPTS-26MAY02PHIBOS-PHIPGEORGE8-25",
+    "game_date": "2026-05-02",
+    "player_name": "Paul George",
+    "stat_type": "pts",
+    "line": 25.0,
+    "yes_ask": 13,
+    "our_probability": 0.0988,
+    "implied_probability": 0.13,
+    "edge": -0.0312,
+    "confidence": "medium",
+    "base_rate": 0.097,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 1.028,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.99
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBASTL-26MAY02PHIBOS-PHIVEDGECOMBE77-3",
+    "game_date": "2026-05-02",
+    "player_name": "Vj Edgecombe",
+    "stat_type": "stl",
+    "line": 3.0,
+    "yes_ask": 12,
+    "our_probability": 0.0649,
+    "implied_probability": 0.12,
+    "edge": -0.0551,
+    "confidence": "low",
+    "base_rate": 0.0615,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 1.016,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.913
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBAPTS-26MAY02PHIBOS-BOSJTATUM0-35",
+    "game_date": "2026-05-02",
+    "player_name": "Jayson Tatum",
+    "stat_type": "pts",
+    "line": 35.0,
+    "yes_ask": 11,
+    "our_probability": 0.03,
+    "implied_probability": 0.11,
+    "edge": -0.08,
+    "confidence": "medium",
+    "base_rate": 0.0,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 1.048,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 1.0
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBASTL-26MAY02PHIBOS-BOSJBROWN7-3",
+    "game_date": "2026-05-02",
+    "player_name": "Jaylen Brown",
+    "stat_type": "stl",
+    "line": 3.0,
+    "yes_ask": 12,
+    "our_probability": 0.0379,
+    "implied_probability": 0.12,
+    "edge": -0.0821,
+    "confidence": "low",
+    "base_rate": 0.0175,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 0.851,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.875
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBASTL-26MAY02PHIBOS-PHITMAXEY0-3",
+    "game_date": "2026-05-02",
+    "player_name": "Tyrese Maxey",
+    "stat_type": "stl",
+    "line": 3.0,
+    "yes_ask": 16,
+    "our_probability": 0.0724,
+    "implied_probability": 0.16,
+    "edge": -0.0876,
+    "confidence": "low",
+    "base_rate": 0.0791,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 0.934,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.873
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBAPTS-26MAY02PHIBOS-PHITMAXEY0-35",
+    "game_date": "2026-05-02",
+    "player_name": "Tyrese Maxey",
+    "stat_type": "pts",
+    "line": 35.0,
+    "yes_ask": 13,
+    "our_probability": 0.03,
+    "implied_probability": 0.13,
+    "edge": -0.1,
+    "confidence": "high",
+    "base_rate": 0.0231,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 0.997,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 1.0
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBASTL-26MAY02PHIBOS-PHIJEMBIID21-3",
+    "game_date": "2026-05-02",
+    "player_name": "Joel Embiid",
+    "stat_type": "stl",
+    "line": 3.0,
+    "yes_ask": 14,
+    "our_probability": 0.0379,
+    "implied_probability": 0.14,
+    "edge": -0.1021,
+    "confidence": "low",
+    "base_rate": 0.0042,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 1.125,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.822
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBASTL-26MAY02PHIBOS-BOSDWHITE9-3",
+    "game_date": "2026-05-02",
+    "player_name": "Derrick White",
+    "stat_type": "stl",
+    "line": 3.0,
+    "yes_ask": 21,
+    "our_probability": 0.1066,
+    "implied_probability": 0.21,
+    "edge": -0.1034,
+    "confidence": "low",
+    "base_rate": 0.1268,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 0.864,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.901
     },
     "suggested_contracts": 0,
     "outcome": null,
