@@ -18574,5 +18574,77 @@
     "outcome": null,
     "actual_stat": null,
     "resolved_date": null
+  },
+  {
+    "ticker": "KXNBABLK-26MAY03TORCLE-TORSBARNES4-3",
+    "game_date": "2026-05-03",
+    "player_name": "Scottie Barnes",
+    "stat_type": "blk",
+    "line": 3.0,
+    "yes_ask": 18,
+    "our_probability": 0.2826,
+    "implied_probability": 0.18,
+    "edge": 0.1026,
+    "confidence": "low",
+    "base_rate": 0.3469,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 0.85,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.894
+    },
+    "suggested_contracts": 8,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBABLK-26MAY03TORCLE-CLEJALLEN31-3",
+    "game_date": "2026-05-03",
+    "player_name": "Jarrett Allen",
+    "stat_type": "blk",
+    "line": 3.0,
+    "yes_ask": 14,
+    "our_probability": 0.1914,
+    "implied_probability": 0.14,
+    "edge": 0.0514,
+    "confidence": "low",
+    "base_rate": 0.2193,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 0.928,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.847
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBABLK-26MAY03TORCLE-CLEEMOBLEY4-3",
+    "game_date": "2026-05-03",
+    "player_name": "Evan Mobley",
+    "stat_type": "blk",
+    "line": 3.0,
+    "yes_ask": 26,
+    "our_probability": 0.2389,
+    "implied_probability": 0.26,
+    "edge": -0.0211,
+    "confidence": "low",
+    "base_rate": 0.2578,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 0.966,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.883
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
   }
 ]
