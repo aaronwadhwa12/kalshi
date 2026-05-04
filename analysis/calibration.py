@@ -12,10 +12,35 @@ we have a +10% overestimate bias. We record this per stat type and subtract
 it from future predictions for that stat.
 """
 import json
+import re
 from collections import defaultdict
 from datetime import date, timedelta
 from pathlib import Path
 from typing import Optional
+
+# Match the date embedded in Kalshi event tickers, e.g. "26APR21" in
+# "KXNBAREB-26APR21PORSAS-..." → year=2026, month=April, day=21
+_TICKER_DATE_RE = re.compile(
+    r"-(\d{2})(JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)(\d{2})[A-Z]{3}"
+)
+_TICKER_MONTHS = {
+    "JAN": 1, "FEB": 2, "MAR": 3, "APR": 4, "MAY": 5, "JUN": 6,
+    "JUL": 7, "AUG": 8, "SEP": 9, "OCT": 10, "NOV": 11, "DEC": 12,
+}
+
+
+def _date_from_ticker(ticker: str) -> Optional[date]:
+    """Extract the actual game date encoded in a Kalshi event ticker."""
+    m = _TICKER_DATE_RE.search(ticker)
+    if not m:
+        return None
+    try:
+        yr  = int("20" + m.group(1))
+        mon = _TICKER_MONTHS[m.group(2)]
+        day = int(m.group(3))
+        return date(yr, mon, day)
+    except (ValueError, KeyError):
+        return None
 
 _ROOT       = Path(__file__).parent.parent
 _PICKS_LOG  = _ROOT / "results" / "picks_log.json"
@@ -115,60 +140,18 @@ def log_picks(all_analyses: list[dict], game_date: date):
 # Resolution — fetch actual outcomes from ESPN boxscores
 # ---------------------------------------------------------------------------
 
-def resolve_picks(for_date: date = None):
+def _build_actuals_for_dates(espn_mod, dates: list[date]) -> dict[str, dict]:
     """
-    Mark win/loss on all unresolved picks whose game_date is in the past.
-
-    Handles picks for any future game date (not just yesterday) — e.g. if
-    this morning's picks were for a game on May 6, they'll be resolved the
-    morning of May 7 when that date becomes yesterday.
-
-    Pass for_date to limit resolution to a specific date (used in tests).
+    Fetch ESPN boxscores for each date and build a name → stats map.
+    Deduplicates: same player appearing in multiple games keeps the last entry.
     """
-    from data import espn as espn_mod
-
-    picks    = _load_picks()
-    today_str = date.today().isoformat()
-
-    # Collect all dates that have unresolved picks in the past
-    if for_date:
-        pending_dates = [for_date.isoformat()]
-    else:
-        pending_dates = sorted({
-            p["game_date"] for p in picks
-            if p["outcome"] is None and p.get("game_date", "") < today_str
-        })
-
-    if not pending_dates:
-        print("[calibration] No past unresolved picks to resolve")
-        return
-
-    total_resolved = 0
-    total_no_data  = 0
-
-    for date_str in pending_dates:
-        unresolved_for_date = [
-            p for p in picks
-            if p["game_date"] == date_str and p["outcome"] is None
-        ]
-        if not unresolved_for_date:
-            continue
-
-        print(f"[calibration] Resolving {len(unresolved_for_date)} picks for {date_str}...")
-
+    actuals: dict[str, dict] = {}
+    for d in dates:
         try:
-            game_date_obj = date.fromisoformat(date_str)
-            completed     = espn_mod.get_completed_games(game_date_obj)
+            completed = espn_mod.get_completed_games(d)
         except Exception as e:
-            print(f"[calibration] ESPN fetch failed for {date_str}: {e}")
+            print(f"[calibration] ESPN fetch failed for {d}: {e}")
             continue
-
-        if not completed:
-            print(f"[calibration] No completed games found for {date_str} (game may not have happened yet)")
-            continue
-
-        # Build name → stats lookup from all boxscores on this date
-        actuals: dict[str, dict] = {}
         for game in completed:
             try:
                 players = espn_mod.get_game_boxscore(game["event_id"])
@@ -192,6 +175,97 @@ def resolve_picks(for_date: date = None):
                     "pa":  pts + ast,
                     "ra":  reb + ast,
                 }
+    return actuals
+
+
+def resolve_picks(for_date: date = None):
+    """
+    Mark win/loss on all unresolved picks whose game_date is in the past.
+
+    Before the UTC→ET date fix was deployed, some picks were stored with
+    game_date one day ahead of the actual game (e.g. a 10 PM ET game on
+    Apr 21 got stored as Apr 22 because its close_time crossed midnight UTC).
+    To handle those, we also check the ticker's embedded date and look up
+    boxscores for both the stored date and the day before.
+
+    Picks currently marked "no_data" are re-examined if their ticker reveals
+    a different game date — they may simply have been looked up on the wrong
+    day before.
+
+    Pass for_date to limit resolution to a specific date (used in tests).
+    """
+    from data import espn as espn_mod
+
+    picks     = _load_picks()
+    today_str = date.today().isoformat()
+    today_obj = date.today()
+
+    # Re-open no_data picks where the ticker says a different game date,
+    # so they get another shot at resolution on the correct date.
+    reopened = 0
+    for pick in picks:
+        if pick.get("outcome") != "no_data":
+            continue
+        ticker      = pick.get("ticker", "")
+        ticker_date = _date_from_ticker(ticker)
+        stored_date = pick.get("game_date", "")
+        if ticker_date and ticker_date.isoformat() != stored_date:
+            # Stored date differs from ticker → was probably a UTC-overflow
+            # mislabelling.  Reopen so we re-resolve on the correct date.
+            pick["outcome"]       = None
+            pick["game_date"]     = ticker_date.isoformat()
+            pick["actual_stat"]   = None
+            pick["resolved_date"] = None
+            reopened += 1
+
+    if reopened:
+        print(f"[calibration] Reopened {reopened} no_data picks with corrected game dates")
+
+    # Collect all dates that have unresolved picks in the past
+    if for_date:
+        pending_dates = [for_date.isoformat()]
+    else:
+        pending_dates = sorted({
+            p["game_date"] for p in picks
+            if p["outcome"] is None and p.get("game_date", "") < today_str
+        })
+
+    if not pending_dates:
+        print("[calibration] No past unresolved picks to resolve")
+        _save_picks(picks)
+        return
+
+    total_resolved = 0
+    total_no_data  = 0
+
+    for date_str in pending_dates:
+        unresolved_for_date = [
+            p for p in picks
+            if p["game_date"] == date_str and p["outcome"] is None
+        ]
+        if not unresolved_for_date:
+            continue
+
+        print(f"[calibration] Resolving {len(unresolved_for_date)} picks for {date_str}...")
+
+        game_date_obj = date.fromisoformat(date_str)
+        if game_date_obj >= today_obj:
+            print(f"[calibration]   {date_str} is today or future — skipping")
+            continue
+
+        # Look up boxscores on the stored date AND the day before, because
+        # some games stored as "Apr 22" were really "Apr 21" (UTC midnight bug).
+        dates_to_check = [game_date_obj, game_date_obj - timedelta(days=1)]
+        actuals = _build_actuals_for_dates(espn_mod, dates_to_check)
+
+        if not actuals:
+            print(f"[calibration]   No boxscore data found for {date_str} (or day before)")
+            # Mark as no_data so we don't keep retrying indefinitely
+            for pick in picks:
+                if pick["game_date"] == date_str and pick["outcome"] is None:
+                    pick["outcome"] = "no_data"
+                    total_no_data  += 1
+            continue
 
         resolved = 0
         no_data  = 0
@@ -478,5 +552,128 @@ def format_daily_recap(for_date: date) -> Optional[str]:
             f"({total_wins/len(all_resolved):.1%}) across "
             f"{len({p['game_date'] for p in all_resolved})} day(s)"
         )
+
+    return "\n".join(lines)
+
+
+def format_pnl_report(from_date: date = None, to_date: date = None,
+                      confidence_levels: tuple = ("high", "medium"),
+                      sent_only: bool = True) -> str:
+    """
+    Build a P&L summary for all logged picks in a date range.
+
+    from_date / to_date: inclusive, defaults to all dates in the log.
+    confidence_levels: filter by confidence (default high+medium).
+    sent_only: if True, only include picks where suggested_contracts > 0
+               (i.e. actually alerted to the user).
+    """
+    from analysis.sizing import pick_pnl
+
+    picks = _load_picks()
+
+    # Apply filters
+    subset = []
+    for p in picks:
+        if confidence_levels and p.get("confidence") not in confidence_levels:
+            continue
+        if sent_only and not p.get("suggested_contracts", 0):
+            continue
+        gd = p.get("game_date", "")
+        if from_date and gd < from_date.isoformat():
+            continue
+        if to_date and gd > to_date.isoformat():
+            continue
+        subset.append(p)
+
+    if not subset:
+        return "No picks match the specified filters."
+
+    resolved = [p for p in subset if p["outcome"] in ("win", "loss")]
+    no_data  = [p for p in subset if p["outcome"] == "no_data"]
+    pending  = [p for p in subset if p["outcome"] is None]
+
+    wins       = sum(1 for p in resolved if p["outcome"] == "win")
+    total_pnl  = 0.0
+    total_risk = 0.0
+
+    lines = ["=" * 50]
+    header = "NBA Picks P&L Report"
+    if from_date or to_date:
+        fd = from_date.isoformat() if from_date else "?"
+        td = to_date.isoformat() if to_date else "?"
+        header += f"  ({fd} → {td})"
+    lines.append(header)
+    lines.append(f"Filter: confidence={'/'.join(confidence_levels)}, sent_only={sent_only}")
+    lines.append("=" * 50)
+    lines.append("")
+
+    if resolved:
+        lines.append("── Resolved picks ──────────────────────────────")
+        for p in sorted(resolved, key=lambda x: (x["game_date"], x["outcome"])):
+            icon      = "WIN " if p["outcome"] == "win" else "LOSS"
+            contracts = p.get("suggested_contracts", 0)
+            ask       = p.get("yes_ask", 50)
+            pnl       = pick_pnl(contracts, ask, p["outcome"])
+            risk      = contracts * ask / 100
+            total_pnl  += pnl
+            total_risk += risk
+            actual_s = (f"{p['actual_stat']:.1f}" if p.get("actual_stat") is not None else "?")
+            lines.append(
+                f"[{icon}] {p['game_date']}  {p['player_name']}  "
+                f"{p.get('stat_type','?').upper()} {p.get('line','?')}+"
+                f"  actual={actual_s}  {contracts}x@{ask}c  {pnl:+.2f}"
+            )
+        lines.append("")
+
+    if no_data:
+        lines.append("── No boxscore data (unresolvable) ─────────────")
+        for p in sorted(no_data, key=lambda x: x["game_date"]):
+            contracts = p.get("suggested_contracts", 0)
+            ask       = p.get("yes_ask", 50)
+            risk      = contracts * ask / 100
+            total_risk += risk
+            lines.append(
+                f"[????] {p['game_date']}  {p['player_name']}  "
+                f"{p.get('stat_type','?').upper()} {p.get('line','?')}+"
+                f"  {contracts}x@{ask}c  risk=${risk:.2f}"
+            )
+        lines.append("")
+
+    if pending:
+        lines.append("── Pending resolution ──────────────────────────")
+        for p in sorted(pending, key=lambda x: x["game_date"]):
+            contracts = p.get("suggested_contracts", 0)
+            ask       = p.get("yes_ask", 50)
+            risk      = contracts * ask / 100
+            total_risk += risk
+            lines.append(
+                f"[PEND] {p['game_date']}  {p['player_name']}  "
+                f"{p.get('stat_type','?').upper()} {p.get('line','?')}+"
+                f"  {contracts}x@{ask}c  risk=${risk:.2f}"
+            )
+        lines.append("")
+
+    # Summary
+    lines.append("─" * 50)
+    lines.append(f"Total picks sent:      {len(subset)}")
+    if resolved:
+        lines.append(
+            f"  Resolved:            {len(resolved)}  "
+            f"({wins} W / {len(resolved)-wins} L  "
+            f"{wins/len(resolved):.1%} hit rate)"
+        )
+    else:
+        lines.append(f"  Resolved:            0")
+    lines.append(f"  No data:             {len(no_data)}")
+    lines.append(f"  Pending:             {len(pending)}")
+    lines.append(f"Total capital at risk: ${total_risk:.2f}")
+    if resolved:
+        lines.append(f"Resolved P&L:          ${total_pnl:+.2f}")
+    unresolved_risk = sum(
+        p.get("suggested_contracts", 0) * p.get("yes_ask", 50) / 100
+        for p in no_data + pending
+    )
+    if unresolved_risk:
+        lines.append(f"Unresolved risk:       ${unresolved_risk:.2f}  (outcome unknown)")
 
     return "\n".join(lines)

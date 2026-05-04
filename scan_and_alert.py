@@ -213,7 +213,7 @@ def main():
     from datetime import timedelta
     from analysis.calibration import (
         resolve_picks, log_picks, update_learned_params,
-        format_calibration_report, format_daily_recap,
+        format_calibration_report, format_daily_recap, format_pnl_report,
     )
 
     now_et = datetime.now(ET)
@@ -252,11 +252,19 @@ def main():
     # ── 0b. Calibration report (short-circuit) ────────────────────────────
     if CALIBRATION_REPORT:
         try:
+            # Resolve any outstanding picks first so the report is current
+            resolve_picks()
             report = format_calibration_report()
             send_notification(report, title="NBA Model Calibration Report")
             print(report)
         except Exception as e:
-            print(f"[calibration] Report failed: {e}")
+            print(f"[calibration] Calibration report failed: {e}")
+        try:
+            pnl = format_pnl_report()
+            send_notification(pnl, title="NBA Picks P&L Report")
+            print(pnl)
+        except Exception as e:
+            print(f"[calibration] P&L report failed: {e}")
         return
 
     # ── 1. Get today's games ──────────────────────────────────────────────
