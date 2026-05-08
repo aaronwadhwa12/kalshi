@@ -28174,5 +28174,29 @@
     "outcome": null,
     "actual_stat": null,
     "resolved_date": null
+  },
+  {
+    "ticker": "KXNBASTL-26MAY09OKCLAL-OKCLDORT5-3",
+    "game_date": "2026-05-08",
+    "player_name": "Luguentz Dort",
+    "stat_type": "stl",
+    "line": 3.0,
+    "yes_ask": 97,
+    "our_probability": 0.0686,
+    "implied_probability": 0.97,
+    "edge": -0.9014,
+    "confidence": "low",
+    "base_rate": 0.0817,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 0.85,
+      "rest": 0.97,
+      "injury": 1.0,
+      "consistency": 0.831
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
   }
 ]
