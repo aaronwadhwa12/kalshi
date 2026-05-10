@@ -32734,5 +32734,29 @@
     "outcome": null,
     "actual_stat": null,
     "resolved_date": null
+  },
+  {
+    "ticker": "KXNBAAST-26MAY11DETCLE-CLEDSCHRODER8-8",
+    "game_date": "2026-05-10",
+    "player_name": "Dennis Schroder",
+    "stat_type": "ast",
+    "line": 8.0,
+    "yes_ask": 9,
+    "our_probability": 0.0415,
+    "implied_probability": 0.09,
+    "edge": -0.0485,
+    "confidence": "low",
+    "base_rate": 0.0405,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 1.15,
+      "rest": 0.97,
+      "injury": 1.0,
+      "consistency": 0.953
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
   }
 ]
