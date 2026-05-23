@@ -42694,5 +42694,77 @@
     "outcome": null,
     "actual_stat": null,
     "resolved_date": null
+  },
+  {
+    "ticker": "KXNBAPTS-26MAY23NYKCLE-NYKJALVARADO5-20",
+    "game_date": "2026-05-23",
+    "player_name": "Jose Alvarado",
+    "stat_type": "pts",
+    "line": 20.0,
+    "yes_ask": 94,
+    "our_probability": 0.03,
+    "implied_probability": 0.94,
+    "edge": -0.91,
+    "confidence": "low",
+    "base_rate": 0.0112,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 1.004,
+      "rest": 1.03,
+      "injury": 1.0,
+      "consistency": 0.935
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBABLK-26MAY23NYKCLE-NYKMBRIDGES25-3",
+    "game_date": "2026-05-23",
+    "player_name": "Mikal Bridges",
+    "stat_type": "blk",
+    "line": 3.0,
+    "yes_ask": 94,
+    "our_probability": 0.03,
+    "implied_probability": 0.94,
+    "edge": -0.91,
+    "confidence": "low",
+    "base_rate": 0.0074,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 1.15,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.77
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBABLK-26MAY23NYKCLE-NYKJHART3-3",
+    "game_date": "2026-05-23",
+    "player_name": "Josh Hart",
+    "stat_type": "blk",
+    "line": 3.0,
+    "yes_ask": 96,
+    "our_probability": 0.03,
+    "implied_probability": 0.96,
+    "edge": -0.93,
+    "confidence": "low",
+    "base_rate": 0.0,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 1.15,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.501
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
   }
 ]
