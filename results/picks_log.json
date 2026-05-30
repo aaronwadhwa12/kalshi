@@ -42787,9 +42787,9 @@
       "consistency": 0.985
     },
     "suggested_contracts": 13,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 7.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBAPTS-26MAY24OKCSAS-SASDHARPER2-20",
@@ -42811,9 +42811,9 @@
       "consistency": 0.983
     },
     "suggested_contracts": 31,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 7.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBAREB-26MAY25NYKCLE-NYKOANUNOBY8-8",
@@ -42835,9 +42835,9 @@
       "consistency": 0.966
     },
     "suggested_contracts": 10,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 7.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBAREB-26MAY25NYKCLE-NYKMROBINSON23-8",
@@ -42859,7 +42859,7 @@
       "consistency": 0.969
     },
     "suggested_contracts": 9,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -42883,9 +42883,9 @@
       "consistency": 0.989
     },
     "suggested_contracts": 11,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 21.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBASTL-26MAY24OKCSAS-SASDVASSELL24-3",
@@ -42907,9 +42907,9 @@
       "consistency": 0.86
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 1.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBAPTS-26MAY24OKCSAS-SASVWEMBANYAMA1-35",
@@ -42931,9 +42931,9 @@
       "consistency": 0.986
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 33.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBASTL-26MAY25NYKCLE-NYKJHART3-3",
@@ -42955,9 +42955,9 @@
       "consistency": 0.869
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "win",
+    "actual_stat": 4.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBAAST-26MAY24OKCSAS-SASSCASTLE5-8",
@@ -42979,9 +42979,9 @@
       "consistency": 0.995
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 6.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBASTL-26MAY25NYKCLE-NYKMBRIDGES25-3",
@@ -43003,9 +43003,9 @@
       "consistency": 0.849
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "win",
+    "actual_stat": 3.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBAPTS-26MAY25NYKCLE-NYKJHART3-25",
@@ -43027,9 +43027,9 @@
       "consistency": 0.958
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 12.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBAPTS-26MAY24OKCSAS-SASSCASTLE5-25",
@@ -43051,9 +43051,9 @@
       "consistency": 0.995
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 13.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBAREB-26MAY25NYKCLE-CLEJHARDEN1-8",
@@ -43075,9 +43075,9 @@
       "consistency": 0.971
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 5.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBASTL-26MAY25NYKCLE-CLEDMITCHELL45-3",
@@ -43099,9 +43099,9 @@
       "consistency": 0.879
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "win",
+    "actual_stat": 3.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBASTL-26MAY25NYKCLE-CLEJHARDEN1-3",
@@ -43123,9 +43123,9 @@
       "consistency": 0.879
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 1.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBAPTS-26MAY25NYKCLE-NYKMROBINSON23-20",
@@ -43147,7 +43147,7 @@
       "consistency": 0.948
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -43171,9 +43171,9 @@
       "consistency": 0.952
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 2.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBABLK-26MAY25NYKCLE-CLEEMOBLEY4-3",
@@ -43195,9 +43195,9 @@
       "consistency": 0.893
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 1.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBAREB-26MAY25NYKCLE-NYKJHART3-8",
@@ -43219,9 +43219,9 @@
       "consistency": 0.991
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "win",
+    "actual_stat": 9.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBAPTS-26MAY25NYKCLE-CLEJALLEN31-25",
@@ -43243,9 +43243,9 @@
       "consistency": 0.977
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 17.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBAREB-26MAY25NYKCLE-NYKJBRUNSON11-8",
@@ -43267,9 +43267,9 @@
       "consistency": 0.957
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 3.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBAAST-26MAY25NYKCLE-CLEDMITCHELL45-8",
@@ -43291,9 +43291,9 @@
       "consistency": 0.969
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 4.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBAPTS-26MAY24OKCSAS-OKCIHARTENSTEIN55-20",
@@ -43315,9 +43315,9 @@
       "consistency": 0.961
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 12.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBAREB-26MAY25NYKCLE-NYKMBRIDGES25-8",
@@ -43339,9 +43339,9 @@
       "consistency": 0.947
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 6.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBAPTS-26MAY25NYKCLE-CLEJHARDEN1-30",
@@ -43363,9 +43363,9 @@
       "consistency": 1.0
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 19.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBASTL-26MAY25NYKCLE-NYKOANUNOBY8-3",
@@ -43387,9 +43387,9 @@
       "consistency": 0.879
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 0.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBAPTS-26MAY24OKCSAS-SASDVASSELL24-25",
@@ -43411,9 +43411,9 @@
       "consistency": 0.993
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 13.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBASTL-26MAY24OKCSAS-SASVWEMBANYAMA1-3",
@@ -43435,9 +43435,9 @@
       "consistency": 0.857
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 2.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBAPTS-26MAY25NYKCLE-NYKKTOWNS32-30",
@@ -43459,9 +43459,9 @@
       "consistency": 1.0
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 13.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBAAST-26MAY24OKCSAS-SASVWEMBANYAMA1-8",
@@ -43483,9 +43483,9 @@
       "consistency": 0.948
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 5.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBAPTS-26MAY24OKCSAS-SASDFOX4-25",
@@ -43507,9 +43507,9 @@
       "consistency": 1.0
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 12.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBAPTS-26MAY25NYKCLE-NYKJBRUNSON11-35",
@@ -43531,9 +43531,9 @@
       "consistency": 1.0
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 30.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBABLK-26MAY25NYKCLE-CLEJALLEN31-3",
@@ -43555,9 +43555,9 @@
       "consistency": 0.897
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 0.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBAPTS-26MAY24OKCSAS-OKCCWALLACE22-20",
@@ -43579,9 +43579,9 @@
       "consistency": 0.932
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 5.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBAPTS-26MAY24OKCSAS-OKCCHOLMGREN7-25",
@@ -43603,9 +43603,9 @@
       "consistency": 1.0
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 10.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBAREB-26MAY24OKCSAS-SASDFOX4-8",
@@ -43627,9 +43627,9 @@
       "consistency": 0.957
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "win",
+    "actual_stat": 10.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBAPTS-26MAY25NYKCLE-CLEEMOBLEY4-25",
@@ -43651,9 +43651,9 @@
       "consistency": 0.999
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 24.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBAAST-26MAY24OKCSAS-SASDFOX4-8",
@@ -43675,9 +43675,9 @@
       "consistency": 0.997
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 5.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBAREB-26MAY24OKCSAS-SASVWEMBANYAMA1-18",
@@ -43699,9 +43699,9 @@
       "consistency": 0.984
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 8.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBAAST-26MAY25NYKCLE-NYKJBRUNSON11-8",
@@ -43723,9 +43723,9 @@
       "consistency": 0.979
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 6.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBAPTS-26MAY25NYKCLE-NYKMBRIDGES25-25",
@@ -43747,9 +43747,9 @@
       "consistency": 0.975
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 22.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBAREB-26MAY24OKCSAS-OKCSGILGEOUSALEXANDER2-8",
@@ -43771,9 +43771,9 @@
       "consistency": 0.972
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 4.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBAREB-26MAY24OKCSAS-SASSCASTLE5-8",
@@ -43795,9 +43795,9 @@
       "consistency": 0.961
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 3.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBAAST-26MAY25NYKCLE-NYKJHART3-8",
@@ -43819,9 +43819,9 @@
       "consistency": 0.975
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 5.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBABLK-26MAY24OKCSAS-SASVWEMBANYAMA1-5",
@@ -43843,9 +43843,9 @@
       "consistency": 0.946
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 3.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBAREB-26MAY25NYKCLE-CLEDMITCHELL45-8",
@@ -43867,9 +43867,9 @@
       "consistency": 0.978
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 1.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBAPTS-26MAY25NYKCLE-CLEDMITCHELL45-35",
@@ -43891,9 +43891,9 @@
       "consistency": 1.0
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 23.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBASTL-26MAY24OKCSAS-SASSCASTLE5-3",
@@ -43915,9 +43915,9 @@
       "consistency": 0.864
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 1.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBAPTS-26MAY24OKCSAS-OKCSGILGEOUSALEXANDER2-40",
@@ -43939,9 +43939,9 @@
       "consistency": 1.0
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 19.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBAREB-26MAY25NYKCLE-NYKKTOWNS32-16",
@@ -43963,9 +43963,9 @@
       "consistency": 1.0
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 8.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBAREB-26MAY25NYKCLE-CLEJALLEN31-8",
@@ -43987,9 +43987,9 @@
       "consistency": 0.979
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 7.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBAAST-26MAY25NYKCLE-CLEJHARDEN1-8",
@@ -44011,9 +44011,9 @@
       "consistency": 0.986
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 5.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBAREB-26MAY25NYKCLE-CLEEMOBLEY4-9",
@@ -44035,9 +44035,9 @@
       "consistency": 0.984
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 6.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBASTL-26MAY24OKCSAS-OKCSGILGEOUSALEXANDER2-3",
@@ -44059,9 +44059,9 @@
       "consistency": 0.901
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 2.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBAAST-26MAY24OKCSAS-OKCLDORT5-8",
@@ -44083,9 +44083,9 @@
       "consistency": 0.903
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 0.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBABLK-26MAY24OKCSAS-OKCCHOLMGREN7-3",
@@ -44107,9 +44107,9 @@
       "consistency": 0.89
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 1.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBAREB-26MAY24OKCSAS-OKCCHOLMGREN7-8",
@@ -44131,9 +44131,9 @@
       "consistency": 0.987
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "win",
+    "actual_stat": 9.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBAAST-26MAY24OKCSAS-OKCSGILGEOUSALEXANDER2-8",
@@ -44155,9 +44155,9 @@
       "consistency": 0.984
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 7.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBASTL-26MAY24OKCSAS-OKCLDORT5-3",
@@ -44179,9 +44179,9 @@
       "consistency": 0.819
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 2.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBAAST-26MAY25NYKCLE-CLEDSCHRODER8-10",
@@ -44203,7 +44203,7 @@
       "consistency": 0.949
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -44227,9 +44227,9 @@
       "consistency": 0.838
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 0.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBASTL-26MAY25NYKCLE-NYKKTOWNS32-3",
@@ -44251,9 +44251,9 @@
       "consistency": 0.86
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "win",
+    "actual_stat": 3.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBASTL-26MAY25NYKCLE-CLEEMOBLEY4-3",
@@ -44275,9 +44275,9 @@
       "consistency": 0.804
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 0.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBASTL-26MAY25NYKCLE-NYKJBRUNSON11-3",
@@ -44299,9 +44299,9 @@
       "consistency": 0.87
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 1.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBASTL-26MAY25NYKCLE-CLEDSCHRODER8-2",
@@ -44323,7 +44323,7 @@
       "consistency": 0.81
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -44347,9 +44347,9 @@
       "consistency": 0.771
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 2.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBABLK-26MAY25NYKCLE-NYKKTOWNS32-3",
@@ -44371,9 +44371,9 @@
       "consistency": 0.824
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 1.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBABLK-26MAY25NYKCLE-NYKJHART3-3",
@@ -44395,9 +44395,9 @@
       "consistency": 0.501
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 0.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBAPTS-26MAY25NYKCLE-CLEDSCHRODER8-25",
@@ -44419,7 +44419,7 @@
       "consistency": 0.914
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -44443,7 +44443,7 @@
       "consistency": 0.81
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -44467,9 +44467,9 @@
       "consistency": 0.987
     },
     "suggested_contracts": 10,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "win",
+    "actual_stat": 11.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBAREB-26MAY26SASOKC-OKCIHARTENSTEIN55-8",
@@ -44491,9 +44491,9 @@
       "consistency": 0.985
     },
     "suggested_contracts": 6,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "win",
+    "actual_stat": 15.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBAPTS-26MAY26SASOKC-SASSCASTLE5-25",
@@ -44515,9 +44515,9 @@
       "consistency": 1.0
     },
     "suggested_contracts": 8,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 24.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBASTL-26MAY26SASOKC-SASDVASSELL24-3",
@@ -44539,9 +44539,9 @@
       "consistency": 0.868
     },
     "suggested_contracts": 4,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "win",
+    "actual_stat": 3.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBAAST-26MAY26SASOKC-SASSCASTLE5-8",
@@ -44563,9 +44563,9 @@
       "consistency": 0.994
     },
     "suggested_contracts": 2,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 6.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBAPTS-26MAY26SASOKC-SASVWEMBANYAMA1-35",
@@ -44587,9 +44587,9 @@
       "consistency": 0.986
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 20.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBAPTS-26MAY26SASOKC-SASDHARPER2-25",
@@ -44611,9 +44611,9 @@
       "consistency": 0.98
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 5.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBAREB-26MAY26SASOKC-SASDFOX4-8",
@@ -44635,9 +44635,9 @@
       "consistency": 0.956
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 4.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBAAST-26MAY26SASOKC-SASDFOX4-8",
@@ -44659,9 +44659,9 @@
       "consistency": 0.997
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "win",
+    "actual_stat": 8.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBAPTS-26MAY26SASOKC-SASDVASSELL24-25",
@@ -44683,9 +44683,9 @@
       "consistency": 0.993
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 6.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBAPTS-26MAY26SASOKC-OKCIHARTENSTEIN55-20",
@@ -44707,9 +44707,9 @@
       "consistency": 0.963
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 12.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBAPTS-26MAY26SASOKC-SASDFOX4-25",
@@ -44731,9 +44731,9 @@
       "consistency": 1.0
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 9.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBAPTS-26MAY26SASOKC-OKCCWALLACE22-20",
@@ -44755,9 +44755,9 @@
       "consistency": 0.928
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 7.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBAAST-26MAY26SASOKC-SASVWEMBANYAMA1-8",
@@ -44779,9 +44779,9 @@
       "consistency": 0.948
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 1.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBAAST-26MAY26SASOKC-OKCLDORT5-8",
@@ -44803,9 +44803,9 @@
       "consistency": 0.897
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 0.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBAPTS-26MAY26SASOKC-OKCCHOLMGREN7-25",
@@ -44827,9 +44827,9 @@
       "consistency": 1.0
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 16.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBAAST-26MAY26SASOKC-OKCSGILGEOUSALEXANDER2-8",
@@ -44851,9 +44851,9 @@
       "consistency": 0.986
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "win",
+    "actual_stat": 9.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBAREB-26MAY26SASOKC-SASVWEMBANYAMA1-18",
@@ -44875,9 +44875,9 @@
       "consistency": 0.984
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 6.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBAREB-26MAY26SASOKC-SASSCASTLE5-8",
@@ -44899,9 +44899,9 @@
       "consistency": 0.964
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 5.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBABLK-26MAY26SASOKC-OKCCHOLMGREN7-3",
@@ -44923,9 +44923,9 @@
       "consistency": 0.895
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 1.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBASTL-26MAY26SASOKC-OKCLDORT5-3",
@@ -44947,9 +44947,9 @@
       "consistency": 0.819
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 0.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBAREB-26MAY26SASOKC-OKCSGILGEOUSALEXANDER2-8",
@@ -44971,9 +44971,9 @@
       "consistency": 0.975
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 2.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBASTL-26MAY26SASOKC-SASVWEMBANYAMA1-3",
@@ -44995,9 +44995,9 @@
       "consistency": 0.86
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 2.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBAPTS-26MAY26SASOKC-OKCSGILGEOUSALEXANDER2-40",
@@ -45019,9 +45019,9 @@
       "consistency": 1.0
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 32.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBAPTS-26MAY26SASOKC-OKCLDORT5-20",
@@ -45043,9 +45043,9 @@
       "consistency": 0.954
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 7.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBASTL-26MAY26SASOKC-OKCSGILGEOUSALEXANDER2-3",
@@ -45067,9 +45067,9 @@
       "consistency": 0.91
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 2.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBASTL-26MAY26SASOKC-SASSCASTLE5-3",
@@ -45091,9 +45091,9 @@
       "consistency": 0.873
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "win",
+    "actual_stat": 3.0,
+    "resolved_date": "2026-05-30"
   },
   {
     "ticker": "KXNBABLK-26MAY26SASOKC-SASVWEMBANYAMA1-5",
@@ -45113,6 +45113,750 @@
       "rest": 1.0,
       "injury": 1.0,
       "consistency": 0.948
+    },
+    "suggested_contracts": 0,
+    "outcome": "loss",
+    "actual_stat": 3.0,
+    "resolved_date": "2026-05-30"
+  },
+  {
+    "ticker": "KXNBAPTS-26MAY30SASOKC-OKCJWILLIAMS8-20",
+    "game_date": "2026-05-30",
+    "player_name": "Jalen Williams",
+    "stat_type": "pts",
+    "line": 20.0,
+    "yes_ask": 13,
+    "our_probability": 0.3323,
+    "implied_probability": 0.13,
+    "edge": 0.2023,
+    "confidence": "medium",
+    "base_rate": 0.353,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 0.981,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.999
+    },
+    "suggested_contracts": 33,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBAREB-26MAY30SASOKC-OKCCHOLMGREN7-9",
+    "game_date": "2026-05-30",
+    "player_name": "Chet Holmgren",
+    "stat_type": "reb",
+    "line": 9.0,
+    "yes_ask": 47,
+    "our_probability": 0.5861,
+    "implied_probability": 0.47,
+    "edge": 0.1161,
+    "confidence": "medium",
+    "base_rate": 0.6381,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 0.93,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.99
+    },
+    "suggested_contracts": 8,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBAPTS-26MAY30SASOKC-SASDHARPER2-20",
+    "game_date": "2026-05-30",
+    "player_name": "Dylan Harper",
+    "stat_type": "pts",
+    "line": 20.0,
+    "yes_ask": 7,
+    "our_probability": 0.1658,
+    "implied_probability": 0.07,
+    "edge": 0.0958,
+    "confidence": "medium",
+    "base_rate": 0.1439,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 1.105,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.98
+    },
+    "suggested_contracts": 27,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBASTL-26MAY30SASOKC-SASDVASSELL24-3",
+    "game_date": "2026-05-30",
+    "player_name": "Devin Vassell",
+    "stat_type": "stl",
+    "line": 3.0,
+    "yes_ask": 15,
+    "our_probability": 0.2111,
+    "implied_probability": 0.15,
+    "edge": 0.0611,
+    "confidence": "low",
+    "base_rate": 0.2081,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 1.053,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.883
+    },
+    "suggested_contracts": 5,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBAPTS-26MAY30SASOKC-SASSCASTLE5-30",
+    "game_date": "2026-05-30",
+    "player_name": "Stephon Castle",
+    "stat_type": "pts",
+    "line": 30.0,
+    "yes_ask": 6,
+    "our_probability": 0.0946,
+    "implied_probability": 0.06,
+    "edge": 0.0346,
+    "confidence": "high",
+    "base_rate": 0.0835,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 1.054,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 1.0
+    },
+    "suggested_contracts": 15,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBAREB-26MAY30SASOKC-OKCIHARTENSTEIN55-8",
+    "game_date": "2026-05-30",
+    "player_name": "Isaiah Hartenstein",
+    "stat_type": "reb",
+    "line": 8.0,
+    "yes_ask": 54,
+    "our_probability": 0.5536,
+    "implied_probability": 0.54,
+    "edge": 0.0136,
+    "confidence": "medium",
+    "base_rate": 0.6157,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 0.919,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.981
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBAPTS-26MAY30SASOKC-OKCCWALLACE22-25",
+    "game_date": "2026-05-30",
+    "player_name": "Cason Wallace",
+    "stat_type": "pts",
+    "line": 25.0,
+    "yes_ask": 3,
+    "our_probability": 0.03,
+    "implied_probability": 0.03,
+    "edge": 0.0,
+    "confidence": "low",
+    "base_rate": 0.0045,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 1.026,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.931
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBAREB-26MAY30SASOKC-SASVWEMBANYAMA1-16",
+    "game_date": "2026-05-30",
+    "player_name": "Victor Wembanyama",
+    "stat_type": "reb",
+    "line": 16.0,
+    "yes_ask": 25,
+    "our_probability": 0.2458,
+    "implied_probability": 0.25,
+    "edge": -0.0042,
+    "confidence": "medium",
+    "base_rate": 0.2211,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 1.079,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.989
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBAREB-26MAY30SASOKC-SASDFOX4-8",
+    "game_date": "2026-05-30",
+    "player_name": "De'Aaron Fox",
+    "stat_type": "reb",
+    "line": 8.0,
+    "yes_ask": 9,
+    "our_probability": 0.083,
+    "implied_probability": 0.09,
+    "edge": -0.007,
+    "confidence": "low",
+    "base_rate": 0.0859,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 1.024,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.96
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBAPTS-26MAY30SASOKC-OKCLDORT5-20",
+    "game_date": "2026-05-30",
+    "player_name": "Luguentz Dort",
+    "stat_type": "pts",
+    "line": 20.0,
+    "yes_ask": 4,
+    "our_probability": 0.03,
+    "implied_probability": 0.04,
+    "edge": -0.01,
+    "confidence": "low",
+    "base_rate": 0.0,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 0.937,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.957
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBAPTS-26MAY30SASOKC-SASDFOX4-25",
+    "game_date": "2026-05-30",
+    "player_name": "De'Aaron Fox",
+    "stat_type": "pts",
+    "line": 25.0,
+    "yes_ask": 7,
+    "our_probability": 0.0535,
+    "implied_probability": 0.07,
+    "edge": -0.0165,
+    "confidence": "medium",
+    "base_rate": 0.0712,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 0.944,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.999
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBAAST-26MAY30SASOKC-SASSCASTLE5-8",
+    "game_date": "2026-05-30",
+    "player_name": "Stephon Castle",
+    "stat_type": "ast",
+    "line": 8.0,
+    "yes_ask": 43,
+    "our_probability": 0.4121,
+    "implied_probability": 0.43,
+    "edge": -0.0179,
+    "confidence": "medium",
+    "base_rate": 0.424,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 1.033,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.999
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBAAST-26MAY30SASOKC-OKCSGILGEOUSALEXANDER2-9",
+    "game_date": "2026-05-30",
+    "player_name": "Shai Gilgeous-Alexander",
+    "stat_type": "ast",
+    "line": 9.0,
+    "yes_ask": 41,
+    "our_probability": 0.3916,
+    "implied_probability": 0.41,
+    "edge": -0.0184,
+    "confidence": "medium",
+    "base_rate": 0.403,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 1.042,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.991
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBAPTS-26MAY30SASOKC-OKCIHARTENSTEIN55-20",
+    "game_date": "2026-05-30",
+    "player_name": "Isaiah Hartenstein",
+    "stat_type": "pts",
+    "line": 20.0,
+    "yes_ask": 5,
+    "our_probability": 0.03,
+    "implied_probability": 0.05,
+    "edge": -0.02,
+    "confidence": "medium",
+    "base_rate": 0.0,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 0.985,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.969
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBAPTS-26MAY30SASOKC-OKCCHOLMGREN7-25",
+    "game_date": "2026-05-30",
+    "player_name": "Chet Holmgren",
+    "stat_type": "pts",
+    "line": 25.0,
+    "yes_ask": 5,
+    "our_probability": 0.03,
+    "implied_probability": 0.05,
+    "edge": -0.02,
+    "confidence": "high",
+    "base_rate": 0.0345,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 0.986,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 1.0
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBAAST-26MAY30SASOKC-SASVWEMBANYAMA1-8",
+    "game_date": "2026-05-30",
+    "player_name": "Victor Wembanyama",
+    "stat_type": "ast",
+    "line": 8.0,
+    "yes_ask": 5,
+    "our_probability": 0.03,
+    "implied_probability": 0.05,
+    "edge": -0.02,
+    "confidence": "low",
+    "base_rate": 0.008,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 0.997,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.957
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBAAST-26MAY30SASOKC-OKCLDORT5-8",
+    "game_date": "2026-05-30",
+    "player_name": "Luguentz Dort",
+    "stat_type": "ast",
+    "line": 8.0,
+    "yes_ask": 6,
+    "our_probability": 0.03,
+    "implied_probability": 0.06,
+    "edge": -0.03,
+    "confidence": "low",
+    "base_rate": 0.0,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 0.9,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.883
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBAPTS-26MAY30SASOKC-SASDVASSELL24-25",
+    "game_date": "2026-05-30",
+    "player_name": "Devin Vassell",
+    "stat_type": "pts",
+    "line": 25.0,
+    "yes_ask": 7,
+    "our_probability": 0.0388,
+    "implied_probability": 0.07,
+    "edge": -0.0312,
+    "confidence": "medium",
+    "base_rate": 0.0,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 1.107,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.998
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBABLK-26MAY30SASOKC-SASVWEMBANYAMA1-5",
+    "game_date": "2026-05-30",
+    "player_name": "Victor Wembanyama",
+    "stat_type": "blk",
+    "line": 5.0,
+    "yes_ask": 23,
+    "our_probability": 0.1958,
+    "implied_probability": 0.23,
+    "edge": -0.0342,
+    "confidence": "low",
+    "base_rate": 0.2082,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 1.038,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.954
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBAPTS-26MAY30SASOKC-SASVWEMBANYAMA1-35",
+    "game_date": "2026-05-30",
+    "player_name": "Victor Wembanyama",
+    "stat_type": "pts",
+    "line": 35.0,
+    "yes_ask": 19,
+    "our_probability": 0.1557,
+    "implied_probability": 0.19,
+    "edge": -0.0343,
+    "confidence": "medium",
+    "base_rate": 0.1853,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 0.925,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.988
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBAAST-26MAY30SASOKC-SASDFOX4-8",
+    "game_date": "2026-05-30",
+    "player_name": "De'Aaron Fox",
+    "stat_type": "ast",
+    "line": 8.0,
+    "yes_ask": 25,
+    "our_probability": 0.2103,
+    "implied_probability": 0.25,
+    "edge": -0.0397,
+    "confidence": "medium",
+    "base_rate": 0.2435,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 0.952,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.998
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBAREB-26MAY30SASOKC-OKCSGILGEOUSALEXANDER2-8",
+    "game_date": "2026-05-30",
+    "player_name": "Shai Gilgeous-Alexander",
+    "stat_type": "reb",
+    "line": 8.0,
+    "yes_ask": 8,
+    "our_probability": 0.03,
+    "implied_probability": 0.08,
+    "edge": -0.05,
+    "confidence": "medium",
+    "base_rate": 0.008,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 0.9,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.972
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBABLK-26MAY30SASOKC-OKCCHOLMGREN7-3",
+    "game_date": "2026-05-30",
+    "player_name": "Chet Holmgren",
+    "stat_type": "blk",
+    "line": 3.0,
+    "yes_ask": 18,
+    "our_probability": 0.1269,
+    "implied_probability": 0.18,
+    "edge": -0.0531,
+    "confidence": "low",
+    "base_rate": 0.1538,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 0.998,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.895
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBASTL-26MAY30SASOKC-SASSCASTLE5-3",
+    "game_date": "2026-05-30",
+    "player_name": "Stephon Castle",
+    "stat_type": "stl",
+    "line": 3.0,
+    "yes_ask": 14,
+    "our_probability": 0.0854,
+    "implied_probability": 0.14,
+    "edge": -0.0546,
+    "confidence": "low",
+    "base_rate": 0.0763,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 1.009,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.881
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBAREB-26MAY30SASOKC-SASSCASTLE5-8",
+    "game_date": "2026-05-30",
+    "player_name": "Stephon Castle",
+    "stat_type": "reb",
+    "line": 8.0,
+    "yes_ask": 19,
+    "our_probability": 0.1161,
+    "implied_probability": 0.19,
+    "edge": -0.0739,
+    "confidence": "medium",
+    "base_rate": 0.1375,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 0.884,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.967
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBAPTS-26MAY30SASOKC-OKCSGILGEOUSALEXANDER2-40",
+    "game_date": "2026-05-30",
+    "player_name": "Shai Gilgeous-Alexander",
+    "stat_type": "pts",
+    "line": 40.0,
+    "yes_ask": 16,
+    "our_probability": 0.0671,
+    "implied_probability": 0.16,
+    "edge": -0.0929,
+    "confidence": "high",
+    "base_rate": 0.0808,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 0.998,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 1.0
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBASTL-26MAY30SASOKC-SASVWEMBANYAMA1-3",
+    "game_date": "2026-05-30",
+    "player_name": "Victor Wembanyama",
+    "stat_type": "stl",
+    "line": 3.0,
+    "yes_ask": 17,
+    "our_probability": 0.0745,
+    "implied_probability": 0.17,
+    "edge": -0.0955,
+    "confidence": "low",
+    "base_rate": 0.0569,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 1.136,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.88
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBASTL-26MAY30SASOKC-OKCSGILGEOUSALEXANDER2-3",
+    "game_date": "2026-05-30",
+    "player_name": "Shai Gilgeous-Alexander",
+    "stat_type": "stl",
+    "line": 3.0,
+    "yes_ask": 20,
+    "our_probability": 0.0978,
+    "implied_probability": 0.2,
+    "edge": -0.1022,
+    "confidence": "low",
+    "base_rate": 0.0825,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 1.073,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.906
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBASTL-26MAY30SASOKC-OKCLDORT5-3",
+    "game_date": "2026-05-30",
+    "player_name": "Luguentz Dort",
+    "stat_type": "stl",
+    "line": 3.0,
+    "yes_ask": 17,
+    "our_probability": 0.0504,
+    "implied_probability": 0.17,
+    "edge": -0.1196,
+    "confidence": "low",
+    "base_rate": 0.042,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 0.955,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.819
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBAREB-26MAY30SASOKC-OKCJWILLIAMS8-8",
+    "game_date": "2026-05-30",
+    "player_name": "Jalen Williams",
+    "stat_type": "reb",
+    "line": 8.0,
+    "yes_ask": 66,
+    "our_probability": 0.0666,
+    "implied_probability": 0.66,
+    "edge": -0.5934,
+    "confidence": "medium",
+    "base_rate": 0.073,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 0.969,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.961
+    },
+    "suggested_contracts": 0,
+    "outcome": null,
+    "actual_stat": null,
+    "resolved_date": null
+  },
+  {
+    "ticker": "KXNBASTL-26MAY30SASOKC-OKCJWILLIAMS8-3",
+    "game_date": "2026-05-30",
+    "player_name": "Jalen Williams",
+    "stat_type": "stl",
+    "line": 3.0,
+    "yes_ask": 95,
+    "our_probability": 0.0476,
+    "implied_probability": 0.95,
+    "edge": -0.9024,
+    "confidence": "low",
+    "base_rate": 0.0203,
+    "factors": {
+      "matchup": 1.0,
+      "home_away": 0.85,
+      "rest": 1.0,
+      "injury": 1.0,
+      "consistency": 0.893
     },
     "suggested_contracts": 0,
     "outcome": null,

@@ -1,14 +1,14 @@
 {
-  "global_bias": -0.0036,
+  "global_bias": -0.0033,
   "stat_biases": {
-    "reb": 0.0014,
-    "pts": -0.0087,
-    "ast": -0.0177,
-    "stl": 0.0151,
-    "blk": -0.0036
+    "reb": 0.0019,
+    "pts": -0.0103,
+    "ast": -0.0178,
+    "stl": 0.0209,
+    "blk": -0.0071
   },
-  "n_resolved": 1748,
-  "overall_hit_rate": 0.157,
-  "brier_score": 0.1091,
-  "last_updated": "2026-05-24"
+  "n_resolved": 1840,
+  "overall_hit_rate": 0.156,
+  "brier_score": 0.109,
+  "last_updated": "2026-05-30"
 }
