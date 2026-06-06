@@ -45883,7 +45883,7 @@
       "consistency": 0.879
     },
     "suggested_contracts": 5,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -45907,9 +45907,9 @@
       "consistency": 0.98
     },
     "suggested_contracts": 14,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 12.0,
+    "resolved_date": "2026-06-06"
   },
   {
     "ticker": "KXNBAPTS-26JUN03NYKSAS-NYKOANUNOBY8-25",
@@ -45931,7 +45931,7 @@
       "consistency": 0.989
     },
     "suggested_contracts": 6,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -45955,9 +45955,9 @@
       "consistency": 0.883
     },
     "suggested_contracts": 3,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 2.0,
+    "resolved_date": "2026-06-06"
   },
   {
     "ticker": "KXNBAREB-26JUN03NYKSAS-NYKOANUNOBY8-8",
@@ -45979,7 +45979,7 @@
       "consistency": 0.966
     },
     "suggested_contracts": 3,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -46003,7 +46003,7 @@
       "consistency": 0.927
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -46027,9 +46027,9 @@
       "consistency": 1.0
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 16.0,
+    "resolved_date": "2026-06-06"
   },
   {
     "ticker": "KXNBASTL-26JUN03NYKSAS-NYKMBRIDGES25-3",
@@ -46051,7 +46051,7 @@
       "consistency": 0.838
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -46075,7 +46075,7 @@
       "consistency": 0.955
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -46099,9 +46099,9 @@
       "consistency": 0.989
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 22.0,
+    "resolved_date": "2026-06-06"
   },
   {
     "ticker": "KXNBAPTS-26JUN03NYKSAS-NYKJHART3-20",
@@ -46123,7 +46123,7 @@
       "consistency": 0.958
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -46147,9 +46147,9 @@
       "consistency": 0.988
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 7.0,
+    "resolved_date": "2026-06-06"
   },
   {
     "ticker": "KXNBAPTS-26JUN03NYKSAS-NYKJBRUNSON11-35",
@@ -46171,7 +46171,7 @@
       "consistency": 1.0
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -46195,9 +46195,9 @@
       "consistency": 0.953
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 0.0,
+    "resolved_date": "2026-06-06"
   },
   {
     "ticker": "KXNBAREB-26JUN03NYKSAS-NYKMBRIDGES25-8",
@@ -46219,7 +46219,7 @@
       "consistency": 0.947
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -46243,7 +46243,7 @@
       "consistency": 0.976
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -46267,9 +46267,9 @@
       "consistency": 0.954
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 2.0,
+    "resolved_date": "2026-06-06"
   },
   {
     "ticker": "KXNBAAST-26JUN03NYKSAS-NYKJBRUNSON11-8",
@@ -46291,7 +46291,7 @@
       "consistency": 0.978
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -46315,9 +46315,9 @@
       "consistency": 0.999
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 11.0,
+    "resolved_date": "2026-06-06"
   },
   {
     "ticker": "KXNBASTL-26JUN03NYKSAS-SASSCASTLE5-3",
@@ -46339,9 +46339,9 @@
       "consistency": 0.889
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 1.0,
+    "resolved_date": "2026-06-06"
   },
   {
     "ticker": "KXNBAPTS-26JUN03NYKSAS-SASDFOX4-25",
@@ -46363,9 +46363,9 @@
       "consistency": 1.0
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 15.0,
+    "resolved_date": "2026-06-06"
   },
   {
     "ticker": "KXNBAAST-26JUN03NYKSAS-SASSCASTLE5-8",
@@ -46387,9 +46387,9 @@
       "consistency": 1.0
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 6.0,
+    "resolved_date": "2026-06-06"
   },
   {
     "ticker": "KXNBASTL-26JUN03NYKSAS-NYKOANUNOBY8-3",
@@ -46411,7 +46411,7 @@
       "consistency": 0.878
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -46435,7 +46435,7 @@
       "consistency": 1.0
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -46459,7 +46459,7 @@
       "consistency": 0.991
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -46483,7 +46483,7 @@
       "consistency": 1.0
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -46507,9 +46507,9 @@
       "consistency": 0.968
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 6.0,
+    "resolved_date": "2026-06-06"
   },
   {
     "ticker": "KXNBAAST-26JUN03NYKSAS-NYKJHART3-8",
@@ -46531,7 +46531,7 @@
       "consistency": 0.978
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -46555,9 +46555,9 @@
       "consistency": 0.88
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 1.0,
+    "resolved_date": "2026-06-06"
   },
   {
     "ticker": "KXNBAAST-26JUN03NYKSAS-SASDFOX4-8",
@@ -46579,9 +46579,9 @@
       "consistency": 0.997
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 5.0,
+    "resolved_date": "2026-06-06"
   },
   {
     "ticker": "KXNBABLK-26JUN03NYKSAS-SASVWEMBANYAMA1-5",
@@ -46603,9 +46603,9 @@
       "consistency": 0.949
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 1.0,
+    "resolved_date": "2026-06-06"
   },
   {
     "ticker": "KXNBASTL-26JUN03NYKSAS-NYKKTOWNS32-3",
@@ -46627,7 +46627,7 @@
       "consistency": 0.87
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -46651,7 +46651,7 @@
       "consistency": 0.862
     },
     "suggested_contracts": 0,
-    "outcome": null,
+    "outcome": "no_data",
     "actual_stat": null,
     "resolved_date": null
   },
@@ -46675,9 +46675,9 @@
       "consistency": 1.0
     },
     "suggested_contracts": 14,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 14.0,
+    "resolved_date": "2026-06-06"
   },
   {
     "ticker": "KXNBAPTS-26JUN05NYKSAS-NYKOANUNOBY8-25",
@@ -46699,9 +46699,9 @@
       "consistency": 0.989
     },
     "suggested_contracts": 22,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 17.0,
+    "resolved_date": "2026-06-06"
   },
   {
     "ticker": "KXNBASTL-26JUN05NYKSAS-SASDVASSELL24-3",
@@ -46723,9 +46723,9 @@
       "consistency": 0.876
     },
     "suggested_contracts": 11,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 0.0,
+    "resolved_date": "2026-06-06"
   },
   {
     "ticker": "KXNBAREB-26JUN05NYKSAS-NYKOANUNOBY8-8",
@@ -46747,9 +46747,9 @@
       "consistency": 0.965
     },
     "suggested_contracts": 10,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 4.0,
+    "resolved_date": "2026-06-06"
   },
   {
     "ticker": "KXNBAAST-26JUN05NYKSAS-NYKKTOWNS32-8",
@@ -46771,9 +46771,9 @@
       "consistency": 0.926
     },
     "suggested_contracts": 15,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 4.0,
+    "resolved_date": "2026-06-06"
   },
   {
     "ticker": "KXNBASTL-26JUN05NYKSAS-NYKJHART3-3",
@@ -46795,9 +46795,9 @@
       "consistency": 0.885
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 1.0,
+    "resolved_date": "2026-06-06"
   },
   {
     "ticker": "KXNBAPTS-26JUN05NYKSAS-NYKMMCBRIDE2-20",
@@ -46819,9 +46819,9 @@
       "consistency": 0.925
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 5.0,
+    "resolved_date": "2026-06-06"
   },
   {
     "ticker": "KXNBAPTS-26JUN05NYKSAS-SASJCHAMPAGNIE30-20",
@@ -46843,9 +46843,9 @@
       "consistency": 0.974
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 8.0,
+    "resolved_date": "2026-06-06"
   },
   {
     "ticker": "KXNBAREB-26JUN05NYKSAS-NYKMROBINSON23-8",
@@ -46867,9 +46867,9 @@
       "consistency": 0.969
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 3.0,
+    "resolved_date": "2026-06-06"
   },
   {
     "ticker": "KXNBASTL-26JUN05NYKSAS-NYKKTOWNS32-3",
@@ -46891,9 +46891,9 @@
       "consistency": 0.862
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 1.0,
+    "resolved_date": "2026-06-06"
   },
   {
     "ticker": "KXNBAPTS-26JUN05NYKSAS-NYKMBRIDGES25-20",
@@ -46915,9 +46915,9 @@
       "consistency": 0.976
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "win",
+    "actual_stat": 20.0,
+    "resolved_date": "2026-06-06"
   },
   {
     "ticker": "KXNBAAST-26JUN05NYKSAS-NYKJBRUNSON11-8",
@@ -46939,9 +46939,9 @@
       "consistency": 0.975
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 6.0,
+    "resolved_date": "2026-06-06"
   },
   {
     "ticker": "KXNBABLK-26JUN05NYKSAS-NYKOANUNOBY8-3",
@@ -46963,9 +46963,9 @@
       "consistency": 0.838
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 2.0,
+    "resolved_date": "2026-06-06"
   },
   {
     "ticker": "KXNBAPTS-26JUN05NYKSAS-SASKJOHNSON3-20",
@@ -46987,9 +46987,9 @@
       "consistency": 0.972
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 3.0,
+    "resolved_date": "2026-06-06"
   },
   {
     "ticker": "KXNBASTL-26JUN05NYKSAS-NYKMBRIDGES25-3",
@@ -47011,9 +47011,9 @@
       "consistency": 0.842
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 1.0,
+    "resolved_date": "2026-06-06"
   },
   {
     "ticker": "KXNBAREB-26JUN05NYKSAS-SASDFOX4-8",
@@ -47035,9 +47035,9 @@
       "consistency": 0.956
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 3.0,
+    "resolved_date": "2026-06-06"
   },
   {
     "ticker": "KXNBAREB-26JUN05NYKSAS-SASSCASTLE5-8",
@@ -47059,9 +47059,9 @@
       "consistency": 0.969
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 4.0,
+    "resolved_date": "2026-06-06"
   },
   {
     "ticker": "KXNBAREB-26JUN05NYKSAS-NYKJBRUNSON11-8",
@@ -47083,9 +47083,9 @@
       "consistency": 0.955
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 5.0,
+    "resolved_date": "2026-06-06"
   },
   {
     "ticker": "KXNBAPTS-26JUN05NYKSAS-NYKJALVARADO5-20",
@@ -47107,9 +47107,9 @@
       "consistency": 0.934
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 2.0,
+    "resolved_date": "2026-06-06"
   },
   {
     "ticker": "KXNBAPTS-26JUN05NYKSAS-NYKMROBINSON23-15",
@@ -47131,9 +47131,9 @@
       "consistency": 0.944
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 7.0,
+    "resolved_date": "2026-06-06"
   },
   {
     "ticker": "KXNBAAST-26JUN05NYKSAS-SASSCASTLE5-8",
@@ -47155,9 +47155,9 @@
       "consistency": 0.999
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 4.0,
+    "resolved_date": "2026-06-06"
   },
   {
     "ticker": "KXNBAPTS-26JUN05NYKSAS-NYKLSHAMET44-20",
@@ -47179,9 +47179,9 @@
       "consistency": 0.947
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 13.0,
+    "resolved_date": "2026-06-06"
   },
   {
     "ticker": "KXNBAAST-26JUN05NYKSAS-SASVWEMBANYAMA1-8",
@@ -47203,9 +47203,9 @@
       "consistency": 0.953
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 2.0,
+    "resolved_date": "2026-06-06"
   },
   {
     "ticker": "KXNBASTL-26JUN05NYKSAS-NYKJBRUNSON11-3",
@@ -47227,9 +47227,9 @@
       "consistency": 0.862
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "win",
+    "actual_stat": 5.0,
+    "resolved_date": "2026-06-06"
   },
   {
     "ticker": "KXNBAPTS-26JUN05NYKSAS-SASDHARPER2-13",
@@ -47251,9 +47251,9 @@
       "consistency": 0.98
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "win",
+    "actual_stat": 15.0,
+    "resolved_date": "2026-06-06"
   },
   {
     "ticker": "KXNBASTL-26JUN05NYKSAS-NYKOANUNOBY8-3",
@@ -47275,9 +47275,9 @@
       "consistency": 0.878
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 2.0,
+    "resolved_date": "2026-06-06"
   },
   {
     "ticker": "KXNBAREB-26JUN05NYKSAS-NYKMBRIDGES25-8",
@@ -47299,9 +47299,9 @@
       "consistency": 0.947
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 6.0,
+    "resolved_date": "2026-06-06"
   },
   {
     "ticker": "KXNBABLK-26JUN05NYKSAS-NYKMBRIDGES25-3",
@@ -47323,9 +47323,9 @@
       "consistency": 0.771
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 0.0,
+    "resolved_date": "2026-06-06"
   },
   {
     "ticker": "KXNBASTL-26JUN05NYKSAS-SASSCASTLE5-3",
@@ -47347,9 +47347,9 @@
       "consistency": 0.881
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 1.0,
+    "resolved_date": "2026-06-06"
   },
   {
     "ticker": "KXNBAPTS-26JUN05NYKSAS-NYJKTOWNS32-30",
@@ -47371,9 +47371,9 @@
       "consistency": 1.0
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 21.0,
+    "resolved_date": "2026-06-06"
   },
   {
     "ticker": "KXNBAPTS-26JUN05NYKSAS-SASDVASSELL24-25",
@@ -47395,9 +47395,9 @@
       "consistency": 0.997
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 14.0,
+    "resolved_date": "2026-06-06"
   },
   {
     "ticker": "KXNBAPTS-26JUN05NYKSAS-NYKJHART3-20",
@@ -47419,9 +47419,9 @@
       "consistency": 0.954
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 0.0,
+    "resolved_date": "2026-06-06"
   },
   {
     "ticker": "KXNBAPTS-26JUN05NYKSAS-NYKJBRUNSON11-35",
@@ -47443,9 +47443,9 @@
       "consistency": 1.0
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 20.0,
+    "resolved_date": "2026-06-06"
   },
   {
     "ticker": "KXNBAPTS-26JUN05NYKSAS-SASDFOX4-25",
@@ -47467,9 +47467,9 @@
       "consistency": 0.997
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 20.0,
+    "resolved_date": "2026-06-06"
   },
   {
     "ticker": "KXNBABLK-26JUN05NYKSAS-NYKKTOWNS32-3",
@@ -47491,9 +47491,9 @@
       "consistency": 0.836
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 1.0,
+    "resolved_date": "2026-06-06"
   },
   {
     "ticker": "KXNBAREB-26JUN05NYKSAS-NYKKTOWNS32-16",
@@ -47515,9 +47515,9 @@
       "consistency": 1.0
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 13.0,
+    "resolved_date": "2026-06-06"
   },
   {
     "ticker": "KXNBAREB-26JUN05NYKSAS-NYKJHART3-9",
@@ -47539,9 +47539,9 @@
       "consistency": 0.988
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 6.0,
+    "resolved_date": "2026-06-06"
   },
   {
     "ticker": "KXNBAAST-26JUN05NYKSAS-SASDFOX4-8",
@@ -47563,9 +47563,9 @@
       "consistency": 1.0
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 5.0,
+    "resolved_date": "2026-06-06"
   },
   {
     "ticker": "KXNBAPTS-26JUN05NYKSAS-SASVWEMBANYAMA1-35",
@@ -47587,9 +47587,9 @@
       "consistency": 0.989
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 29.0,
+    "resolved_date": "2026-06-06"
   },
   {
     "ticker": "KXNBASTL-26JUN05NYKSAS-SASVWEMBANYAMA1-3",
@@ -47611,9 +47611,9 @@
       "consistency": 0.88
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 2.0,
+    "resolved_date": "2026-06-06"
   },
   {
     "ticker": "KXNBABLK-26JUN05NYKSAS-NYKJHART3-3",
@@ -47635,9 +47635,9 @@
       "consistency": 0.56
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 1.0,
+    "resolved_date": "2026-06-06"
   },
   {
     "ticker": "KXNBAAST-26JUN05NYKSAS-NYKJHART3-8",
@@ -47659,9 +47659,9 @@
       "consistency": 0.979
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 4.0,
+    "resolved_date": "2026-06-06"
   },
   {
     "ticker": "KXNBABLK-26JUN05NYKSAS-SASVWEMBANYAMA1-5",
@@ -47683,9 +47683,9 @@
       "consistency": 0.948
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "loss",
+    "actual_stat": 4.0,
+    "resolved_date": "2026-06-06"
   },
   {
     "ticker": "KXNBAREB-26JUN05NYKSAS-SASVWEMBANYAMA1-8",
@@ -47707,8 +47707,8 @@
       "consistency": 0.988
     },
     "suggested_contracts": 0,
-    "outcome": null,
-    "actual_stat": null,
-    "resolved_date": null
+    "outcome": "win",
+    "actual_stat": 9.0,
+    "resolved_date": "2026-06-06"
   }
 ]
